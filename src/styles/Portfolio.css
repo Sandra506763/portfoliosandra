@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
 
 body {
-  font-family: "Segoe UI", sans-serif;
+  font-family: "DM Sans", system-ui, sans-serif;
   background: #ddd6d2;
-  color: #444;
+  color: #050505;
   height: 100%;
   width: auto;
   border: 2px solid #141212;
@@ -124,6 +124,64 @@ header p {
   align-items: flex-start;
 }
 
+.about-main {
+  min-height: 140vh; /* wächst mit Inhalt */
+  flex: 1 0 auto; /* erlaubt Flexbox, dass main expandiert */
+  /* optional, falls breiter gewünscht */
+  margin-left: 2rem; /* kann angepasst werden */
+  margin-right: 2rem; /* optional */
+  border: solid 1px rgb(143, 134, 134);
+}
+
+h2 {
+  margin-top: 60px;
+  margin-left: 65px;
+  font-size: xx-large;
+
+  color: #141212;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 12px rgba(143, 133, 133, 0.15);
+}
+.about-text {
+  margin-top: 35px;
+  font-size: 1.1rem; /* oder sogar 1.1rem */
+  line-height: 1.6;
+}
+
+.about-text > div {
+  margin-bottom: 1.4rem; /* Abstand zwischen den Absätzen */
+  margin-left: 7vh;
+  margin-right: 7vh;
+  font-size: medium;
+  text-align: justify;
+}
+.about-text strong {
+  font-weight: 800;
+  color: #f76d0e;
+}
+
+.smiley {
+  width: 22px;
+  height: 22px;
+  margin-left: 6px;
+  vertical-align: -3px;
+}
+
+/* Gesicht */
+.smiley-face {
+  fill: #ddd6d2; /* beige */
+  stroke: #f76d0e; /* orange außen */
+  stroke-width: 4;
+}
+
+/* Augen & Mund */
+.smiley-eye-open,
+.smiley-eye-wink,
+.smiley-mouth {
+  stroke: #f76d0e;
+  stroke-width: 4;
+  fill: #f76d0e;
+}
+
 main {
   flex: 0 0 70%;
   max-width: 70%;
@@ -135,6 +193,7 @@ main {
   margin-top: 2rem;
   margin-left: 2rem;
   position: relative;
+  border: solid 1px rgb(143, 134, 134);
 }
 
 main p {
@@ -143,8 +202,8 @@ main p {
   color: #141212;
   margin: 0;
   line-height: 1.2;
-  text-shadow: 0.9px 0 currentColor, -0.9px 0 currentColor,
-    0 0.9px currentColor, 0 -0.9px currentColor;
+  text-shadow: 0.9px 0 currentColor, -0.9px 0 currentColor, 0 0.9px currentColor,
+    0 -0.9px currentColor;
   letter-spacing: 5.9rem;
 }
 
@@ -157,6 +216,7 @@ main p {
   top: 0;
   left: 0;
   will-change: transform;
+  pointer-events: none; /* Hinzugefügt */
 }
 
 .orange-dot {
@@ -181,7 +241,6 @@ main p {
     box-shadow: 0 0 8px rgb(247, 69, 14);
   }
 }
-
 .slider-nav {
   display: flex;
   justify-content: center;
@@ -221,13 +280,13 @@ main p {
 .slider a:hover {
   color: rgb(247, 69, 14);
 }
-
 .slider .highlight {
   position: absolute;
   top: 3px;
   bottom: 3px;
   left: 3px;
-  width: calc(33.33% - 3px);
+  width: calc(33.33% - 6px); /* Angepasst für runde Form */
+  height: calc(100% - 6px); /* Hinzugefügt */
   background: radial-gradient(
     circle at 30% 30%,
     rgb(244, 246, 247),
@@ -239,38 +298,40 @@ main p {
     inset 4px 4px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   z-index: 0;
-  transform: scale(1.5);
+  transform: scale(1); /* Geändert von 1.5 */
+  aspect-ratio: 1 / 1; /* Hinzugefügt - erzwingt runde Form */
 }
 
 .slider a.active {
   color: #444;
 }
 
+/* Hover-States - rund bleiben */
 .slider a:nth-child(1).active ~ .highlight {
-  transform: translateX(0%) scale(0.65, 1.1);
+  transform: translateX(0%) scale(0.8); /* Nur scale, kein x,y */
 }
 
 .slider a:nth-child(2).active ~ .highlight {
-  transform: translateX(100%) scale(0.65, 1.1);
+  transform: translateX(100%) scale(0.8);
 }
 
 .slider a:nth-child(3).active ~ .highlight {
-  transform: translateX(200%) scale(0.65, 1.1);
+  transform: translateX(200%) scale(0.8);
 }
 
 .slider a:nth-of-type(1):hover ~ .highlight,
 .slider a:nth-of-type(1):focus-visible ~ .highlight {
-  transform: translateX(0%) scale(0.65, 1.1);
+  transform: translateX(0%) scale(0.8);
 }
 
 .slider a:nth-of-type(2):hover ~ .highlight,
 .slider a:nth-of-type(2):focus-visible ~ .highlight {
-  transform: translateX(100%) scale(0.65, 1.1);
+  transform: translateX(100%) scale(0.8);
 }
 
 .slider a:nth-of-type(3):hover ~ .highlight,
 .slider a:nth-of-type(3):focus-visible ~ .highlight {
-  transform: translateX(200%) scale(0.65, 1.1);
+  transform: translateX(200%) scale(0.8);
 }
 
 footer {
