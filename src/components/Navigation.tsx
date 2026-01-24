@@ -6,6 +6,13 @@ const Navigation: React.FC = () => {
     <nav className="slider-nav">
       <div className="slider">
         <NavLink 
+          to="/"
+          className={({ isActive }) => isActive ? 'active' : ''}
+        >
+          Home
+        </NavLink>
+
+        <NavLink 
           to="/about"
           className={({ isActive }) => isActive ? 'active' : ''}
         >
@@ -17,13 +24,6 @@ const Navigation: React.FC = () => {
           className={({ isActive }) => isActive ? 'active' : ''}
         >
           Projekte
-        </NavLink>
-
-        <NavLink 
-          to="/contact"
-          className={({ isActive }) => isActive ? 'active' : ''}
-        >
-          Kontakt
         </NavLink>
 
         <span className="highlight"></span>

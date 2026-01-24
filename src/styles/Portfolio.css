@@ -3,7 +3,7 @@
 body {
   font-family: "DM Sans", system-ui, sans-serif;
   background: #ddd6d2;
-  color: #050505;
+  color: #2e2b29;
   height: 100%;
   width: auto;
   border: 2px solid #141212;
@@ -125,17 +125,18 @@ header p {
 }
 
 .about-main {
-  min-height: 140vh; /* wächst mit Inhalt */
-  flex: 1 0 auto; /* erlaubt Flexbox, dass main expandiert */
-  /* optional, falls breiter gewünscht */
-  margin-left: 2rem; /* kann angepasst werden */
-  margin-right: 2rem; /* optional */
+  min-height: 140vh;
+  flex: 1 0 auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
   border: solid 1px rgb(143, 134, 134);
   background-color: #bbb5b2;
   color: #fff;
 }
 
 h2 {
+  margin-top: 0;
+  margin-left: 0;
   font-family: "DM Sans";
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -150,6 +151,7 @@ h2 {
   font-weight: 400;
   color: #2e2b29;
 }
+
 .about-text strong {
   position: relative;
 }
@@ -172,15 +174,141 @@ h2 {
 }
 
 .about-text > div {
-  margin-bottom: 1.4rem; /* Abstand zwischen den Absätzen */
-  margin-left: 27vh;
-  margin-right: 7vh;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
   margin-top: 2.5rem;
   font-size: large;
   text-align: justify;
   max-width: 80ch;
 }
 
+.about-main::after {
+  content: "";
+  position: absolute;
+  right: 4rem;
+  top: 10%;
+  width: 1px;
+  height: 80%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(247, 69, 14),
+    transparent
+  );
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 3.5rem;
+  align-items: start;
+  padding: 2rem;
+}
+
+.about-content {
+  width: 100%;
+}
+
+.about-rail {
+  font-size: 0.95rem;
+  color: #3a3735;
+  position: sticky;
+  top: 4rem;
+  padding-left: 2rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.rail-block {
+  margin-bottom: 2.5rem;
+}
+
+.rail-block h3 {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  color: #141212;
+}
+
+.rail-block p,
+.rail-block li {
+  line-height: 1.5;
+}
+
+.about-rail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-rail li {
+  margin-bottom: 0.3rem;
+}
+
+.about-rail p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Mini Terminal */
+.mini-terminal {
+  margin-top: 2rem;
+  background: #1e1e1e;
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.terminal-header {
+  background: #2d2d2d;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red {
+  background: #ff5f56;
+}
+
+.terminal-dot.yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot.green {
+  background: #27c93f;
+}
+
+.terminal-body {
+  padding: 0.8rem;
+  color: #d4d4d4;
+  line-height: 1.6;
+}
+
+.terminal-line {
+  margin-bottom: 0.4rem;
+}
+
+.prompt {
+  color: rgb(247, 69, 14);
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.terminal-output {
+  color: #9cdcfe;
+  margin-left: 1rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.7rem;
+}
 .smiley {
   width: 22px;
   height: 22px;
@@ -190,8 +318,8 @@ h2 {
 
 /* Gesicht */
 .smiley-face {
-  fill: #ddd6d2; /* beige */
-  stroke: #f76d0e; /* orange außen */
+  fill: #ddd6d2;
+  stroke: rgb(247, 69, 14);
   stroke-width: 4;
 }
 
@@ -199,9 +327,9 @@ h2 {
 .smiley-eye-open,
 .smiley-eye-wink,
 .smiley-mouth {
-  stroke: #f76d0e;
+  stroke: rgb(247, 69, 14);
   stroke-width: 4;
-  fill: #f76d0e;
+  fill: rgb(247, 69, 14);
 }
 
 main {
@@ -218,15 +346,23 @@ main {
   border: solid 1px rgb(143, 134, 134);
 }
 
-main p {
+/* Nur für den großen Titel-Text */
+main #title {
   font-size: 10rem;
   font-weight: 900;
-  color: #141212;
+  color: #2e2b29;
   margin: 0;
   line-height: 1.2;
   text-shadow: 0.9px 0 currentColor, -0.9px 0 currentColor, 0 0.9px currentColor,
     0 -0.9px currentColor;
   letter-spacing: 5.9rem;
+}
+
+/* Normale p-Tags im main */
+main p:not(#title) {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: normal;
 }
 
 .i-letter {
@@ -238,7 +374,7 @@ main p {
   top: 0;
   left: 0;
   will-change: transform;
-  pointer-events: none; /* Hinzugefügt */
+  pointer-events: none;
 }
 
 .orange-dot {
@@ -263,6 +399,7 @@ main p {
     box-shadow: 0 0 8px rgb(247, 69, 14);
   }
 }
+
 .slider-nav {
   display: flex;
   justify-content: center;
@@ -291,7 +428,7 @@ main p {
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  color: #141212;
+  color: #2e2b29;
   z-index: 2;
   user-select: none;
   transition: color 0.3s ease;
@@ -302,13 +439,14 @@ main p {
 .slider a:hover {
   color: rgb(247, 69, 14);
 }
+
 .slider .highlight {
   position: absolute;
   top: 3px;
   bottom: 3px;
   left: 3px;
-  width: calc(33.33% - 6px); /* Angepasst für runde Form */
-  height: calc(100% - 6px); /* Hinzugefügt */
+  width: calc(33.33% - 6px);
+  height: calc(100% - 6px);
   background: radial-gradient(
     circle at 30% 30%,
     rgb(244, 246, 247),
@@ -320,8 +458,8 @@ main p {
     inset 4px 4px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   z-index: 0;
-  transform: scale(1); /* Geändert von 1.5 */
-  aspect-ratio: 1 / 1; /* Hinzugefügt - erzwingt runde Form */
+  transform: scale(1);
+  aspect-ratio: 1 / 1;
 }
 
 .slider a.active {
@@ -330,7 +468,7 @@ main p {
 
 /* Hover-States - rund bleiben */
 .slider a:nth-child(1).active ~ .highlight {
-  transform: translateX(0%) scale(0.8); /* Nur scale, kein x,y */
+  transform: translateX(0%) scale(0.8);
 }
 
 .slider a:nth-child(2).active ~ .highlight {
