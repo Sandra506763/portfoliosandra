@@ -131,32 +131,54 @@ header p {
   margin-left: 2rem; /* kann angepasst werden */
   margin-right: 2rem; /* optional */
   border: solid 1px rgb(143, 134, 134);
+  background-color: #bbb5b2;
+  color: #fff;
 }
 
 h2 {
-  margin-top: 60px;
-  margin-left: 65px;
-  font-size: xx-large;
-
-  color: #141212;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 12px rgba(143, 133, 133, 0.15);
+  font-family: "DM Sans";
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  line-height: 1.3;
 }
+
 .about-text {
-  margin-top: 35px;
-  font-size: 1.1rem; /* oder sogar 1.1rem */
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  font-weight: 400;
+  color: #2e2b29;
+}
+.about-text strong {
+  position: relative;
+}
+
+.about-text strong::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: rgb(247, 69, 14);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.about-text strong:hover::after {
+  transform: scaleX(1);
 }
 
 .about-text > div {
   margin-bottom: 1.4rem; /* Abstand zwischen den Absätzen */
-  margin-left: 7vh;
+  margin-left: 27vh;
   margin-right: 7vh;
-  font-size: medium;
+  margin-top: 2.5rem;
+  font-size: large;
   text-align: justify;
-}
-.about-text strong {
-  font-weight: 800;
-  color: #f76d0e;
+  max-width: 80ch;
 }
 
 .smiley {
@@ -185,7 +207,7 @@ h2 {
 main {
   flex: 0 0 70%;
   max-width: 70%;
-  background: #fff;
+  background: hsl(30, 40%, 98%);
   padding: 2rem;
   box-shadow: 60px 12px 42px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
