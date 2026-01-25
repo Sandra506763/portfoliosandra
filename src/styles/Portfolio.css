@@ -251,64 +251,6 @@ h2 {
   line-height: 1.5;
 }
 
-/* Mini Terminal */
-.mini-terminal {
-  margin-top: 2rem;
-  background: #1e1e1e;
-  border-radius: 6px;
-  overflow: hidden;
-  font-family: "Courier New", monospace;
-  font-size: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.terminal-header {
-  background: #2d2d2d;
-  padding: 0.5rem;
-  display: flex;
-  gap: 0.4rem;
-}
-
-.terminal-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.terminal-dot.red {
-  background: #ff5f56;
-}
-
-.terminal-dot.yellow {
-  background: #ffbd2e;
-}
-
-.terminal-dot.green {
-  background: #27c93f;
-}
-
-.terminal-body {
-  padding: 0.8rem;
-  color: #d4d4d4;
-  line-height: 1.6;
-}
-
-.terminal-line {
-  margin-bottom: 0.4rem;
-}
-
-.prompt {
-  color: rgb(247, 69, 14);
-  font-weight: bold;
-  margin-right: 0.3rem;
-}
-
-.terminal-output {
-  color: #9cdcfe;
-  margin-left: 1rem;
-  margin-bottom: 0.6rem;
-  font-size: 0.7rem;
-}
 .smiley {
   width: 22px;
   height: 22px;
@@ -492,6 +434,33 @@ main p:not(#title) {
 .slider a:nth-of-type(3):hover ~ .highlight,
 .slider a:nth-of-type(3):focus-visible ~ .highlight {
   transform: translateX(200%) scale(0.8);
+}
+.side-statement {
+  /* Remove fixed positioning */
+  position: relative;
+  right: auto;
+  top: 240px;
+  transform: none;
+
+  /* Remove vertical writing mode */
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+
+  color: #2e2b29;
+  opacity: 0.4;
+
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+
+  /* Add some spacing */
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
 footer {

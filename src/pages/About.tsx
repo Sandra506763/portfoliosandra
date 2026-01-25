@@ -177,6 +177,7 @@ const About: React.FC = () => {
         </aside>
       </div>
     </main>
+    
   );
 };
 

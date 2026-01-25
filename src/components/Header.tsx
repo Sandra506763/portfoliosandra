@@ -8,9 +8,7 @@ const Header: React.FC = () => {
   const [chars, setChars] = useState<CharItem[]>([]);
   const location = useLocation();
   
-  // Terminal nur auf About-Seite anzeigen
-  const showTerminal = location.pathname === '/about';
-
+  
   useEffect(() => {
     const text = "Sandra Nitsch";
     const charArray = [...text].map((ch, i) => ({
@@ -83,37 +81,15 @@ const Header: React.FC = () => {
       
       <Navigation />
 
-      {/* Mini Terminal - nur auf About-Seite */}
-      {showTerminal && (
-        <div className="mini-terminal">
-          <div className="terminal-header">
-            <span className="terminal-dot red"></span>
-            <span className="terminal-dot yellow"></span>
-            <span className="terminal-dot green"></span>
-          </div>
-          <div className="terminal-body">
-            <div className="terminal-line">
-              <span className="prompt">&gt;</span> whoami
-            </div>
-            <div className="terminal-output">Sandra | Frontend Dev</div>
-            
-            <div className="terminal-line">
-              <span className="prompt">&gt;</span> pwd
-            </div>
-            <div className="terminal-output">/home/sandra/projects/nothing-impossible</div>
-            
-            <div className="terminal-line">
-              <span className="prompt">&gt;</span> cat .env
-            </div>
-            <div className="terminal-output">
-              MINDSET=growth<br />
-              COFFEE=essential<br />
-              CODE=clean<br />
-              DREAMS=achievable
-            </div>
-          </div>
-        </div>
-      )}
+      {location.pathname === "/about" && (
+  <aside className="side-statement">
+    Design is how it feels.
+  </aside>
+)}
+
+       
+        
+      
     </header>
   );
 };
