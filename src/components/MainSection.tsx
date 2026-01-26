@@ -35,18 +35,17 @@ const MainSection: React.FC = () => {
         ? footerElement.getBoundingClientRect().top - rectContainer.top
         : window.innerHeight - 100;
 
-      // Phasen-Dauer
       const phases = {
         fall: { end: 2000 },
         bounce: { end: 5200 },
-        rollOut: { end: 5200 + 18000 }, // Rollout jetzt 18 Sekunden für sanftes Bremsen
+        rollOut: { end: 5200 + 28000 },
       };
 
       const easeInQuad = (t: number) => t * t;
       const easeOutQuad = (t: number) => t * (2 - t);
-
-      // ✅ neue Ease-out für horizontales Rollen
-      const easeOutSlow = (t: number) => 1 - Math.pow(1 - t, 2.5);
+      const easeOutFriction = (t: number) => {
+        return 1 - Math.pow(1 - t, 4);
+      };
 
       function animate(timestamp: number) {
         if (!wrapper) return;
@@ -65,8 +64,7 @@ const MainSection: React.FC = () => {
           y = fallDistance * easeInQuad(t);
           rotation = t * 120;
         } else if (elapsed < phases.bounce.end) {
-
-        /* ===== BOUNCES ===== */
+          /* ===== BOUNCES ===== */
           const phaseTime = elapsed - phases.fall.end;
           const phaseDuration = phases.bounce.end - phases.fall.end;
           const t = phaseTime / phaseDuration;
@@ -76,14 +74,23 @@ const MainSection: React.FC = () => {
           const currentBounce = Math.floor(bounceProgress);
           const bounceT = bounceProgress - currentBounce;
 
-          const bounceStep = 70;
-          x = I_EDGE_OFFSET + currentBounce * bounceStep + bounceT * bounceStep;
+          // Bounces werden progressiv breiter
+          const bounceStep = 70 + currentBounce * 10;
+          let xOffset = 0;
+          for (let i = 0; i < currentBounce; i++) {
+            xOffset += 70 + i * 10;
+          }
+          x = I_EDGE_OFFSET + xOffset + bounceT * bounceStep;
 
-          const initialBounceHeight = 100;
+          // Bounce-Höhe nimmt exponentiell ab
+          let initialBounceHeight = 100;
+          if (currentBounce >= numBounces - 2) {
+            initialBounceHeight = 45;
+          }
+
           const bounceHeight =
-            initialBounceHeight * Math.pow(0.65, currentBounce);
+            initialBounceHeight * Math.pow(0.58, currentBounce);
           const bounceCurve = Math.sin(Math.PI * bounceT);
-
           y = footerTop - startY - 40 - bounceHeight * bounceCurve;
 
           if (bounceCurve < 0.15) {
@@ -94,19 +101,22 @@ const MainSection: React.FC = () => {
 
           rotation += bounceT * 240;
         } else if (elapsed < phases.rollOut.end) {
-
-        /* ===== AUSROLLEN (langsamer, decelerated) ===== */
+          /* ===== AUSROLLEN ===== */
           const phaseTime = elapsed - phases.bounce.end;
           const t = phaseTime / (phases.rollOut.end - phases.bounce.end);
+          const easedT = easeOutFriction(t);
 
-          // sanftes Abbremsen
-          const easedT = easeOutSlow(t);
+          // Berechne finale X-Position nach allen Bounces
+          let finalBounceX = I_EDGE_OFFSET;
+          for (let i = 0; i < 5; i++) {
+            finalBounceX += 70 + i * 10;
+          }
 
           const totalDistance = 1500;
-          x = I_EDGE_OFFSET + 5 * 70 + totalDistance * easedT;
+          x = finalBounceX + totalDistance * easedT;
           y = footerTop - startY - 40;
 
-          rotation += easedT * 900;
+          rotation += easedT * 700;
 
           wrapper.style.opacity = `${1 - Math.max(0, (t - 0.85) / 0.15)}`;
         } else {
