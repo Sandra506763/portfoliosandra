@@ -17,7 +17,7 @@ const Projekte: React.FC = () => {
       id: "project1",
       title: "Streamflix",
       description:
-        "Streamflix ist eine Webseite mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Sie wurde mit JavaScript und CSS erstellt.",
+        "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Sie wurde mit JavaScript und CSS erstellt.",
       videoUrl: "/videos/projekt1.mp4", // Passe den Pfad an
     },
     {

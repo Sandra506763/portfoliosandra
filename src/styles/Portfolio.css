@@ -122,7 +122,9 @@ header p {
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
+ 
 }
+
 
 .about-main {
   min-height: 140vh;
@@ -133,6 +135,8 @@ header p {
   background-color: #bbb5b2;
   color: #fff;
 }
+
+
 
 h2 {
   margin-top: 0;
@@ -366,7 +370,7 @@ main p:not(#title) {
 
 .slider a {
   flex: 1;
-  padding: 1.3rem 1.8rem;
+  padding: 1.3rem 1.3rem;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
@@ -405,7 +409,7 @@ main p:not(#title) {
 }
 
 .slider a.active {
-  color:  #2e2b29;
+  color: #2e2b29;
 }
 
 /* Hover-States - rund bleiben */
@@ -500,7 +504,6 @@ footer {
   transform: scale(1.2);
 }
 
-
 /* Projekte Seite */
 .projekte-main {
   min-height: 100vh;
@@ -569,14 +572,13 @@ footer {
   width: 100%;
   height: 220px;
   background: linear-gradient(135deg, #ddd6d2 0%, #bbb5b2 100%),
-  url("/images/Bildschirmfoto vom-2025-09-29-14-17-52.png");
+    url("/images/Bildschirmfoto vom-2025-09-29-14-17-52.png");
   display: flex;
   align-items: center;
   justify-content: center;
   color: #888;
   font-size: 0.9rem;
   position: relative;
-  
 }
 
 .card-image img {
