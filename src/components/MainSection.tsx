@@ -15,10 +15,10 @@ const MainSection: React.FC = () => {
     const rectI = iLetter.getBoundingClientRect();
     const rectContainer = container.getBoundingClientRect();
 
-    const startX =
-      rectI.left - rectContainer.left + rectI.width / 2 - 65;
-    const startY =
-      rectI.top - rectContainer.top - 20;
+    const I_EDGE_OFFSET = 33;
+
+    const startX = rectI.left - rectContainer.left + rectI.width / 2 - 65;
+    const startY = rectI.top - rectContainer.top - 20;
 
     wrapper.style.left = `${startX}px`;
     wrapper.style.top = `${startY}px`;
@@ -30,49 +30,45 @@ const MainSection: React.FC = () => {
       let animationId: number;
       const startTime = performance.now();
 
-      const BOUNCE_DAMPING = 0.65;
-
       const footerElement = document.getElementById("footer");
       const footerTop = footerElement
         ? footerElement.getBoundingClientRect().top - rectContainer.top
         : window.innerHeight - 100;
 
+      // Phasen-Dauer
       const phases = {
-        fallToFooter: { start: 0, end: 2000 },
-        bounceOnFooter: { start: 2000, end: 5000 },
-        rollOut: { start: 5000, end: 9000 },
+        fall: { end: 2000 },
+        bounce: { end: 5200 },
+        rollOut: { end: 5200 + 18000 }, // Rollout jetzt 18 Sekunden für sanftes Bremsen
       };
 
       const easeInQuad = (t: number) => t * t;
       const easeOutQuad = (t: number) => t * (2 - t);
 
-      // ✅ NEU: kleiner Versatz, damit er AM I rollt
-      const I_EDGE_OFFSET = 33;
+      // ✅ neue Ease-out für horizontales Rollen
+      const easeOutSlow = (t: number) => 1 - Math.pow(1 - t, 2.5);
 
       function animate(timestamp: number) {
         if (!wrapper) return;
 
         const elapsed = timestamp - startTime;
-        let x = 0;
-        let y = 0;
+        let x = I_EDGE_OFFSET;
+        let y = startY;
         let rotation = 0;
+        let scaleX = 1;
+        let scaleY = 1;
 
-        // Phase 1: Am I entlang rollen und fallen
-        if (elapsed < phases.fallToFooter.end) {
-          const t = elapsed / phases.fallToFooter.end;
+        /* ===== FALL AM I ===== */
+        if (elapsed < phases.fall.end) {
+          const t = elapsed / phases.fall.end;
           const fallDistance = footerTop - startY - 40;
-
-          x = I_EDGE_OFFSET; // 🔑 HIER: nicht im I, sondern am I
           y = fallDistance * easeInQuad(t);
           rotation = t * 120;
-        }
+        } else if (elapsed < phases.bounce.end) {
 
-        // Phase 2: Bounces auf Footer
-        else if (elapsed < phases.bounceOnFooter.end) {
-          const phaseTime =
-            elapsed - phases.fallToFooter.end;
-          const phaseDuration =
-            phases.bounceOnFooter.end - phases.fallToFooter.end;
+        /* ===== BOUNCES ===== */
+          const phaseTime = elapsed - phases.fall.end;
+          const phaseDuration = phases.bounce.end - phases.fall.end;
           const t = phaseTime / phaseDuration;
 
           const numBounces = 5;
@@ -85,40 +81,32 @@ const MainSection: React.FC = () => {
 
           const initialBounceHeight = 100;
           const bounceHeight =
-            initialBounceHeight *
-            Math.pow(BOUNCE_DAMPING, currentBounce);
+            initialBounceHeight * Math.pow(0.65, currentBounce);
+          const bounceCurve = Math.sin(Math.PI * bounceT);
 
-          if (bounceT < 0.5) {
-            const fallT = bounceT * 2;
-            y =
-              footerTop -
-              startY -
-              40 -
-              bounceHeight * (1 - easeInQuad(fallT));
-          } else {
-            const riseT = (bounceT - 0.5) * 2;
-            y =
-              footerTop -
-              startY -
-              40 -
-              bounceHeight * easeOutQuad(1 - riseT);
+          y = footerTop - startY - 40 - bounceHeight * bounceCurve;
+
+          if (bounceCurve < 0.15) {
+            const squash = 1 - bounceCurve / 0.15;
+            scaleX = 1 + squash * 0.12;
+            scaleY = 1 - squash * 0.18;
           }
 
-          rotation = 600 + t * 900;
-        }
+          rotation += bounceT * 240;
+        } else if (elapsed < phases.rollOut.end) {
 
-        // Phase 3: Ausrollen (weiter!)
-        else if (elapsed < phases.rollOut.end) {
-          const phaseTime =
-            elapsed - phases.bounceOnFooter.end;
-          const phaseDuration =
-            phases.rollOut.end - phases.bounceOnFooter.end;
-          const t = phaseTime / phaseDuration;
+        /* ===== AUSROLLEN (langsamer, decelerated) ===== */
+          const phaseTime = elapsed - phases.bounce.end;
+          const t = phaseTime / (phases.rollOut.end - phases.bounce.end);
 
-          const rollOutDistance = 1100; // 🔑 länger ausrollen
-          x = I_EDGE_OFFSET + 5 * 70 + rollOutDistance * t;
+          // sanftes Abbremsen
+          const easedT = easeOutSlow(t);
+
+          const totalDistance = 1500;
+          x = I_EDGE_OFFSET + 5 * 70 + totalDistance * easedT;
           y = footerTop - startY - 40;
-          rotation = 1500 + t * 800;
+
+          rotation += easedT * 900;
 
           wrapper.style.opacity = `${1 - Math.max(0, (t - 0.85) / 0.15)}`;
         } else {
@@ -127,10 +115,9 @@ const MainSection: React.FC = () => {
         }
 
         wrapper.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-
         const ball = wrapper.querySelector(".orange-dot") as HTMLElement;
         if (ball) {
-          ball.style.transform = `rotate(${rotation}deg)`;
+          ball.style.transform = `rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
         }
 
         animationId = requestAnimationFrame(animate);
@@ -151,7 +138,9 @@ const MainSection: React.FC = () => {
 
       <p id="title">
         NO-TH
-        <span ref={iLetterRef} className="i-letter">I</span>
+        <span ref={iLetterRef} className="i-letter">
+          I
+        </span>
         NG'S IMPOS-SIBLE
       </p>
     </main>
