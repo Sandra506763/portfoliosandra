@@ -291,19 +291,24 @@ main {
   margin-left: 2rem;
   position: relative;
   border: solid 1px rgb(143, 134, 134);
+
 }
 
-/* Nur für den großen Titel-Text */
+
+
 main #title {
-  font-size: 10rem;
+  font-size: clamp(4rem, 10vw, 10rem); /* skaliert responsiv */
   font-weight: 900;
   color: #2e2b29;
   margin: 0;
   line-height: 1.2;
-  text-shadow: 0.9px 0 currentColor, -0.9px 0 currentColor, 0 0.9px currentColor,
-    0 -0.9px currentColor;
-  letter-spacing: 5.9rem;
+  text-shadow: 0.9px 0 currentColor, -0.9px 0 currentColor,
+               0 0.9px currentColor, 0 -0.9px currentColor;
+  letter-spacing: clamp(0.5rem, 10vw, 5.9rem);
+  max-width: 100%;          /* nie breiter als main */
+  overflow-wrap: normal;    /* kein Word Break, Text bleibt in einer Zeile */
 }
+
 
 /* Normale p-Tags im main */
 main p:not(#title) {
@@ -333,19 +338,21 @@ main p:not(#title) {
 }
 
 @keyframes pulseGlow {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 8px rgba(136, 122, 118, 0.8);
-  }
-  50% {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px rgb(175, 44, 4);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 8px rgb(247, 69, 14);
-  }
+  0% { transform: scale(1); box-shadow: 0 0 8px rgba(136, 122, 118, 0.8);}
+  50% { transform: scale(1.2); box-shadow: 0 0 20px rgb(175, 44, 4);}
+  100% { transform: scale(1); box-shadow: 0 0 8px rgb(247, 69, 14);}
 }
+
+@media (max-width: 1024px) {
+  main { flex: 0 0 90%; max-width: 90%; margin-left:auto; margin-right:auto; }
+  main #title { font-size: clamp(3rem, 12vw, 8rem); letter-spacing: clamp(0.3rem, 8vw, 5rem); }
+}
+
+@media (max-width: 768px) {
+  main { flex: 0 0 95%; max-width: 95%; margin-left:auto; margin-right:auto; padding:1rem;}
+  main #title { font-size: clamp(2.5rem, 14vw, 6rem); letter-spacing: clamp(0.2rem, 6vw, 4rem); }
+}
+
 
 .slider-nav {
   display: flex;
@@ -781,4 +788,58 @@ background-color: hsl(30, 40%, 98%);
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Desktop bleibt wie er ist ===== */
+/* Keine Änderung nötig */
+
+
+/* ===== Tablet ===== */
+@media (max-width: 1024px) {
+  .side-statement {
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    opacity: 0.35;
+  }
+}
+
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .side-statement {
+    writing-mode: horizontal-tb; /* nicht mehr vertikal */
+    text-orientation: initial;
+
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    opacity: 0.3;
+
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
+
+
+/* ===== Sehr kleine Geräte ===== */
+@media (max-width: 480px) {
+  .side-statement {
+    display: none; /* optional, sehr clean */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
