@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
+const BREAKPOINT_PX = 768;
+
 const MainSection: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const iLetterRef = useRef<HTMLSpanElement>(null);
@@ -12,28 +14,55 @@ const MainSection: React.FC = () => {
 
     if (!wrapper || !iLetter || !container) return;
 
+    const ball = wrapper.querySelector(".orange-dot") as HTMLElement | null;
+    if (!ball) return;
+
     const rectI = iLetter.getBoundingClientRect();
     const rectContainer = container.getBoundingClientRect();
 
-    const I_EDGE_OFFSET = 33;
+    const isMobileAtStart = window.innerWidth <= BREAKPOINT_PX;
 
-    const startX = rectI.left - rectContainer.left + rectI.width / 2 - 65;
-    const startY = rectI.top - rectContainer.top - 20;
+    // ✅ Originalwerte (wie bei dir funktionierend)
+    const I_EDGE_OFFSET = 33;
+    const MOBILE_X_OFFSET = isMobileAtStart ? 45 : 0;
+
+    // ✅ Start: bei dir perfekt über dem I
+    const startX =
+      rectI.left - rectContainer.left + rectI.width / 2 - 65 + MOBILE_X_OFFSET;
+
+    const startY = rectI.top - rectContainer.top - (isMobileAtStart ? 10 : 20);
 
     wrapper.style.left = `${startX}px`;
     wrapper.style.top = `${startY}px`;
     wrapper.style.transform = "translate3d(0,0,0)";
     wrapper.style.display = "block";
     wrapper.style.zIndex = "10";
+    wrapper.style.opacity = "1";
 
-    const startTimeout = setTimeout(() => {
-      let animationId: number;
+    let rafId: number | null = null;
+
+    const startTimeout = window.setTimeout(() => {
       const startTime = performance.now();
 
-      const footerElement = document.getElementById("footer");
-      const footerTop = footerElement
-        ? footerElement.getBoundingClientRect().top - rectContainer.top
-        : window.innerHeight - 100;
+      const getFallDistance = () => {
+        const rectContainerNow = container.getBoundingClientRect();
+        const dotSize = ball.offsetWidth || 40;
+        const smallNow = window.innerWidth <= BREAKPOINT_PX;
+
+        const footerElement = document.getElementById("footer");
+        const footerTop = footerElement
+          ? footerElement.getBoundingClientRect().top - rectContainerNow.top
+          : window.innerHeight - rectContainerNow.top - 100;
+
+        const csMain = getComputedStyle(container);
+        const padBottom = parseFloat(csMain.paddingBottom || "0") || 0;
+
+        // ✅ Mobile: physisch im Main stoppen
+        const mainBottom = container.clientHeight - (smallNow ? 2 : padBottom);
+        const groundY = smallNow ? mainBottom : footerTop;
+
+        return Math.max(0, groundY - startY - dotSize);
+      };
 
       const phases = {
         fall: { end: 2000 },
@@ -42,29 +71,26 @@ const MainSection: React.FC = () => {
       };
 
       const easeInQuad = (t: number) => t * t;
-      const easeOutQuad = (t: number) => t * (2 - t);
-      const easeOutFriction = (t: number) => {
-        return 1 - Math.pow(1 - t, 4);
-      };
+      const easeOutFriction = (t: number) => 1 - Math.pow(1 - t, 4);
 
       function animate(timestamp: number) {
         if (!wrapper) return;
 
         const elapsed = timestamp - startTime;
+        const fallDistance = getFallDistance();
+
+        // ✅ Originalbahn (dein Verhalten)
         let x = I_EDGE_OFFSET;
         let y = startY;
         let rotation = 0;
         let scaleX = 1;
         let scaleY = 1;
 
-        /* ===== FALL AM I ===== */
         if (elapsed < phases.fall.end) {
           const t = elapsed / phases.fall.end;
-          const fallDistance = footerTop - startY - 40;
           y = fallDistance * easeInQuad(t);
           rotation = t * 120;
         } else if (elapsed < phases.bounce.end) {
-          /* ===== BOUNCES ===== */
           const phaseTime = elapsed - phases.fall.end;
           const phaseDuration = phases.bounce.end - phases.fall.end;
           const t = phaseTime / phaseDuration;
@@ -74,24 +100,21 @@ const MainSection: React.FC = () => {
           const currentBounce = Math.floor(bounceProgress);
           const bounceT = bounceProgress - currentBounce;
 
-          // Bounces werden progressiv breiter
           const bounceStep = 70 + currentBounce * 10;
           let xOffset = 0;
           for (let i = 0; i < currentBounce; i++) {
             xOffset += 70 + i * 10;
           }
+
           x = I_EDGE_OFFSET + xOffset + bounceT * bounceStep;
 
-          // Bounce-Höhe nimmt exponentiell ab
           let initialBounceHeight = 100;
-          if (currentBounce >= numBounces - 2) {
-            initialBounceHeight = 45;
-          }
+          if (currentBounce >= numBounces - 2) initialBounceHeight = 45;
 
-          const bounceHeight =
-            initialBounceHeight * Math.pow(0.58, currentBounce);
+          const bounceHeight = initialBounceHeight * Math.pow(0.58, currentBounce);
           const bounceCurve = Math.sin(Math.PI * bounceT);
-          y = footerTop - startY - 40 - bounceHeight * bounceCurve;
+
+          y = fallDistance - bounceHeight * bounceCurve;
 
           if (bounceCurve < 0.15) {
             const squash = 1 - bounceCurve / 0.15;
@@ -101,23 +124,21 @@ const MainSection: React.FC = () => {
 
           rotation += bounceT * 240;
         } else if (elapsed < phases.rollOut.end) {
-          /* ===== AUSROLLEN ===== */
           const phaseTime = elapsed - phases.bounce.end;
           const t = phaseTime / (phases.rollOut.end - phases.bounce.end);
           const easedT = easeOutFriction(t);
 
-          // Berechne finale X-Position nach allen Bounces
           let finalBounceX = I_EDGE_OFFSET;
           for (let i = 0; i < 5; i++) {
             finalBounceX += 70 + i * 10;
           }
 
-          const totalDistance = 1500;
+          const totalDistance = window.innerWidth <= BREAKPOINT_PX ? 600 : 1500;
+
           x = finalBounceX + totalDistance * easedT;
-          y = footerTop - startY - 40;
+          y = fallDistance;
 
           rotation += easedT * 700;
-
           wrapper.style.opacity = `${1 - Math.max(0, (t - 0.85) / 0.15)}`;
         } else {
           wrapper.style.display = "none";
@@ -125,19 +146,30 @@ const MainSection: React.FC = () => {
         }
 
         wrapper.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        const ball = wrapper.querySelector(".orange-dot") as HTMLElement;
+
+        // ✅ HIER ist die Korrektur:
+        // Mobile bekommt einen kleineren Track-Offset, damit er am I runterläuft
+        const isMobileNow = window.innerWidth <= BREAKPOINT_PX;
+
+        const DESKTOP_TRACK_OFFSET = 16; // so wie es bei dir “gut” war
+        const MOBILE_TRACK_OFFSET = 6;   // ✅ kleiner = weniger weit rechts
+
+        const trackOffset = isMobileNow ? MOBILE_TRACK_OFFSET : DESKTOP_TRACK_OFFSET;
+
         if (ball) {
-          ball.style.transform = `rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+          ball.style.transform = `translateX(${trackOffset}px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
         }
 
-        animationId = requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
       }
 
-      animationId = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(animationId);
+      rafId = requestAnimationFrame(animate);
     }, 9000);
 
-    return () => clearTimeout(startTimeout);
+    return () => {
+      window.clearTimeout(startTimeout);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -151,7 +183,7 @@ const MainSection: React.FC = () => {
         <span ref={iLetterRef} className="i-letter">
           I
         </span>
-        NG'S IMPOS-SIBLE
+        NG&apos;S IMPOS-SIBLE
       </p>
     </main>
   );

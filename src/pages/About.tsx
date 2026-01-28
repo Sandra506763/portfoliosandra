@@ -128,7 +128,7 @@ const About: React.FC = () => {
 
             <div>
               <strong>Tech-Stack? Klar!</strong> JavaScript & TypeScript, React,
-              Next.js, Node.js– alles am Start. Dazu moderne Tools wie bun und
+              Next.js, Node.js – alles am Start. Dazu moderne Tools wie bun und
               npm. Backend-Programmierung und API-Schnittstellen
               Implementierung, MongoDB für flexible Datenmodelle sowie
               DevOps-Grundlagen. UI & UX – klare Interfaces, saubere User Flows

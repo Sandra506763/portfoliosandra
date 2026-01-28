@@ -350,7 +350,7 @@ main p:not(#title) {
 
 @media (max-width: 768px) {
   main { flex: 0 0 95%; max-width: 95%; margin-left:auto; margin-right:auto; padding:1rem;}
-  main #title { font-size: clamp(2.5rem, 14vw, 6rem); letter-spacing: clamp(0.2rem, 6vw, 4rem); }
+  main #title { font-size: clamp(2.5rem, 14vw, 6rem);  letter-spacing: clamp(0.12rem, 3.5vw, 2.2rem);}
 }
 
 
@@ -830,8 +830,17 @@ background-color: hsl(30, 40%, 98%);
 
 
 
+  @media (max-width: 768px) {
+    .orange-dot {
+      width: 18px;
+      height: 18px;
+    }
+  }
 
-
+  @media (max-width: 768px) {
+    main { overflow: hidden; }
+  }
+  
 
 
 

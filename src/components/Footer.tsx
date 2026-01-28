@@ -2,8 +2,9 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer>
+    <footer id="footer">
       <p className="footerText">© 2026 Sandra Nitsch – Portfolio</p>
+
       <div className="social-links">
         <a
           href="mailto:sanitsch78@web.de"
@@ -15,22 +16,26 @@ const Footer: React.FC = () => {
             alt="E-Mail"
           />
         </a>
+
         <a
           href="https://www.linkedin.com/in/dein-profil"
           target="_blank"
           rel="noopener noreferrer"
           className="social-btn linkedin"
+          aria-label="LinkedIn"
         >
           <img
             src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
             alt="LinkedIn"
           />
         </a>
+
         <a
           href="https://www.instagram.com/miezekatze0805"
           target="_blank"
           rel="noopener noreferrer"
           className="social-btn instagram"
+          aria-label="Instagram"
         >
           <img
             src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
