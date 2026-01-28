@@ -41,6 +41,9 @@ const MainSection: React.FC = () => {
 
     let rafId: number | null = null;
 
+    // ✅ Desktop "Impact"-Impuls (macht das Aufkommen natürlicher wie auf Mobile)
+    let impactAt: number | null = null;
+
     const startTimeout = window.setTimeout(() => {
       const startTime = performance.now();
 
@@ -78,6 +81,7 @@ const MainSection: React.FC = () => {
 
         const elapsed = timestamp - startTime;
         const fallDistance = getFallDistance();
+        const isMobileNow = window.innerWidth <= BREAKPOINT_PX;
 
         // ✅ Originalbahn (dein Verhalten)
         let x = I_EDGE_OFFSET;
@@ -90,6 +94,11 @@ const MainSection: React.FC = () => {
           const t = elapsed / phases.fall.end;
           y = fallDistance * easeInQuad(t);
           rotation = t * 120;
+
+          // ✅ Desktop: Zeitpunkt "kurz vor Aufkommen" merken (einmalig)
+          if (!isMobileNow && t > 0.985 && impactAt === null) {
+            impactAt = timestamp;
+          }
         } else if (elapsed < phases.bounce.end) {
           const phaseTime = elapsed - phases.fall.end;
           const phaseDuration = phases.bounce.end - phases.fall.end;
@@ -108,18 +117,44 @@ const MainSection: React.FC = () => {
 
           x = I_EDGE_OFFSET + xOffset + bounceT * bounceStep;
 
-          let initialBounceHeight = 100;
-          if (currentBounce >= numBounces - 2) initialBounceHeight = 45;
+          // ✅ Desktop bounct höher, Mobile bleibt wie gehabt
+          let initialBounceHeight = isMobileNow ? 135 : 150;
 
-          const bounceHeight = initialBounceHeight * Math.pow(0.58, currentBounce);
+          // die letzten Bounces etwas kleiner lassen (wie vorher), aber Desktop trotzdem etwas höher
+          if (currentBounce >= numBounces - 2) {
+            initialBounceHeight = isMobileNow ? 45 : 50;
+          }
+
+          const bounceHeight =
+            initialBounceHeight * Math.pow(0.58, currentBounce);
           const bounceCurve = Math.sin(Math.PI * bounceT);
 
           y = fallDistance - bounceHeight * bounceCurve;
 
+          // ✅ Squash/Stretch beim Kontakt (dein Original)
           if (bounceCurve < 0.15) {
             const squash = 1 - bounceCurve / 0.15;
             scaleX = 1 + squash * 0.12;
             scaleY = 1 - squash * 0.18;
+          }
+
+          // ✅ Desktop: zusätzlicher kurzer "Impact"-Impuls direkt nach dem ersten Aufkommen
+          // (macht das Aufkommen "snappier", ähnlich wie auf Mobile)
+          if (!isMobileNow && impactAt !== null) {
+            const impactElapsed = timestamp - impactAt; // ms seit "impactAt"
+            const impactDur = 140;
+
+            if (impactElapsed < impactDur) {
+              const p = impactElapsed / impactDur; // 0..1
+              const kick = 1 - p; // schnell abklingend
+
+              // mini-rebound + stärkerer squash
+              y -= 10 * kick;
+              scaleX += 0.18 * kick;
+              scaleY -= 0.26 * kick;
+            } else {
+              impactAt = null;
+            }
           }
 
           rotation += bounceT * 240;
@@ -147,14 +182,12 @@ const MainSection: React.FC = () => {
 
         wrapper.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
-        // ✅ HIER ist die Korrektur:
-        // Mobile bekommt einen kleineren Track-Offset, damit er am I runterläuft
-        const isMobileNow = window.innerWidth <= BREAKPOINT_PX;
-
-        const DESKTOP_TRACK_OFFSET = 16; // so wie es bei dir “gut” war
-        const MOBILE_TRACK_OFFSET = 6;   // ✅ kleiner = weniger weit rechts
-
-        const trackOffset = isMobileNow ? MOBILE_TRACK_OFFSET : DESKTOP_TRACK_OFFSET;
+        // ✅ Track-Offset bleibt wie bei dir
+        const DESKTOP_TRACK_OFFSET = 16;
+        const MOBILE_TRACK_OFFSET = 6;
+        const trackOffset = isMobileNow
+          ? MOBILE_TRACK_OFFSET
+          : DESKTOP_TRACK_OFFSET;
 
         if (ball) {
           ball.style.transform = `translateX(${trackOffset}px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
