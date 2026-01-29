@@ -24,7 +24,7 @@ const MainSection: React.FC = () => {
 
     // ✅ Originalwerte (wie bei dir funktionierend)
     const I_EDGE_OFFSET = 33;
-    const MOBILE_X_OFFSET = isMobileAtStart ? 47 : 0;
+    const MOBILE_X_OFFSET = isMobileAtStart ? 48 : 0;
 
     // ✅ Start: bei dir perfekt über dem I
     const startX =

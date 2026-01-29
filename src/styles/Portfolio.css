@@ -12,7 +12,7 @@ body {
   width: auto;
   box-sizing: border-box;
 
-  border: 2px solid #141212;
+  outline: 2px solid #141212;
   margin: 20px;
   padding: 0;
 }
@@ -144,13 +144,12 @@ main {
   max-width: 70%;
   background: hsl(30, 40%, 98%);
   padding: 2rem;
-  box-shadow: 60px 12px 42px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.16), 0 10px 26px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   text-align: left;
   margin-top: 2rem;
   margin-left: 2rem;
   position: relative;
-  border: solid 1px rgb(143, 134, 134);
 }
 
 main #title {
@@ -166,7 +165,6 @@ main #title {
   overflow-wrap: normal;
 }
 
-/* Normale p-Tags im main */
 main p:not(#title) {
   font-size: 1rem;
   font-weight: 400;
@@ -192,38 +190,31 @@ main p:not(#title) {
   border-radius: 50%;
   background: rgb(247, 69, 14);
 
-  /* sanfte Tiefe statt flacher Glow */
-  box-shadow:
-    inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
     0 0 10px rgba(175, 44, 4, 0.65);
 
   animation: pulseGlow 1.7s ease-in-out infinite;
-
 }
 
 @keyframes pulseGlow {
   0% {
     transform: scale(1);
-    box-shadow:
-      inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
       0 0 8px rgba(175, 44, 4, 0.55);
   }
 
   50% {
     transform: scale(1.15); /* etwas weniger als 1.2 */
-    box-shadow:
-      inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3),
       0 0 18px rgba(175, 44, 4, 0.75);
   }
 
   100% {
     transform: scale(1);
-    box-shadow:
-      inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
       0 0 8px rgba(175, 44, 4, 0.55);
   }
 }
-
 
 /* =========================================================
    About
@@ -353,28 +344,34 @@ h2 {
 }
 
 .smiley {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   margin-left: 6px;
-  vertical-align: -3px;
+  vertical-align: -2px;
+  opacity: 0.9;
 }
-
-/* Gesicht */
 .smiley-face {
-  fill: #ddd6d2;
-  stroke: rgb(247, 69, 14);
-  stroke-width: 4;
+  fill: none;
+  stroke: rgba(247, 69, 14, 0.85);
+  stroke-width: 5;
 }
-
-/* Augen & Mund */
 .smiley-eye-open,
 .smiley-eye-wink,
 .smiley-mouth {
-  stroke: rgb(247, 69, 14);
-  stroke-width: 4;
-  fill: rgb(247, 69, 14);
+  fill: none;
+  stroke: rgba(247, 69, 14, 0.9);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.about-text .smiley {
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+.about-text .smiley:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
 /* =========================================================
    Slider
    ========================================================= */
@@ -444,7 +441,6 @@ h2 {
   aspect-ratio: 1 / 1;
 }
 
-/* Hover-States - rund bleiben */
 .slider a:nth-child(1).active ~ .highlight,
 .slider a:nth-of-type(1):hover ~ .highlight,
 .slider a:nth-of-type(1):focus-visible ~ .highlight {
@@ -492,7 +488,7 @@ h2 {
 }
 
 /* =========================================================
-   Footer - FIXED FOR INSTAGRAM
+   Footer 
    ========================================================= */
 footer {
   position: relative;
@@ -551,7 +547,6 @@ footer {
   min-height: 100vh;
   background: linear-gradient(180deg, #e0e0e0 0%, #f7f6f4 60%, #fafafa 100%);
   background-color: hsl(30, 40%, 98%);
-  border: solid 1px rgb(143, 134, 134);
   padding: 3rem 2rem;
 }
 
@@ -668,7 +663,6 @@ footer {
   margin: 0;
 }
 
-/* Pixel Reveal Text */
 .more-coming {
   text-align: center;
   margin: 4rem auto 3rem;
@@ -754,7 +748,7 @@ footer {
 }
 
 /* =========================================================
-   Responsive (Media Queries at End)
+   Responsive (Media Queries)
    ========================================================= */
 
 /* Tablets */
@@ -844,7 +838,6 @@ footer {
     gap: 1rem;
   }
 
-  /* Optional ordering if Header/Main are siblings in the same flex container */
   header {
     order: 1;
   }
@@ -869,7 +862,6 @@ footer {
     height: 18px;
   }
 
-  /* Side statement mobile (back to vertical like your original feel) */
   .side-statement {
     position: relative;
     top: 0;
@@ -890,7 +882,6 @@ footer {
     pointer-events: none;
   }
 
-  /* ABOUT — keep desktop-like typography */
   .about-main {
     min-height: auto;
     margin-left: 0;
@@ -962,7 +953,6 @@ footer {
 
 /* <= 480px */
 @media (max-width: 480px) {
-  /* keep frame feel (no shrinking margins) */
   body {
     margin: 20px;
   }

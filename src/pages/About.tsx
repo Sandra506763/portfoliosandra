@@ -87,7 +87,7 @@ const About: React.FC = () => {
 
             <div>
               Ein weiterer Gedanke ließ mich nicht los: Ich war fast 47 Jahre
-              alt. Trotzdem fasste ich einen klaren Entschluss –{" "}
+              alt. Trotzdem fasste ich einen Entschluss –{" "}
               <strong>nichts ist unmöglich</strong>. Ich wollte es mir selbst
               beweisen und auch meinem fast erwachsenen Sohn, der heute übrigens
               einen ganz ähnlichen beruflichen Weg anstrebt.
