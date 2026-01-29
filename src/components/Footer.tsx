@@ -31,7 +31,9 @@ const Footer: React.FC = () => {
         </a>
 
         <a
-          href="https://www.instagram.com/miezekatze0805"
+          // href="https://www.instagram.com/miezekatze0805/" 
+          href="https://www.instagram.com/accounts/login/?next=%2Fmiezekatze0805%2F"
+
           target="_blank"
           rel="noopener noreferrer"
           className="social-btn instagram"

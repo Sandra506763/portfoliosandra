@@ -49,9 +49,9 @@ const About: React.FC = () => {
             <div>
               Danach war ich zehn Jahre als Disponentin tätig. In dieser Zeit
               konnte ich mein strukturiertes Arbeiten und mein
-              Organisationstalent weiter ausbauen. Anschließend arbeitete ich im
-              Vertriebsinnendienst – der enge Kontakt mit Menschen hat mich sehr
-              erfüllt. Und trotzdem fehlte etwas.
+              Organisationstalent weiter ausbauen. Anschließend war ich im
+              Vertriebsinnendienst tätig – der enge Kontakt mit Menschen hat
+              mich sehr erfüllt. Und trotzdem fehlte etwas.
             </div>
 
             <div>
@@ -79,15 +79,15 @@ const About: React.FC = () => {
             <div>
               Es folgte noch ein letzter Arbeitgeber: ein großer internationaler
               Industriekonzern. Als Custom-Order-Processing-Mitarbeiterin war
-              ich im nationalen wie internationalen Umfeld tätig. Die
+              ich im nationalen als auch internationalen Umfeld tätig. Die
               Rahmenbedingungen stimmten – gute Bezahlung, nette Kolleg:innen –
-              und dennoch blieb dieser Wunsch, kreativ zu arbeiten und meine
-              analytischen Fähigkeiten sinnvoll einzusetzen.
+              und dennoch blieb dieser Wunsch, kreativ arbeiten zu wollen und
+              meine analytischen Fähigkeiten sinnvoll einzusetzen.
             </div>
 
             <div>
-              Ein weiterer Gedanke ließ mich nicht los: Ich war 47 Jahre alt.
-              Trotzdem fasste ich einen klaren Entschluss –{" "}
+              Ein weiterer Gedanke ließ mich nicht los: Ich war fast 47 Jahre
+              alt. Trotzdem fasste ich einen klaren Entschluss –{" "}
               <strong>nichts ist unmöglich</strong>. Ich wollte es mir selbst
               beweisen und auch meinem fast erwachsenen Sohn, der heute übrigens
               einen ganz ähnlichen beruflichen Weg anstrebt.
@@ -148,9 +148,9 @@ const About: React.FC = () => {
             </div>
 
             <div>
-              <strong>Kurz gesagt:</strong> Ich baue Websites und Webapps mit
-              Anspruch, Persönlichkeit – und einer Lebensweise, die sagt:
-              Nothing's impossible.
+              <strong>Kurz gesagt:</strong> Ich baue Websites, Webapps, Apps und
+              Landingpages mit Anspruch, Persönlichkeit – und einer Lebensweise,
+              die sagt: Nothing's impossible!
             </div>
           </section>
         </div>

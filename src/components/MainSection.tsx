@@ -24,11 +24,11 @@ const MainSection: React.FC = () => {
 
     // ✅ Originalwerte (wie bei dir funktionierend)
     const I_EDGE_OFFSET = 33;
-    const MOBILE_X_OFFSET = isMobileAtStart ? 45 : 0;
+    const MOBILE_X_OFFSET = isMobileAtStart ? 47 : 0;
 
     // ✅ Start: bei dir perfekt über dem I
     const startX =
-      rectI.left - rectContainer.left + rectI.width / 2 - 65 + MOBILE_X_OFFSET;
+      rectI.left - rectContainer.left + rectI.width / 2 - 66 + MOBILE_X_OFFSET;
 
     const startY = rectI.top - rectContainer.top - (isMobileAtStart ? 10 : 20);
 
