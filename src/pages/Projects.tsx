@@ -8,26 +8,27 @@ interface Project {
   image?: string;
   videoUrl?: string;
 }
+const projects: Project[] = [
+  {
+    id: "project1",
+    title: "Streamflix",
+    description:
+      "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Sie wurde mit JavaScript und CSS erstellt.",
+    image: "/images/BildschirmfotoStreamflix.png",
+    videoUrl: "/videos/projekt1.mp4",
+  },
+  {
+    id: "project2",
+    title: "Moty",
+    description:
+      "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Des Weiteren kann eine API-Schnittstelle mit Reggae Musik aufgerufen werden. Erstellt habe ich das Ganze mit TypeScript, CSS, Tailwind und Inline-Style. Diese drei Varianten zu kombinieren, war ein wenig herausfordernd, aber nicht unlösbar.",
+    image: "/images/DailyMotivatorDesktop.png",
+    videoUrl: "/videos/projekt2.mp4",
+  },
+];
 
 const Projekte: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-
-  const projects: Project[] = [
-    {
-      id: "project1",
-      title: "Streamflix",
-      description:
-        "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Sie wurde mit JavaScript und CSS erstellt.",
-      videoUrl: "/videos/projekt1.mp4", // Passe den Pfad an
-    },
-    {
-      id: "project2",
-      title: "Moty",
-      description:
-        "Ist eine APP mit eigens konzipiertem Logo und ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Des Weiteren kann eine API-Schnittstelle mit Reggae Musik aufgerufen werden. Erstellt wurde diese mit TypeScript, CSS und Tailwind",
-      videoUrl: "/videos/projekt2.mp4", // Passe den Pfad an
-    },
-  ];
 
   const openVideo = (videoUrl: string) => {
     setActiveVideo(videoUrl);

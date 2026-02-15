@@ -602,22 +602,38 @@ footer {
 
 .card-image {
   width: 100%;
-  height: 220px;
-  background: linear-gradient(135deg, #ddd6d2 0%, #bbb5b2 100%),
-    url("/images/Bildschirmfoto vom-2025-09-29-14-17-52.png");
+  height: clamp(220px, 30vw, 350px);
+  /* background: linear-gradient(135deg, #ddd6d2 0%, #bbb5b2 100%), */
   display: flex;
   align-items: center;
   justify-content: center;
   color: #888;
   font-size: 0.9rem;
   position: relative;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;           /* crop */
+ }
+
+ .card-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(135deg, rgba(221,221,221,0.15), rgba(187,181,178,0.15));
+  pointer-events:none;
 }
+
 
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+   display: block;             /* kein mini gap */
 }
+  
+
 
 .film-icon {
   position: absolute;
