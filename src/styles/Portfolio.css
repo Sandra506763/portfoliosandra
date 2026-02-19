@@ -1,65 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
 
-:root{
-  --frame-gap: 20px; /* Abstand */
-  --frame-w: 2px;    /* Rahmenstärke */
-}
-html, body{
-  width: 100%;
-  min-height: 100%;}
-/* Rahmen wie vorher (nicht overlay, nicht fixed) */
-body{
-  margin: 0;
-  
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;           /* <-- statt margin-left/margin-right */
-  }
-  
-  .top-section > main,
-  .top-section > header{
-    min-width: 0;        /* <-- verhindert “quetschen/abschneiden” */
-  }
-  
-  /* Header: feste, aber responsive Breite (bleibt rechts stabil) */
-  .top-section > header{
-    margin-right: 0;     /* <-- WICHTIG: raus damit */
-    flex: 0 0 clamp(260px, 28vw, 360px);
-  }
-  
-  /* Main: behält deinen 70%-Look, ohne overflow durch margins */
-  .top-section > main{
-    margin-left: 0;      /* <-- WICHTIG: raus damit */
-    flex: 1 1 0;
-    max-width: none;     /* <-- 70% steuern wir über Header-Breite */
-  }
-  .top-section{
-  outline: none;
-  border: none;
-  position: relative;
-  /* dein restlicher body bleibt wie er ist */
+/* =========================================================
+   Base / Global
+   ========================================================= */
+body {
   font-family: "DM Sans", system-ui, sans-serif;
   background: #ddd6d2;
   color: #2e2b29;
+
   height: 100%;
-}
-#root{
-  min-height: 100vh;
-  margin: var(--frame-gap);
-  box-shadow: 0 0 0 var(--frame-w) #141212;
-  background: transparent; /* wichtig: nichts am Design ändern */
-}
+  width: auto;
+  box-sizing: border-box;
 
-@media (max-width: 768px){
-  :root{ --frame-gap: 14px; }
+  outline: 2px solid #141212;
+  margin: 20px;
+  padding: 0;
 }
-@media (max-width: 480px){
-  :root{ --frame-gap: 10px; }
-}
-
- 
 
 /* =========================================================
    Header
@@ -865,7 +821,10 @@ footer {
 /* <= 768px */
 @media (max-width: 768px) {
   /* Keep the "desktop frame feel" */
-
+  body {
+    margin: 20px;
+    border: 2px solid #141212;
+  }
 
   header {
     padding: 1rem;
@@ -1006,13 +965,14 @@ footer {
     margin-left: 6px;
     vertical-align: -2px;
   }
-  
- }
-  
+}
 
 /* <= 480px */
 @media (max-width: 480px) {
-  
+  body {
+    margin: 20px;
+  }
+
   .side-statement {
     font-size: 0.8rem;
     opacity: 0.3;
@@ -1026,5 +986,4 @@ footer {
   .rail-block {
     padding: 0.9rem;
   }
-  
 }
