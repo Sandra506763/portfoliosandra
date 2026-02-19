@@ -29,7 +29,7 @@ const projects: Project[] = [
     id: "project3",
     title: "If I lived there",
     description:
-      "Ist eine Web-APP die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, CSS und ein wenig Inline-Style",
+      "Ist eine Web-APP die anregen soll darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, CSS und ein wenig Inline-Style",
     image: "/images/If-I-lived-there-thailand.png",
     videoUrl: "/videos/projekt2.mp4",
   },
