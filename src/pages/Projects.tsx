@@ -25,6 +25,22 @@ const projects: Project[] = [
     image: "/images/DailyMotivatorDesktop.png",
     videoUrl: "/videos/projekt2.mp4",
   },
+  {
+    id: "project3",
+    title: "If I lived there",
+    description:
+      "Ist eine Web-APP die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, CSS und ein wenig Inline-Style",
+    image: "/images/If-I-lived-there-thailand.png",
+    videoUrl: "/videos/projekt2.mp4",
+  },
+  {
+    id: "project4",
+    title: "",
+    description:
+      "",
+    image: "In Bearbeitung",
+    videoUrl: "/videos/projekt2.mp4",
+  },
 ];
 
 const Projekte: React.FC = () => {
