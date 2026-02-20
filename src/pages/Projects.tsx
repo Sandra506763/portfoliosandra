@@ -17,7 +17,7 @@ const projects: Project[] = [
     description:
       "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und CSS erstellt.",
     image: "/images/BildschirmfotoStreamflix.png",
-    videoUrl: "/public/videos/2026-02-20 17-07-41.mkvStreamflix",
+    videoUrl: "/videos/streamflix.mp4",
   },
   {
     id: "project2",
@@ -25,7 +25,7 @@ const projects: Project[] = [
     description:
       "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt habe ich es mit TypeScript, CSS, Tailwind und Inline-Style. Alle drei zusammen war ein wenig herausfordernd, aber nicht unlösbar.",
     image: "/images/DailyMotivatorDesktop.png",
-    videoUrl: "/public/videos/2026-02-20 16-53-26.mkv Moty",
+    videoUrl: "/videos/moty.mp4"
   },
   {
     id: "project3",
@@ -33,7 +33,7 @@ const projects: Project[] = [
     description:
       "Ist eine Web-APP, die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript, CSS und ein wenig Inline-Style. Responsives Design!",
     image: "/images/If-I-lived-there-thailand.png",
-    videoUrl: "/public/videos/2026-02-20 16-07-14.mkv If-I-lived-there",
+    videoUrl: "/videos/if-i-lived-there.mp4"
   },
   {
     id: "project4",
