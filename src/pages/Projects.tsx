@@ -17,23 +17,23 @@ const projects: Project[] = [
     description:
       "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und CSS erstellt.",
     image: "/images/BildschirmfotoStreamflix.png",
-    videoUrl: "/videos/projekt1.mp4",
+    videoUrl: "/public/videos/2026-02-20 17-07-41.mkvStreamflix",
   },
   {
     id: "project2",
     title: "Moty",
     description:
-      "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt habe ich es mit TypeScript, CSS, Tailwind und Inline-Style. Alle drei zusammen ein wenig herausfordernd, aber nicht unlösbar.",
+      "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt habe ich es mit TypeScript, CSS, Tailwind und Inline-Style. Alle drei zusammen war ein wenig herausfordernd, aber nicht unlösbar.",
     image: "/images/DailyMotivatorDesktop.png",
-    videoUrl: "/videos/projekt2.mp4",
+    videoUrl: "/public/videos/2026-02-20 16-53-26.mkv Moty",
   },
   {
     id: "project3",
     title: "If I lived there",
     description:
-      "Ist eine Web-APP die anregen soll darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript, CSS und ein wenig Inline-Style. Responsives Design",
+      "Ist eine Web-APP, die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript, CSS und ein wenig Inline-Style. Responsives Design!",
     image: "/images/If-I-lived-there-thailand.png",
-    videoUrl: "/videos/projekt3.mp4",
+    videoUrl: "/public/videos/2026-02-20 16-07-14.mkv If-I-lived-there",
   },
   {
     id: "project4",
