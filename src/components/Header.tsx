@@ -79,9 +79,12 @@ const Header: React.FC = () => {
 
       <Navigation />
 
-      {location.pathname === "/about" && (
-        <aside className="side-statement">Design is how it feels</aside>
-      )}
+      {(location.pathname === "/about" ||
+  location.pathname === "/projects") && (
+  <aside className="side-statement">
+    Design is how it feels
+  </aside>
+)}
     </header>
   );
 };

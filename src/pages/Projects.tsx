@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 
+
 interface Project {
   id: string;
   title: string;
   description: string;
   image?: string;
   videoUrl?: string;
+  comingSoon?: boolean;
 }
 const projects: Project[] = [
   {
     id: "project1",
     title: "Streamflix",
     description:
-      "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Sie wurde mit JavaScript und CSS erstellt.",
+      "Streamflix ist eine Streaming-Webseite nur für Serien - mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst schon wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und CSS erstellt.",
     image: "/images/BildschirmfotoStreamflix.png",
     videoUrl: "/videos/projekt1.mp4",
   },
@@ -21,7 +23,7 @@ const projects: Project[] = [
     id: "project2",
     title: "Moty",
     description:
-      "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Des Weiteren kann eine API-Schnittstelle mit Reggae Musik aufgerufen werden. Erstellt habe ich das Ganze mit TypeScript, CSS, Tailwind und Inline-Style. Diese drei Varianten zu kombinieren, war ein wenig herausfordernd, aber nicht unlösbar.",
+      "Ist eine Web-APP mit eigens konzipiertem Logo und responsivem Design. Herunterladbar als App bei netlify. Moty ist ein Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt habe ich es mit TypeScript, CSS, Tailwind und Inline-Style. Alle drei zusammen ein wenig herausfordernd, aber nicht unlösbar.",
     image: "/images/DailyMotivatorDesktop.png",
     videoUrl: "/videos/projekt2.mp4",
   },
@@ -29,17 +31,15 @@ const projects: Project[] = [
     id: "project3",
     title: "If I lived there",
     description:
-      "Ist eine Web-APP die anregen soll darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, CSS und ein wenig Inline-Style",
+      "Ist eine Web-APP die anregen soll darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt - oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript, CSS und ein wenig Inline-Style. Responsives Design",
     image: "/images/If-I-lived-there-thailand.png",
-    videoUrl: "/videos/projekt2.mp4",
+    videoUrl: "/videos/projekt3.mp4",
   },
   {
     id: "project4",
-    title: "",
-    description:
-      "",
-    image: "In Bearbeitung",
-    videoUrl: "/videos/projekt2.mp4",
+    title: "Neues Projekt",
+    description: "In Bearbeitung…",
+    comingSoon: true,
   },
 ];
 
@@ -123,9 +123,20 @@ const Projekte: React.FC = () => {
                 </div>
               </div>
               <div className="card-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-              </div>
+  <h3>{project.title}</h3>
+  <p>{project.description}</p>
+
+  {project.id === "project2" && (
+    <a
+      href="https://app.netlify.com/projects/peppy-marigold-2a2a40/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="project-link"
+    >
+      Projekt ansehen →
+    </a>
+  )}
+</div>
             </div>
           ))}
         </div>
