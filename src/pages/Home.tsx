@@ -33,38 +33,71 @@ const Home: React.FC = () => {
     let intervalId: number | null = null;
     let stopTimeoutId: number | null = null;
     let started = false;
-
     const spawnBubble = () => {
       const l = bubbleLayerRef.current;
       const slider = sliderNavRef.current;
       if (!l || !slider) return;
-
+    
       const layerRect = l.getBoundingClientRect();
       const sliderRect = slider.getBoundingClientRect();
-
-      const centerX = sliderRect.left - layerRect.left + sliderRect.width / 2;
-      const spread = Math.max(40, sliderRect.width * 0.55);
-      const x = centerX + (Math.random() * spread - spread / 2);
-
+    
+      // Slider-Koordinaten relativ zum Bubble-Layer
+      const sliderLeft = sliderRect.left - layerRect.left;
+      const sliderRight = sliderRect.right - layerRect.left;
+    
+      // ✅ Bubble zuerst erstellen + Größe bestimmen (WICHTIG fürs Clamp!)
       const bubble = document.createElement("span");
       bubble.className = "bubble";
-
-      const size = Math.floor(Math.random() * 10) + 10;
+    
+      const size = Math.floor(Math.random() * 10) + 10; // 10..19 (dein aktueller Bereich)
+      const radius = size / 2;
+    
       const duration = Math.random() * 1.4 + 3.0;
       const opacity = Math.random() * 0.25 + 0.18;
-
+    
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
-      bubble.style.left = `${x}px`;
       bubble.style.opacity = `${opacity}`;
       bubble.style.animationDuration = `${duration}s`;
-
+    
+      // ✅ Mittelpunkt vom Slider
+      const centerX = sliderLeft + (sliderRight - sliderLeft) / 2;
+    
+      // ✅ Mobile: kleinere Streuung, Desktop: wie gehabt
+      const isMobile = window.innerWidth <= BREAKPOINT_PX;
+      const spread = isMobile
+        ? (sliderRight - sliderLeft) * 0.35
+        : Math.max(40, (sliderRight - sliderLeft) * 0.55);
+    
+      // Rohes x (als Mittelpunkt)
+      let xCenter = centerX + (Math.random() * spread - spread / 2);
+    
+      // ✅ HARTES Clamp: Bubble muss komplett im Slider bleiben
+      // linke Kante >= sliderLeft + padding
+      // rechte Kante <= sliderRight - padding
+      const padding = 6;
+    
+      const minCenter = sliderLeft + padding + radius;
+      const maxCenter = sliderRight - padding - radius;
+    
+      // Falls Slider extrem klein ist: zur Mitte zwingen
+      if (maxCenter <= minCenter) {
+        xCenter = centerX;
+      } else {
+        xCenter = Math.max(minCenter, Math.min(maxCenter, xCenter));
+      }
+    
+      // bubble.left ist linke Kante => Mittelpunkt - Radius
+      bubble.style.left = `${xCenter - radius}px`;
+    
+      // Bubble soll hinter dem Slider starten (dein bisheriges Verhalten)
       const bottomFromLayer = layerRect.bottom - sliderRect.bottom + 6;
       bubble.style.bottom = `${Math.max(6, bottomFromLayer)}px`;
-
+    
       l.appendChild(bubble);
       bubble.addEventListener("animationend", () => bubble.remove());
     };
+
 
     const stopBubbles = () => {
       if (intervalId) {
@@ -172,15 +205,28 @@ const Home: React.FC = () => {
     startTimeoutId = window.setTimeout(() => {
       isRunning = true;
 
+     
       const startTop = parseFloat(wrapper.style.top || "0") || 0;
-      const groundDY = getGroundDY(startTop);
+      const dotSize = ball.offsetWidth || 40;
+      
+      // untere Innenkante der QuoteCard
+      const groundY = container.clientHeight - dotSize;
+      
+      const groundDY = Math.max(0, groundY - startTop);
 
       const startTime = performance.now();
       const isMobile = window.innerWidth <= BREAKPOINT_PX;
 
-      // ✅ noch ein Hauch mehr rechts am I entlang
-      const rollDX = isMobile ? 32 : 46; // vorher 30/43
-
+      const rectI = iLetter.getBoundingClientRect();
+      const rectC = container.getBoundingClientRect();
+    
+      const startLeft = parseFloat(wrapper.style.left || "0") || 0;
+      
+      // rechte I-Kante relativ zur QuoteCard
+      const iRightRel = rectI.right - rectC.left;
+      
+      const ROLL_EXTRA = dotSize; // ganze Ballbreite nach rechts
+const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
       // ✅ noch früher fallen = schneller runter
       const dropStart = 0.22; // vorher 0.28
 
