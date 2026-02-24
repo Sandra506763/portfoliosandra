@@ -17,197 +17,221 @@ const MainSection: React.FC = () => {
     const ball = wrapper.querySelector(".orange-dot") as HTMLElement | null;
     if (!ball) return;
 
-    const rectI = iLetter.getBoundingClientRect();
-    const rectContainer = container.getBoundingClientRect();
-
-    const isMobileAtStart = window.innerWidth <= BREAKPOINT_PX;
-
-    // ✅ Originalwerte (wie bei dir funktionierend)
-    const I_EDGE_OFFSET = 33;
-    const MOBILE_X_OFFSET = isMobileAtStart ? 48 : 0;
-
-    // ✅ Start: bei dir perfekt über dem I
-    const startX =
-      rectI.left - rectContainer.left + rectI.width / 2 - 66 + MOBILE_X_OFFSET;
-
-    const startY = rectI.top - rectContainer.top - (isMobileAtStart ? 10 : 20);
-
-    wrapper.style.left = `${startX}px`;
-    wrapper.style.top = `${startY}px`;
-    wrapper.style.transform = "translate3d(0,0,0)";
-    wrapper.style.display = "block";
-    wrapper.style.zIndex = "10";
-    wrapper.style.opacity = "1";
-
     let rafId: number | null = null;
+    let startTimeoutId: number | null = null;
+    let isRunning = false;
 
-    // ✅ Desktop "Impact"-Impuls (macht das Aufkommen natürlicher wie auf Mobile)
-    let impactAt: number | null = null;
+    // helpers
+    const clamp01 = (t: number) => Math.max(0, Math.min(1, t));
+    const easeInQuad = (t: number) => t * t;
+    const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-    const startTimeout = window.setTimeout(() => {
+    const placeOnI = () => {
+      const rectI = iLetter.getBoundingClientRect();
+      const rectC = container.getBoundingClientRect();
+
+      const isMobile = window.innerWidth <= BREAKPOINT_PX;
+      const dotSize = ball.offsetWidth || 40;
+
+      // Mittelpunkt vom I relativ zum Container
+      const xCenter = rectI.left - rectC.left + rectI.width / 2;
+
+      // Ball soll “oben auf der Zeile” sitzen
+      const yTopLine = rectI.top - rectC.top - (isMobile ? 10 : 20);
+
+      wrapper.style.left = `${xCenter - dotSize / 2}px`;
+      wrapper.style.top = `${yTopLine}px`;
+      wrapper.style.transform = "translate3d(0,0,0)";
+      wrapper.style.display = "block";
+      wrapper.style.opacity = "1";
+      wrapper.style.zIndex = "10";
+
+      // JS übernimmt rotate/scale
+      ball.style.transform = "translateX(0px) rotate(0deg) scale(1,1)";
+    };
+
+    const getGroundDY = (startTop: number) => {
+      const cs = getComputedStyle(container);
+      const padBottom = parseFloat(cs.paddingBottom || "0") || 0;
+      const dotSize = ball.offsetWidth || 40;
+
+      // Boden = innerer “Main”-Boden
+      const groundY = container.clientHeight - padBottom - dotSize;
+
+      return Math.max(0, groundY - startTop);
+    };
+
+    // initial
+    placeOnI();
+
+    // bei Resize nur neu positionieren, wenn nicht animiert
+    const onResize = () => {
+      if (!isRunning) placeOnI();
+    };
+    window.addEventListener("resize", onResize);
+
+    // timings
+    const phases = {
+      pulse: 2600,
+      rollTop: 4200,
+      fall: 1700,
+      bounce: 2900,
+      rollOut: 12000,
+    };
+
+    startTimeoutId = window.setTimeout(() => {
+      isRunning = true;
+
+      // StartTop aus wrapper.top
+      const startTop = parseFloat(wrapper.style.top || "0") || 0;
+      const groundDY = getGroundDY(startTop);
+
       const startTime = performance.now();
+      const isMobile = window.innerWidth <= BREAKPOINT_PX;
 
-      const getFallDistance = () => {
-        const rectContainerNow = container.getBoundingClientRect();
-        const dotSize = ball.offsetWidth || 40;
-        const smallNow = window.innerWidth <= BREAKPOINT_PX;
+      const topRollDX = isMobile ? 140 : 220;
+      const bounces = 5;
+      const bounceStepX = isMobile ? 48 : 70;
 
-        const footerElement = document.getElementById("footer");
-        const footerTop = footerElement
-          ? footerElement.getBoundingClientRect().top - rectContainerNow.top
-          : window.innerHeight - rectContainerNow.top - 100;
+      const animate = (now: number) => {
+        const tAll = now - startTime;
 
-        const csMain = getComputedStyle(container);
-        const padBottom = parseFloat(csMain.paddingBottom || "0") || 0;
-
-        // ✅ Mobile: physisch im Main stoppen
-        const mainBottom = container.clientHeight - (smallNow ? 2 : padBottom);
-        const groundY = smallNow ? mainBottom : footerTop;
-
-        return Math.max(0, groundY - startY - dotSize);
-      };
-
-      const phases = {
-        fall: { end: 2000 },
-        bounce: { end: 5200 },
-        rollOut: { end: 5200 + 28000 },
-      };
-
-      const easeInQuad = (t: number) => t * t;
-      const easeOutFriction = (t: number) => 1 - Math.pow(1 - t, 4);
-
-      function animate(timestamp: number) {
-        if (!wrapper) return;
-
-        const elapsed = timestamp - startTime;
-        const fallDistance = getFallDistance();
-        const isMobileNow = window.innerWidth <= BREAKPOINT_PX;
-
-        // ✅ Originalbahn (dein Verhalten)
-        let x = I_EDGE_OFFSET;
-        let y = startY;
+        let dx = 0;
+        let dy = 0;
         let rotation = 0;
         let scaleX = 1;
         let scaleY = 1;
 
-        if (elapsed < phases.fall.end) {
-          const t = elapsed / phases.fall.end;
-          y = fallDistance * easeInQuad(t);
-          rotation = t * 120;
+        // 1) pulse
+        if (tAll < phases.pulse) {
+          const t = tAll / phases.pulse;
+          const wobble = Math.sin(t * Math.PI * 2) * 0.04;
+          scaleX = 1 + wobble;
+          scaleY = 1 - wobble;
 
-          // ✅ Desktop: Zeitpunkt "kurz vor Aufkommen" merken (einmalig)
-          if (!isMobileNow && t > 0.985 && impactAt === null) {
-            impactAt = timestamp;
-          }
-        } else if (elapsed < phases.bounce.end) {
-          const phaseTime = elapsed - phases.fall.end;
-          const phaseDuration = phases.bounce.end - phases.fall.end;
-          const t = phaseTime / phaseDuration;
+          wrapper.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+          ball.style.transform = `translateX(0px) rotate(0deg) scale(${scaleX}, ${scaleY})`;
 
-          const numBounces = 5;
-          const bounceProgress = t * numBounces;
-          const currentBounce = Math.floor(bounceProgress);
-          const bounceT = bounceProgress - currentBounce;
-
-          const bounceStep = 70 + currentBounce * 10;
-          let xOffset = 0;
-          for (let i = 0; i < currentBounce; i++) {
-            xOffset += 70 + i * 10;
-          }
-
-          x = I_EDGE_OFFSET + xOffset + bounceT * bounceStep;
-
-          // ✅ Desktop bounct höher, Mobile bleibt wie gehabt
-          let initialBounceHeight = isMobileNow ? 135 : 150;
-
-          // die letzten Bounces etwas kleiner lassen (wie vorher), aber Desktop trotzdem etwas höher
-          if (currentBounce >= numBounces - 2) {
-            initialBounceHeight = isMobileNow ? 45 : 50;
-          }
-
-          const bounceHeight =
-            initialBounceHeight * Math.pow(0.58, currentBounce);
-          const bounceCurve = Math.sin(Math.PI * bounceT);
-
-          y = fallDistance - bounceHeight * bounceCurve;
-
-          // ✅ Squash/Stretch beim Kontakt (dein Original)
-          if (bounceCurve < 0.15) {
-            const squash = 1 - bounceCurve / 0.15;
-            scaleX = 1 + squash * 0.12;
-            scaleY = 1 - squash * 0.18;
-          }
-
-          // ✅ Desktop: zusätzlicher kurzer "Impact"-Impuls direkt nach dem ersten Aufkommen
-          // (macht das Aufkommen "snappier", ähnlich wie auf Mobile)
-          if (!isMobileNow && impactAt !== null) {
-            const impactElapsed = timestamp - impactAt; // ms seit "impactAt"
-            const impactDur = 140;
-
-            if (impactElapsed < impactDur) {
-              const p = impactElapsed / impactDur; // 0..1
-              const kick = 1 - p; // schnell abklingend
-
-              // mini-rebound + stärkerer squash
-              y -= 10 * kick;
-              scaleX += 0.18 * kick;
-              scaleY -= 0.26 * kick;
-            } else {
-              impactAt = null;
-            }
-          }
-
-          rotation += bounceT * 240;
-        } else if (elapsed < phases.rollOut.end) {
-          const phaseTime = elapsed - phases.bounce.end;
-          const t = phaseTime / (phases.rollOut.end - phases.bounce.end);
-          const easedT = easeOutFriction(t);
-
-          let finalBounceX = I_EDGE_OFFSET;
-          for (let i = 0; i < 5; i++) {
-            finalBounceX += 70 + i * 10;
-          }
-
-          const totalDistance = window.innerWidth <= BREAKPOINT_PX ? 600 : 1500;
-
-          x = finalBounceX + totalDistance * easedT;
-          y = fallDistance;
-
-          rotation += easedT * 700;
-          wrapper.style.opacity = `${1 - Math.max(0, (t - 0.85) / 0.15)}`;
-        } else {
-          wrapper.style.display = "none";
+          rafId = requestAnimationFrame(animate);
           return;
         }
 
-        wrapper.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        // 2) roll on top line
+        const t2 = tAll - phases.pulse;
+        if (t2 < phases.rollTop) {
+          const t = clamp01(t2 / phases.rollTop);
+          const eased = easeInOutCubic(t);
 
-        // ✅ Track-Offset bleibt wie bei dir
-        const DESKTOP_TRACK_OFFSET = 16;
-        const MOBILE_TRACK_OFFSET = 6;
-        const trackOffset = isMobileNow
-          ? MOBILE_TRACK_OFFSET
-          : DESKTOP_TRACK_OFFSET;
+          dx = topRollDX * eased;
+          rotation = eased * 260;
 
-        if (ball) {
-          ball.style.transform = `translateX(${trackOffset}px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+          wrapper.style.transform = `translate3d(${dx}px, 0px, 0)`;
+          ball.style.transform = `translateX(0px) rotate(${rotation}deg) scale(1,1)`;
+
+          rafId = requestAnimationFrame(animate);
+          return;
         }
 
-        rafId = requestAnimationFrame(animate);
-      }
+        // 3) fall
+        const t3 = t2 - phases.rollTop;
+        if (t3 < phases.fall) {
+          const t = clamp01(t3 / phases.fall);
+          const eased = easeInQuad(t);
+
+          dx = topRollDX;
+          dy = groundDY * eased;
+          rotation = 260 + eased * 120;
+
+          if (t > 0.92) {
+            const p = (t - 0.92) / 0.08;
+            scaleX = 1 + 0.18 * p;
+            scaleY = 1 - 0.26 * p;
+          }
+
+          wrapper.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+          ball.style.transform = `translateX(0px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+
+          rafId = requestAnimationFrame(animate);
+          return;
+        }
+
+        // 4) bounce
+        const t4 = t3 - phases.fall;
+        if (t4 < phases.bounce) {
+          const t = clamp01(t4 / phases.bounce);
+
+          const prog = t * bounces;
+          const idx = Math.floor(prog);
+          const localT = prog - idx;
+
+          let bounceDX = topRollDX;
+          for (let i = 0; i < idx; i++) bounceDX += bounceStepX + i * 10;
+          bounceDX += (bounceStepX + idx * 10) * localT;
+
+          const baseY = groundDY;
+          const initialH = isMobile ? 120 : 150;
+          const h = initialH * Math.pow(0.58, idx);
+          const curve = Math.sin(Math.PI * localT);
+
+          dx = bounceDX;
+          dy = baseY - h * curve;
+          rotation = 380 + (idx + localT) * 220;
+
+          if (curve < 0.12) {
+            const p = 1 - curve / 0.12;
+            scaleX = 1 + 0.12 * p;
+            scaleY = 1 - 0.18 * p;
+          }
+
+          wrapper.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+          ball.style.transform = `translateX(0px) rotate(${rotation}deg) scale(${scaleX}, ${scaleY})`;
+
+          rafId = requestAnimationFrame(animate);
+          return;
+        }
+
+        // 5) roll out
+        const t5 = t4 - phases.bounce;
+        if (t5 < phases.rollOut) {
+          const t = clamp01(t5 / phases.rollOut);
+          const eased = easeOutQuad(t);
+
+          let endBounceDX = topRollDX;
+          for (let i = 0; i < bounces; i++) endBounceDX += bounceStepX + i * 10;
+
+          const totalOut = isMobile ? 700 : 1600;
+
+          dx = endBounceDX + totalOut * eased;
+          dy = groundDY;
+          rotation = 900 + eased * 1400;
+
+          wrapper.style.opacity = `${1 - Math.max(0, (t - 0.88) / 0.12)}`;
+          wrapper.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+          ball.style.transform = `translateX(0px) rotate(${rotation}deg) scale(1,1)`;
+
+          rafId = requestAnimationFrame(animate);
+          return;
+        }
+
+        wrapper.style.display = "none";
+        isRunning = false;
+      };
 
       rafId = requestAnimationFrame(animate);
     }, 9000);
 
     return () => {
-      window.clearTimeout(startTimeout);
-      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+      if (startTimeoutId) window.clearTimeout(startTimeoutId);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
-    <main ref={containerRef}>
-      <div ref={wrapperRef} className="orange-dot-wrapper">
+    <main ref={containerRef} className="homeBallStage">
+      <div ref={wrapperRef} className="orange-dot-wrapper" style={{ display: "none" }}>
         <div className="orange-dot" />
       </div>
 
