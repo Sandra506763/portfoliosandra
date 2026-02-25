@@ -1,13 +1,42 @@
 import React from "react";
+import RightHeader from "../components/RightHeader";
 
 const About: React.FC = () => {
   return (
-    <main className="about-main">
-      <div className="about-layout">
-        <div className="about-content">
-          <h2>Über mich</h2>
-          <section className="about-text">
-            <div>
+    <main className="homePage aboutPage">
+      <div className="homeFrame">
+        <div className="homeGrid">
+          {/* ✅ 70% MAIN (links) */}
+          <section className="homeLeft aboutMain">
+            {/* Rail-Block (rechts oben im Main-Bereich) */}
+            <aside className="aboutRailInMain">
+              <div className="rail-block">
+                <h3>Quick Facts</h3>
+                <ul>
+                  <li>Frontend Developer</li>
+                  <li>React · Next.js · TypeScript</li>
+                  <li>Designaffin</li>
+                </ul>
+              </div>
+
+              <div className="rail-block">
+                <h3>Status</h3>
+                <p>Open for opportunities</p>
+              </div>
+
+              <div className="rail-block">
+                <h3>Focus</h3>
+                <p>
+                  Clean UI <br />
+                  Thoughtful Motion
+                </p>
+              </div>
+            </aside>
+
+            <h2>Über mich</h2>
+
+            <section className="about-text">
+              <div>
               Ich bin Webentwicklerin, die gerne Ordnung ins Chaos bringt – mit
               sauberem Code, einzigartigem Design und innovativen Lösungen für
               eine langfristige Architektur.
@@ -17,27 +46,29 @@ const About: React.FC = () => {
               Kreativität war schon immer ein fester Bestandteil meines Lebens –
               sie zieht sich durch mein gesamtes Leben und durch meine gesamte
               Familie. Auch mein Kind wurde davon nicht verschont.
-              <svg
-                className="smiley"
-                viewBox="0 0 100 100"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle className="smiley-face" cx="50" cy="50" r="45" />
-                <circle className="smiley-eye-open" cx="35" cy="40" r="5" />
-                <path
-                  className="smiley-eye-wink"
-                  d="M58 40 Q65 36 72 40"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <path
-                  className="smiley-mouth"
-                  d="M30 58 Q50 72 70 58"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-              </svg>
+              
+
+<svg
+  className="smiley"
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <circle className="smiley-face" cx="50" cy="50" r="45" />
+  <circle className="smiley-eye-open" cx="35" cy="40" r="3.6" />
+  <path
+    className="smiley-eye-wink"
+    d="M58 42 Q65 38 72 42"
+    fill="none"
+    strokeLinecap="round"
+  />
+  <path
+    className="smiley-mouth"
+    d="M28 56 Q50 76 72 56"
+    fill="none"
+    strokeLinecap="round"
+  />
+</svg>
             </div>
 
             <div>
@@ -152,35 +183,20 @@ const About: React.FC = () => {
               Landingpages mit Anspruch, Persönlichkeit – und einer Lebensweise,
               die sagt: Nothing's impossible!
             </div>
-          </section>
+            </section>   {/* Ende .about-text */}
+          </section>     {/* Ende .homeLeft */}
+                
+          <aside className="homeRight">
+            <RightHeader />
+          </aside>
         </div>
-
-        <aside className="about-rail">
-          <div className="rail-block">
-            <h3>Quick Facts</h3>
-            <ul>
-              <li>Frontend Developer</li>
-              <li>React · Next.js · TypeScript · JavaScript </li>
-              <li>Designaffin</li>
-            </ul>
-          </div>
-
-          <div className="rail-block">
-            <h3>Status</h3>
-            <p>Open for opportunities</p>
-          </div>
-
-          <div className="rail-block">
-            <h3>Focus</h3>
-            <p>
-              Clean UI <br />
-              Thoughtful Motion
-            </p>
-          </div>
-        </aside>
       </div>
     </main>
   );
 };
 
 export default About;
+
+
+
+              

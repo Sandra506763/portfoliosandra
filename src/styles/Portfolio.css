@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 html,
 body {
@@ -7,7 +8,9 @@ body {
 }
 body {
   margin: 0;
-}
+      font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
 
 #root {
   min-height: 100vh;
@@ -51,6 +54,10 @@ body {
       rgba(255, 255, 255, 0) 62%
     ),
     #d7cfcb;
+}
+
+.aboutPage .homeFrame {
+  overflow: visible;
 }
 
 .homeFrame {
@@ -380,18 +387,16 @@ header #fancy-heading {
   background: linear-gradient(to top, #222, #555);
   color: #fff;
   padding: 0.9rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.8rem;
-
   isolation: isolate;
 }
 
 .siteFooter .footerText {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.08em;
   text-shadow: 0 2px 10px rgba(219, 209, 209, 0.8);
@@ -555,5 +560,306 @@ header #fancy-heading {
   }
   .qChar {
     letter-spacing: 0.06em;
+  }
+}
+
+/* ====================================================================== */
+/* ABOUT – CLEAN (nutzt Home-Layout: homePage/homeFrame/homeGrid)          */
+/* Ziel: links Text + Rail daneben (sticky), rechts RightHeader + Statement */
+/* ====================================================================== */
+
+/* ------------------------------ */
+/* 1) ABOUT MAIN: Layout in 70%-Spalte */
+/* ------------------------------ */
+
+.aboutMain {
+  position: relative; /* für orange Linie */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); /* Text | Rail */
+  gap: clamp(18px, 2.4vw, 40px);
+  align-items: start;
+}
+
+/* Titel */
+.aboutMain h2 {
+  grid-column: 1;
+  margin: 20px 0 0 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.18);
+}
+
+/* Textblock */
+
+.about-text{
+  display: grid;
+  gap: clamp(10px, 1.2vw, 16px); /* kleiner */
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #2e2b29;
+}
+
+.about-text > div{
+  margin: 0;              /* wichtig: kein extra Abstand */
+  text-align: justify;
+  max-width: 80ch;
+}
+
+
+/* Hover-Underline */
+.about-text strong {
+  position: relative;
+}
+
+.about-text strong::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: rgb(247, 69, 14);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.about-text strong:hover::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------ */
+/* 2) ORANGE LINIE rechts im Textbereich */
+/* ------------------------------ */
+
+.aboutMain::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  right: clamp(10px, 2vw, 22px);
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(247, 69, 14, 0.95),
+    transparent
+  );
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ------------------------------ */
+/* 3) RAIL: Quick Facts etc. (sticky + neben Text) */
+/* ------------------------------ */
+
+.aboutRailInMain {
+  grid-column: 2;
+  grid-row: 1 / span 2; /* startet neben Titel+Text */
+  display: grid;
+  gap: 14px;
+
+  position: sticky;
+  top: 120px; /* ggf. 90–140 je nach Header-Höhe */
+
+  align-self: start;
+  width: 100%;
+}
+
+/* Rail Cards */
+.rail-block {
+  width: 100%;
+  background: rgba(251, 249, 248, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+  padding: clamp(14px, 1.6vw, 18px);
+}
+
+/* Headline + orange Strich davor */
+.rail-block h3 {
+  margin: 0 0 0.6rem 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #141212;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rail-block h3::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgb(247, 69, 14);
+  flex: 0 0 auto;
+}
+
+.rail-block p,
+.rail-block li {
+  margin: 0;
+  line-height: 1.5;
+  color: #2e2b29;
+}
+
+.rail-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* ------------------------------ */
+/* 4) SMILEY (kein blaues Auge) */
+/* ------------------------------ */
+
+.smiley {
+  width: clamp(16px, 1.1vw, 22px);
+  height: clamp(16px, 1.1vw, 22px);
+  display: inline-block;
+  vertical-align: -0.15em;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 2px rgba(247, 69, 14, 0.25));
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.smiley:hover {
+  transform: translateY(-1px) scale(1.08);
+}
+
+.smiley-face {
+  fill: none;
+  stroke: rgba(247, 69, 14, 0.85);
+  stroke-width: 3;
+}
+
+.smiley-eye-open {
+  fill: rgba(247, 69, 14, 0.9);
+  stroke: none;
+}
+
+.smiley-eye-wink,
+.smiley-mouth {
+  fill: none;
+  stroke: rgba(247, 69, 14, 0.9);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.smiley:hover .smiley-mouth {
+  stroke-width: 3.4;
+}
+
+/* ------------------------------ */
+/* 5) RIGHTHEADER: keine "Einflug"-Animation auf About/Projects */
+/* (Glow bleibt im CSS von .homeTitle etc.) */
+/* ------------------------------ */
+
+.rh-static .nameChar,
+.rh-static .nameSpace {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.rh-static .rh-role,
+.rh-home .rh-role {
+  /* falls irgendwo p/global-styles reinfunken */
+  margin: 0.2rem 0 0 0;
+  font-size: 1.7rem; /* oder was du auf Home willst */
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+/* ------------------------------ */
+/* 6) SIDE STATEMENT (NUR EINMAL!) */
+/* ------------------------------ */
+
+.side-statement {
+  position: relative;
+  top: 240px;
+
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+
+  color: #2e2b29;
+  opacity: 0.2;
+
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+
+/* ABOUT: RightHeader soll wie Home "in einer Bühne" sitzen */
+/* About: Header weiter nach oben */
+.aboutPage .homeRight{
+  min-height: clamp(520px, 72vh, 820px);
+  align-items: flex-start;   /* statt center */
+}
+
+.aboutPage .sideStack{
+  justify-content: flex-start;  /* statt center */
+  padding-top: 40px;            /* Feintuning */
+}
+
+
+
+
+/* ------------------------------ */
+/* 7) RESPONSIVE */
+/* ------------------------------ */
+
+@media (max-width: 980px) {
+  .aboutMain {
+    grid-template-columns: 1fr; /* Text + Rail untereinander */
+  }
+
+  .aboutRailInMain {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+    top: auto;
+    margin-bottom: 18px;
+  }
+
+  .aboutMain::after {
+    display: none; /* orange Linie ausblenden auf Mobile */
+  }
+
+  .aboutRailInMain .rail-block:first-child{
+    position: relative;
+  }
+  
+  .aboutRailInMain .rail-block:first-child::before{
+    content: "";
+    position: absolute;
+    left: -14px;           /* Abstand neben dem Card */
+    top: 16px;
+    bottom: 16px;
+    width: 2px;
+    border-radius: 2px;
+    background: rgba(247, 69, 14, 0.95);
+  }
+  .side-statement {
+    writing-mode: horizontal-tb;
+    top: 0;
+    letter-spacing: 0.2em;
+    font-size: 1rem;
+    opacity: 0.5;
   }
 }
