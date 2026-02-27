@@ -20,8 +20,12 @@ const Navigation: React.FC = () => {
     const h = highlightRef.current;
     if (!h) return;
 
-    // Dein CSS nutzt translateX(0/100/200) bereits – wir setzen exakt das
-    const nudge = index === 0 ? 7 : 0; // px nach rechts nur für HOME
+    let nudge = 0;
+
+    if (index === 0) nudge = 6;     // Home etwas nach rechts
+    if (index === 1) nudge = -2;    // Über mich leicht nach links
+    if (index === 2) nudge = -4;    // Projekte minimal mehr nach links
+    
     h.style.transform = `translateX(calc(${index * 100}% + ${nudge}px)) scale(0.85)`;
   };
 
