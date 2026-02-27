@@ -128,27 +128,25 @@
 
 /* Statement */
 .rph-statement {
-  position: relative;
-  top: 240px;
-
+    margin-top: 110px; /* statt top: 240px */
+  
   writing-mode: vertical-lr;
   text-orientation: mixed;
 
   font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.3em;
+  font-size: clamp(0.95rem, 1vw, 1.15rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 
   color: #2e2b29;
-  opacity: 0.2;
+  opacity: 0.25;
 
   pointer-events: none;
   user-select: none;
-  z-index: 10;
 
-  margin-top: 1.5rem;
   text-align: center;
 }
+
 
 /* ✅ Slider kleiner + runde Highlight-Bubble (override Navigation CSS) */
 /* Wir überschreiben bewusst deine globalen .slider-* Regeln nur in diesem Bereich */
@@ -176,11 +174,11 @@
   max-width: 100%;
   width: min(290px, 100%);
   margin-inline: auto;
-}
+  }
 
 .rph .slider a {
   flex: 1;
-   font-weight: bold;
+  font-weight: 600;  
     color: #2e2b29;
   z-index: 2;
   user-select: none;
@@ -209,10 +207,10 @@
   height: calc(100% - 6px);
 
   background: radial-gradient(
-    circle at 30% 30%,
-    rgb(244, 246, 247),
-    rgba(241, 242, 243, 0.37) 40%,
-    rgba(5, 5, 5, 0.41) 100%
+    circle at 35% 35%,
+    rgb(248, 249, 250),
+    rgba(241, 242, 243, 0.45) 45%,
+    rgba(5, 5, 5, 0.28) 100%
   );
 
   border-radius: 999px; /* rund */
@@ -222,7 +220,35 @@
   box-shadow: inset -4px -4px 12px rgba(255, 255, 255, 0.6),
     inset 4px 4px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.3);
 
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
   z-index: 0;
 }
 
+/* ================================
+   RPH Slider: feste, saubere Breiten
+   (Ende der Datei, damit es gewinnt)
+================================ */
+
+.rph .rph-sliderWrap .slider{
+    width: 100%;
+    max-width: 275px;  /* Desktop/Tablet Standard */
+    margin-inline: auto;
+  }
+  
+  /* ✅ Mobile kleiner (muss greifen!) */
+  @media (max-width: 520px){
+    .rph .rph-sliderWrap .slider{
+      max-width: 260px;
+    }
+  }
+  /* Links im RPH-Slider: wirklich mittig, auch bei 2 Zeilen */
+.rph .rph-sliderWrap .slider a{
+    display: grid;
+    place-items: center;
+    line-height: 1.05;
+  }
+  @media (max-width: 520px){
+    .rph .rph-sliderWrap .slider a{
+      font-size: 0.9rem;
+    }
+  }

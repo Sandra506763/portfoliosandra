@@ -863,3 +863,32 @@ header #fancy-heading {
     opacity: 0.5;
   }
 }
+@media (max-width: 980px){
+
+  .aboutRailInMain .rail-block{
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aboutRailInMain .rail-block::after{
+    content: "";
+    position: absolute;
+    top: 16px;
+    bottom: 16px;
+
+    left: 68%;        /* letztes Drittel */
+    width: 1.5px;     /* dünner wirkt edler */
+
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(247, 69, 14, 0.75),
+      transparent
+    );
+
+    opacity: 0.6;     /* wichtig: sonst zu dominant */
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+}
