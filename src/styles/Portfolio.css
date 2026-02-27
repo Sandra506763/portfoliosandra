@@ -293,7 +293,7 @@ header #fancy-heading {
   padding: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   max-width: 100%;
-}
+  }
 
 .slider a {
   flex: 1;

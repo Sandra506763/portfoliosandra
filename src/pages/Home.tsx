@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Portfolio.css";
+import RightPanelHeader from "../components/RightPanelHeader";
 
 const BREAKPOINT_PX = 768;
 

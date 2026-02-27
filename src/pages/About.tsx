@@ -1,5 +1,5 @@
 import React from "react";
-import RightHeader from "../components/RightHeader";
+import RightPanelHeader from "../components/RightPanelHeader";
 
 const About: React.FC = () => {
   return (
@@ -187,7 +187,7 @@ const About: React.FC = () => {
           </section>     {/* Ende .homeLeft */}
                 
           <aside className="homeRight">
-            <RightHeader />
+          <RightPanelHeader statement />
           </aside>
         </div>
       </div>
