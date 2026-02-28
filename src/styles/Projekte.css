@@ -1,0 +1,371 @@
+/* Projekte.css – NUR Projekte-spezifisch. Layout-Base bleibt in Portfolio.css */
+
+.projectsPage .homeLeft.projectsLeft {
+  min-height: clamp(520px, 72vh, 820px);
+}
+
+.projectsPage .homeGrid {
+  grid-template-columns: minmax(0, 7.5fr) minmax(0, 2.5fr);
+}
+.projectsLeft {
+  padding-top: 8px;
+  padding-bottom: 1.2rem;
+  padding-right: clamp(10px, 2vw, 40px);
+}
+
+/* Panel nur links hinter den Cards */
+
+/* =========================================================
+   Projects Panel – "almost invisible" (nur Schatten/Glas)
+   ========================================================= */
+
+.projectsPanel {
+  position: relative;
+  padding: clamp(26px, 2.8vw, 44px);
+  margin-inline: clamp(-20px, -2vw, -40px);
+  padding-inline: 20px;
+  /* Schatten statt Kante */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  /* kein Rand */
+
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  margin-left: clamp(-30px, -2vw, -60px);
+}
+
+/* Kante "auflösen": weicher Auslauf nach unten */
+.projectsPanel::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -28px;
+  height: 70px;
+
+  /* läuft in den Seitenhintergrund aus */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Header links über den Cards */
+.projectsHeader {
+  display: grid;
+  justify-items: center; /* 👈 horizontal zentrieren */
+  gap: 10px;
+  margin: 5px 0 18px 0;
+  margin-bottom: 2.5rem;
+  padding-left: 10px;
+}
+
+.projectsHeader h2 {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 800; /* kräftig */
+  text-transform: uppercase;
+  font-size: clamp(2rem, 2.8vw, 2.8rem);
+  letter-spacing: 0.08em;
+  color: #ffffff; /* wieder weiß */
+  margin: 0 0 1.2rem 0;
+  justify-self: center;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.projectsRail {
+  margin-top: -28px;
+  justify-self: center;
+  width: 210px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(247, 69, 14, 0.65),
+    rgba(247, 69, 14, 0.25),
+    rgba(255, 255, 255, 0.2)
+  );
+}
+
+.projectsGrid {
+  display: grid;
+
+  /* GENAU 2 Spalten */
+  grid-template-columns: 1fr 1fr;
+
+  gap: 2.5rem;
+
+  width: 100%;
+  max-width: none;
+  margin: 0 0 2rem 0;
+}
+
+/* Card Look (passt zu deinem Portfolio-Style) */
+.projectCard {
+  background: rgba(251, 249, 248, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.cardImage {
+  position: relative;
+  aspect-ratio: 16 / 7; /* etwas flacher */
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  object-position: center;
+}
+
+.project-project2 .cardImage img {
+  object-fit: cover;
+  object-position: center 17%;
+}
+
+.imagePlaceholder {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: rgba(46, 43, 41, 0.8);
+  font-weight: 600;
+}
+
+/* Film-Icon Button */
+.filmIcon {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(46, 43, 41, 0.25);
+  background: rgba(255, 255, 255, 0.75);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.filmIcon svg {
+  width: 24px;
+  height: 24px;
+  color: #2e2b29;
+}
+
+.filmIcon:hover {
+  transform: translateY(-1px) scale(1.05);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.cardContent {
+  padding: clamp(14px, 1.6vw, 18px);
+  display: grid;
+  gap: 10px;
+}
+
+.cardContent h3 {
+  margin: 0;
+  color: #141212;
+}
+
+.cardContent p {
+  margin: 0;
+  line-height: 1.6;
+  color: #2e2b29;
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardTopRow h3 {
+  margin: 0;
+}
+
+.cardTopLink {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  color: rgba(17, 17, 17, 0.75);
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba(17, 17, 17, 0.22);
+  padding-bottom: 2px;
+
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.cardTopLink:hover {
+  color: rgba(17, 17, 17, 0.95);
+  border-bottom-color: rgba(247, 69, 14, 0.35); /* ultra-dezent orange */
+}
+
+.moreInline {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  color: #111;
+
+  /* Dezenter 3D-Tiefeneffekt nur über Schatten */
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8), 0 8px 18px rgba(0, 0, 0, 0.15);
+
+  opacity: 0.15;
+
+  animation: elegantFade 6s ease-in-out infinite;
+}
+
+@keyframes elegantFade {
+  0% {
+    opacity: 0.08;
+    transform: translateY(2px);
+  }
+
+  40% {
+    opacity: 0.9;
+    transform: translateY(0px);
+  }
+
+  60% {
+    opacity: 0.85;
+    transform: translateY(0px);
+  }
+
+  100% {
+    opacity: 0.08;
+    transform: translateY(2px);
+  }
+}
+
+/* =========================================================
+   VIDEO MODAL – Cinematic Version (wie früher)
+   ========================================================= */
+
+.videoModal {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+  place-items: center;
+
+  /* Dunkles Anthrazit mit Vignette */
+  background: radial-gradient(
+    circle at center,
+    #1a1a1a 0%,
+    #121212 55%,
+    #0c0c0c 100%
+  );
+
+  z-index: 999;
+
+  animation: modalFadeIn 0.25s ease forwards;
+}
+
+.videoModal.active {
+  display: grid;
+}
+
+/* Container – wirkt wie Kinoleinwand */
+.videoContainer {
+  width: min(980px, 92vw);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+
+  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+
+  animation: videoLift 0.3s ease forwards;
+}
+
+/* Video */
+.videoContainer video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.closeModal {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 999px;
+  border: none;
+
+  background: #ffffff; /* Weiß statt transparent */
+  color: #111; /* dunkles X */
+
+  font-size: 22px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 10; /* wichtig */
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.closeModal:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+  /* homeGrid macht schon 1 Spalte (aus Portfolio.css) – wir passen nur das Grid an */
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /* optional: wenn du Header oben willst (meistens nice) -> passt zu deinem Home CSS sowieso */
+  .projectsRight {
+    margin-bottom: 18px;
+  }
+}
+
+/* Mobile wie bei dir */
+@media (max-width: 820px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
