@@ -8,7 +8,7 @@ interface Project {
   description: string;
   image?: string;
   videoUrl?: string;
-  linkUrl?: string; // optionaler Link (z.B. Moty)
+  linkUrl?: string; 
 }
 
 const projects: Project[] = [
@@ -54,7 +54,7 @@ const Projekte: React.FC = () => {
       <div className="homePage projectsPage">
         <div className="homeFrame">
           <div className="homeGrid">
-            {/* LINKS – Projekte */}
+            
             <main className="homeLeft projectsLeft">
               <div className="projectsPanel">
                 <div className="projectsHeader">
@@ -149,13 +149,12 @@ const Projekte: React.FC = () => {
                     </article>
                   ))}
 
-                  {/* "Weitere folgen" an Stelle der entfernten leeren Card */}
-                  <div className="moreInline">Weitere folgen</div>
+                  <div className="moreInline">Weitere folgen...</div>
                 </div>
               </div>
             </main>
 
-            {/* RECHTS – Neuer Header */}
+       
             <aside className="homeRight projectsRight">
               <RightPanelHeader statement roleText="Webentwicklerin" />
             </aside>
@@ -163,7 +162,7 @@ const Projekte: React.FC = () => {
         </div>
       </div>
 
-      {/* Video Modal */}
+
       {activeVideo && (
         <div
           className="videoModal active"

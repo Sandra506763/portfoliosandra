@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className="top-section">
-        {/* ✅ Header nur auf About/Projects, NICHT auf Home */}
+    
         {!isHome && <Header />}
 
         <Outlet />

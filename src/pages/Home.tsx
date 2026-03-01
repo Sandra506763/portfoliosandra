@@ -1,8 +1,7 @@
-// Home.tsx
+
 import React, { useEffect, useMemo, useRef } from "react";
-import { NavLink } from "react-router-dom";
 import "../styles/Portfolio.css";
-import RightPanelHeader from "../components/RightPanelHeader";
+import Navigation from "../components/Navigation";
 
 const BREAKPOINT_PX = 768;
 
@@ -13,7 +12,9 @@ const Home: React.FC = () => {
 
   const bubbleLayerRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const sliderNavRef = useRef<HTMLElement | null>(null);
+
+
+  const sliderNavRef = useRef<HTMLDivElement | null>(null);
 
   const nameText = "Sandra Nitsch";
   const nameChars = useMemo(
@@ -21,84 +22,73 @@ const Home: React.FC = () => {
     [nameText]
   );
 
-  // =========================
-  // BUBBLES
-  // =========================
+
+
+
   useEffect(() => {
     const layer = bubbleLayerRef.current;
     const titleEl = titleRef.current;
-    const sliderEl = sliderNavRef.current;
+    const sliderWrap = sliderNavRef.current;
 
-    if (!layer || !titleEl || !sliderEl) return;
+    if (!layer || !titleEl || !sliderWrap) return;
+
+
+    const getSliderEl = () =>
+      sliderNavRef.current?.querySelector(".slider") as HTMLElement | null;
 
     let intervalId: number | null = null;
     let stopTimeoutId: number | null = null;
     let started = false;
+
     const spawnBubble = () => {
       const l = bubbleLayerRef.current;
-      const slider = sliderNavRef.current;
-      if (!l || !slider) return;
-    
+      const sliderEl = getSliderEl();
+      if (!l || !sliderEl) return;
+
       const layerRect = l.getBoundingClientRect();
-      const sliderRect = slider.getBoundingClientRect();
-    
-      // Slider-Koordinaten relativ zum Bubble-Layer
+      const sliderRect = sliderEl.getBoundingClientRect();
+
       const sliderLeft = sliderRect.left - layerRect.left;
       const sliderRight = sliderRect.right - layerRect.left;
-    
-      // ✅ Bubble zuerst erstellen + Größe bestimmen (WICHTIG fürs Clamp!)
+
       const bubble = document.createElement("span");
       bubble.className = "bubble";
-    
-      const size = Math.floor(Math.random() * 10) + 10; // 10..19 (dein aktueller Bereich)
+
+      const size = Math.floor(Math.random() * 10) + 10; 
       const radius = size / 2;
-    
+
       const duration = Math.random() * 1.4 + 3.0;
       const opacity = Math.random() * 0.25 + 0.18;
-    
+
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
       bubble.style.opacity = `${opacity}`;
       bubble.style.animationDuration = `${duration}s`;
-    
-      // ✅ Mittelpunkt vom Slider
+
       const centerX = sliderLeft + (sliderRight - sliderLeft) / 2;
-    
-      // ✅ Mobile: kleinere Streuung, Desktop: wie gehabt
+
       const isMobile = window.innerWidth <= BREAKPOINT_PX;
       const spread = isMobile
         ? (sliderRight - sliderLeft) * 0.35
         : Math.max(40, (sliderRight - sliderLeft) * 0.55);
-    
-      // Rohes x (als Mittelpunkt)
+
       let xCenter = centerX + (Math.random() * spread - spread / 2);
-    
-      // ✅ HARTES Clamp: Bubble muss komplett im Slider bleiben
-      // linke Kante >= sliderLeft + padding
-      // rechte Kante <= sliderRight - padding
+
       const padding = 6;
-    
       const minCenter = sliderLeft + padding + radius;
       const maxCenter = sliderRight - padding - radius;
-    
-      // Falls Slider extrem klein ist: zur Mitte zwingen
-      if (maxCenter <= minCenter) {
-        xCenter = centerX;
-      } else {
-        xCenter = Math.max(minCenter, Math.min(maxCenter, xCenter));
-      }
-    
-      // bubble.left ist linke Kante => Mittelpunkt - Radius
+
+      if (maxCenter <= minCenter) xCenter = centerX;
+      else xCenter = Math.max(minCenter, Math.min(maxCenter, xCenter));
+
       bubble.style.left = `${xCenter - radius}px`;
-    
-      // Bubble soll hinter dem Slider starten (dein bisheriges Verhalten)
+
       const bottomFromLayer = layerRect.bottom - sliderRect.bottom + 6;
       bubble.style.bottom = `${Math.max(6, bottomFromLayer)}px`;
-    
+
       l.appendChild(bubble);
       bubble.addEventListener("animationend", () => bubble.remove());
     };
-
 
     const stopBubbles = () => {
       if (intervalId) {
@@ -123,7 +113,8 @@ const Home: React.FC = () => {
       stopTimeoutId = window.setTimeout(stopBubbles, totalNameTime + 3000);
     };
 
-    if (firstChar) firstChar.addEventListener("animationstart", onStart, { once: true });
+    if (firstChar)
+      firstChar.addEventListener("animationstart", onStart, { once: true });
     else onStart();
 
     return () => {
@@ -133,9 +124,9 @@ const Home: React.FC = () => {
     };
   }, [nameChars]);
 
-  // =========================
-  // BALL (QuoteCard)
-  // =========================
+
+
+
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
@@ -177,17 +168,6 @@ const Home: React.FC = () => {
       ball.style.transform = "translateX(0px) rotate(0deg) scale(1,1)";
     };
 
-    const getGroundDY = (startTop: number) => {
-      const cs = getComputedStyle(container);
-      const padBottom = parseFloat(cs.paddingBottom || "0") || 0;
-      const dotSize = ball.offsetWidth || 40;
-
-      const GROUND_EXTRA = 33;
-
-      const groundY = container.clientHeight - padBottom - dotSize + GROUND_EXTRA;
-      return Math.max(0, groundY - startTop);
-    };
-
     placeOnI();
 
     const onResize = () => {
@@ -197,8 +177,7 @@ const Home: React.FC = () => {
 
     const phases = {
       pulse: 2600,
-      // ✅ noch schneller insgesamt
-      rollAndDrop: 2050, // vorher 2400
+      rollAndDrop: 2050,
       bounce: 2900,
       rollOut: 12000,
     };
@@ -206,13 +185,10 @@ const Home: React.FC = () => {
     startTimeoutId = window.setTimeout(() => {
       isRunning = true;
 
-     
       const startTop = parseFloat(wrapper.style.top || "0") || 0;
       const dotSize = ball.offsetWidth || 40;
-      
-      // untere Innenkante der QuoteCard
+
       const groundY = container.clientHeight - dotSize;
-      
       const groundDY = Math.max(0, groundY - startTop);
 
       const startTime = performance.now();
@@ -220,16 +196,14 @@ const Home: React.FC = () => {
 
       const rectI = iLetter.getBoundingClientRect();
       const rectC = container.getBoundingClientRect();
-    
+
       const startLeft = parseFloat(wrapper.style.left || "0") || 0;
-      
-      // rechte I-Kante relativ zur QuoteCard
       const iRightRel = rectI.right - rectC.left;
-      
-      const ROLL_EXTRA = dotSize; // ganze Ballbreite nach rechts
-const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
-      // ✅ noch früher fallen = schneller runter
-      const dropStart = 0.22; // vorher 0.28
+
+      const ROLL_EXTRA = dotSize;
+      const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
+
+      const dropStart = 0.22;
 
       const bounces = 5;
       const bounceStepX = isMobile ? 48 : 70;
@@ -243,7 +217,6 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
         let scaleX = 1;
         let scaleY = 1;
 
-        // 1) Pulse
         if (tAll < phases.pulse) {
           const t = tAll / phases.pulse;
           const wobble = Math.sin(t * Math.PI * 2) * 0.04;
@@ -257,21 +230,19 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
           return;
         }
 
-        // 2) Roll + Drop (ultra schnell & flüssig)
+   
         const t2 = tAll - phases.pulse;
         if (t2 < phases.rollAndDrop) {
           const t = clamp01(t2 / phases.rollAndDrop);
 
-          // X: super schnell (steiler als easeOutQuad)
           const tx = Math.min(1, Math.pow(easeOutQuad(t), 0.55));
           dx = rollDX * tx;
 
-          // Y: startet sehr früh & fällt schneller (steiler)
           if (t <= dropStart) {
             dy = 0;
           } else {
             const ty = clamp01((t - dropStart) / (1 - dropStart));
-            const fall = Math.min(1, Math.pow(easeInQuad(ty), 0.62)); // ✅ schneller
+            const fall = Math.min(1, Math.pow(easeInQuad(ty), 0.62));
             dy = groundDY * fall;
           }
 
@@ -290,7 +261,7 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
           return;
         }
 
-        // 3) Bounce
+    
         const t3 = t2 - phases.rollAndDrop;
         if (t3 < phases.bounce) {
           const t = clamp01(t3 / phases.bounce);
@@ -325,7 +296,7 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
           return;
         }
 
-        // 4) Roll out
+     
         const t4 = t3 - phases.bounce;
         if (t4 < phases.rollOut) {
           const t = clamp01(t4 / phases.rollOut);
@@ -363,7 +334,7 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
   }, []);
 
   return (
-    <main className="homePage">
+    <main className="homePage homePage--home">
       <section className="homeFrame">
         <section className="homeGrid">
           <div className="homeLeft">
@@ -456,19 +427,10 @@ const rollDX = iRightRel - startLeft - dotSize + ROLL_EXTRA;
                 </p>
               </header>
 
-              <nav ref={sliderNavRef} className="slider-nav" aria-label="Navigation">
-                <div className="slider">
-                  <NavLink to="/" end>
-                    Home
-                  </NavLink>
-                  <NavLink to="/about">
-                    Über<br />
-                    mich
-                  </NavLink>
-                  <NavLink to="/projects">Projekte</NavLink>
-                  <span className="highlight" aria-hidden="true"></span>
-                </div>
-              </nav>
+           
+              <div ref={sliderNavRef}>
+                <Navigation />
+              </div>
             </div>
           </aside>
         </section>

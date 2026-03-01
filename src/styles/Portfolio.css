@@ -8,9 +8,9 @@ body {
 }
 body {
   margin: 0;
-      font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  }
-
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+}
 
 #root {
   min-height: 100vh;
@@ -24,11 +24,30 @@ body {
   flex-direction: column;
 
   background: radial-gradient(
-      1100px 520px at 50% 0%,
-      rgba(255, 255, 255, 0.55),
-      rgba(255, 255, 255, 0) 62%
+      1200px 700px at 50% -10%,
+      rgba(0, 0, 0, 0.07),
+      rgba(0, 0, 0, 0) 72%
     ),
-    #d7cfcb;
+    radial-gradient(
+      1200px 640px at 50% 0%,
+      rgba(255, 255, 255, 0.62),
+      rgba(255, 255, 255, 0.18) 52%,
+      rgba(255, 255, 255, 0) 78%
+    ),
+    radial-gradient(
+      1200px 820px at 50% 58%,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.12) 55%,
+      rgba(255, 255, 255, 0) 82%
+    ),
+    radial-gradient(
+      1400px 1100px at 50% 118%,
+      rgba(255, 255, 255, 0.56),
+      rgba(255, 255, 255, 0.24) 52%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0) 92%
+    ),
+    linear-gradient(180deg, #e2e1e0 0%, #d8d6d4 48%, #cdcbca 100%);
 }
 
 .top-section > header {
@@ -36,10 +55,10 @@ body {
 }
 .top-section > main {
   order: 2;
-}/* wichtig für absolute children */
-
-
-
+}
+.sectionTitle {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
 .homePage {
   flex: 1;
   display: flex;
@@ -49,11 +68,30 @@ body {
   box-sizing: border-box;
 
   background: radial-gradient(
-      1100px 520px at 50% 0%,
-      rgba(255, 255, 255, 0.55),
-      rgba(255, 255, 255, 0) 62%
+      1200px 700px at 50% -10%,
+      rgba(0, 0, 0, 0.07),
+      rgba(0, 0, 0, 0) 72%
     ),
-    #d7cfcb;
+    radial-gradient(
+      1200px 640px at 50% 0%,
+      rgba(255, 255, 255, 0.62),
+      rgba(255, 255, 255, 0.18) 52%,
+      rgba(255, 255, 255, 0) 78%
+    ),
+    radial-gradient(
+      1200px 820px at 50% 58%,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.12) 55%,
+      rgba(255, 255, 255, 0) 82%
+    ),
+    radial-gradient(
+      1400px 1100px at 50% 118%,
+      rgba(255, 255, 255, 0.56),
+      rgba(255, 255, 255, 0.24) 52%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0) 92%
+    ),
+    linear-gradient(180deg, #e2e1e0 0%, #d8d6d4 48%, #cdcbca 100%);
 }
 
 .aboutPage .homeFrame {
@@ -293,7 +331,7 @@ header #fancy-heading {
   padding: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   max-width: 100%;
-  }
+}
 
 .slider a {
   flex: 1;
@@ -332,10 +370,14 @@ header #fancy-heading {
   );
 
   border-radius: 50%;
-  box-shadow: inset -4px -4px 12px rgba(255, 255, 255, 0.6),
-    inset 4px 4px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow:
+  inset -2px -2px 10px rgba(255,255,255,0.55),
+  inset  2px  2px 10px rgba(0,0,0,0.14),
+  0 6px 14px rgba(0,0,0,0.22);
 
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
+    transition: all 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
   z-index: 0;
   transform: scale(1);
   aspect-ratio: 1 / 1;
@@ -362,7 +404,7 @@ header #fancy-heading {
 .bubble {
   position: absolute;
   border-radius: 50%;
-  background: rgba(30, 30, 30, 0.35);
+  background: rgba(30, 30, 30, 0.18);
   pointer-events: none;
   animation: rise 3.2s ease-out forwards;
   z-index: 1;
@@ -384,7 +426,6 @@ header #fancy-heading {
 
 .siteFooter {
   margin-top: auto;
-  background: linear-gradient(to top, #222, #555);
   color: #fff;
   padding: 0.9rem;
   display: flex;
@@ -392,14 +433,27 @@ header #fancy-heading {
   align-items: center;
   gap: 0.8rem;
   isolation: isolate;
+  position: relative;
+  background: linear-gradient(to top, #2b2b2b, #575757);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.siteFooter::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -34px;
+  height: 34px;
+  pointer-events: none;
+
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.28));
+}
 .siteFooter .footerText {
   margin: 0;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.08em;
-  text-shadow: 0 2px 10px rgba(219, 209, 209, 0.8);
 }
 
 .siteFooter .social-links {
@@ -414,24 +468,21 @@ header #fancy-heading {
   width: 42px;
   height: 42px;
   border-radius: 999px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(6px);
-
   transition: transform 0.18s ease, background 0.18s ease,
     border-color 0.18s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .siteFooter .iconBtn:hover {
   transform: translateY(-1px) scale(1.05);
-  background: rgba(255, 255, 255, 0.13);
-  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .siteFooter .social-icon {
@@ -441,8 +492,7 @@ header #fancy-heading {
   display: block;
 }
 
-
-.orange-dot-wrapper{
+.orange-dot-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -451,53 +501,77 @@ header #fancy-heading {
   z-index: 5;
 }
 
-.orange-dot{
-    width: clamp(14px, 3vw, 40px);
-    height: clamp(14px, 3vw, 40px);
+.orange-dot {
+  width: clamp(14px, 3vw, 40px);
+  height: clamp(14px, 3vw, 40px);
   border-radius: 50%;
   background: rgb(247, 69, 14);
-  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25), 0 0 10px rgba(175, 44, 4, 0.65);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+    0 0 10px rgba(175, 44, 4, 0.65);
   animation: pulseGlow 1.7s ease-in-out infinite;
 }
 
-/* ✅ Pulse NUR über Glow, nicht über transform */
 @keyframes pulseGlow {
   0% {
-    box-shadow:
-      inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
       0 0 8px rgba(175, 44, 4, 0.55);
     filter: brightness(1);
   }
   50% {
-    box-shadow:
-      inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3),
       0 0 18px rgba(175, 44, 4, 0.75);
     filter: brightness(1.08);
   }
   100% {
-    box-shadow:
-      inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25),
       0 0 8px rgba(175, 44, 4, 0.55);
     filter: brightness(1);
   }
- }
- .homeBallStage{
+}
+.homeBallStage {
   position: relative;
   overflow: hidden;
 }
-.quoteCard.homeBallStage{
+.quoteCard.homeBallStage {
   position: relative;
   overflow: hidden;
 }
+
+/* =========================================
+   HOME: Slider exakt wie About "fühlen"
+   (nur Home, nicht About/Projects)
+   ========================================= */
+
+   .homePage--home .slider {
+    padding: 8px;                 /* vorher 5px -> weniger Höhe */
+  }
+  
+  .homePage--home .slider a {
+    padding: clamp(0.72rem, 1.4vw, 1.15rem); /* weniger Höhe */
+    line-height: 1.05;            /* sauberer, weniger "hoch" */
+      display: grid;
+  place-items: center;
+  line-height: 1.05;              /* weniger Zeilenabstand -> wirkt mittiger */
+  padding-block: clamp(0.75rem, 1.2vw, 1.05rem); /* gleiche optische Höhe */
+}
+
+/* optional: falls "Über mich" immer noch minimal zu tief wirkt */
+.homePage--home .slider a:nth-child(2) {
+  transform: translateY(-1px);
+}
+.homePage--home .slider .highlight{
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
 /*
    RESPONSIVE
   */
-  @media (min-width: 900px) and (max-width: 1280px){
-    .orange-dot{
-      width:  clamp(16px, 2.2vw, 40px);
+@media (min-width: 900px) and (max-width: 1280px) {
+  .orange-dot {
+    width: clamp(16px, 2.2vw, 40px);
     height: clamp(16px, 2.2vw, 40px);
-    }
   }
+}
 @media (max-width: 1020px) {
   .qLine {
     gap: clamp(14px, 3vw, 34px);
@@ -563,58 +637,43 @@ header #fancy-heading {
   }
 }
 
-/* ====================================================================== */
-/* ABOUT – CLEAN (nutzt Home-Layout: homePage/homeFrame/homeGrid)          */
-/* Ziel: links Text + Rail daneben (sticky), rechts RightHeader + Statement */
-/* ====================================================================== */
-
-/* ------------------------------ */
-/* 1) ABOUT MAIN: Layout in 70%-Spalte */
-/* ------------------------------ */
+/* ABOUT MAIN:  */
 
 .aboutMain {
-  position: relative; /* für orange Linie */
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); /* Text | Rail */
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
   gap: clamp(18px, 2.4vw, 40px);
   align-items: start;
 }
 
-/* Titel */
 .aboutMain h2 {
   grid-column: 1;
   font-family: "DM Sans", system-ui, sans-serif;
-  font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.3;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.18);
-        font-size: clamp(1.8rem, 2.2vw, 2.4rem);
-      letter-spacing: 0.18em;
-      color: rgba(255, 255, 255, 0.92);
-        margin: 20px 0 10px 0;
-  }
-
-
-
-
-/* Textblock */
-
-.about-text{
+  line-height: 1.1;
+  margin: 35px 0 0 0;
+  font-weight: 500;                          
+  font-size: clamp(2.0rem, 2.6vw, 2.8rem);   
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  text-shadow: none;             
+}
+.about-text {
   display: grid;
-  gap: clamp(10px, 1.2vw, 16px); /* kleiner */
+  gap: clamp(10px, 1.2vw, 16px);
   font-size: 1.02rem;
   line-height: 1.7;
   color: #2e2b29;
+  margin-top: 4px;
 }
 
-.about-text > div{
-  margin: 0;              /* wichtig: kein extra Abstand */
+.about-text > div {
+  margin: 0;
   text-align: justify;
   max-width: 80ch;
 }
 
-
-/* Hover-Underline */
 .about-text strong {
   position: relative;
 }
@@ -636,10 +695,6 @@ header #fancy-heading {
   transform: scaleX(1);
 }
 
-/* ------------------------------ */
-/* 2) ORANGE LINIE rechts im Textbereich */
-/* ------------------------------ */
-
 .aboutMain::after {
   content: "";
   position: absolute;
@@ -658,24 +713,19 @@ header #fancy-heading {
   pointer-events: none;
 }
 
-/* ------------------------------ */
-/* 3) RAIL: Quick Facts etc. (sticky + neben Text) */
-/* ------------------------------ */
-
 .aboutRailInMain {
   grid-column: 2;
-  grid-row: 1 / span 2; /* startet neben Titel+Text */
+  grid-row: 1 / span 2;
   display: grid;
   gap: 14px;
 
   position: sticky;
-  top: 120px; /* ggf. 90–140 je nach Header-Höhe */
+  top: 120px;
 
   align-self: start;
   width: 100%;
 }
 
-/* Rail Cards */
 .rail-block {
   width: 100%;
   background: rgba(251, 249, 248, 0.92);
@@ -684,7 +734,6 @@ header #fancy-heading {
   padding: clamp(14px, 1.6vw, 18px);
 }
 
-/* Headline + orange Strich davor */
 .rail-block h3 {
   margin: 0 0 0.6rem 0;
   font-size: 0.75rem;
@@ -717,10 +766,6 @@ header #fancy-heading {
   margin: 0;
   padding-left: 1.1rem;
 }
-
-/* ------------------------------ */
-/* 4) SMILEY (kein blaues Auge) */
-/* ------------------------------ */
 
 .smiley {
   width: clamp(16px, 1.1vw, 22px);
@@ -760,11 +805,6 @@ header #fancy-heading {
   stroke-width: 3.4;
 }
 
-/* ------------------------------ */
-/* 5) RIGHTHEADER: keine "Einflug"-Animation auf About/Projects */
-/* (Glow bleibt im CSS von .homeTitle etc.) */
-/* ------------------------------ */
-
 .rh-static .nameChar,
 .rh-static .nameSpace {
   animation: none !important;
@@ -774,15 +814,11 @@ header #fancy-heading {
 
 .rh-static .rh-role,
 .rh-home .rh-role {
-  /* falls irgendwo p/global-styles reinfunken */
   margin: 0.2rem 0 0 0;
-  font-size: 1.7rem; /* oder was du auf Home willst */
+  font-size: 1.7rem;
   color: #fff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
-/* ------------------------------ */
-/* 6) SIDE STATEMENT (NUR EINMAL!) */
-/* ------------------------------ */
 
 .side-statement {
   position: relative;
@@ -797,7 +833,7 @@ header #fancy-heading {
   text-transform: uppercase;
 
   color: #2e2b29;
-  opacity: 0.2;
+  opacity: 0.1;
 
   pointer-events: none;
   user-select: none;
@@ -808,28 +844,21 @@ header #fancy-heading {
 }
 
 
-/* ABOUT: RightHeader soll wie Home "in einer Bühne" sitzen */
-/* About: Header weiter nach oben */
-.aboutPage .homeRight{
+.aboutPage .homeRight {
   min-height: clamp(520px, 72vh, 820px);
-  align-items: flex-start;   /* statt center */
+  align-items: flex-start;
 }
 
-.aboutPage .sideStack{
-  justify-content: flex-start;  /* statt center */
-  padding-top: 40px;            /* Feintuning */
+.aboutPage .sideStack {
+  justify-content: flex-start;
+  padding-top: 40px;
 }
 
-
-
-
-/* ------------------------------ */
-/* 7) RESPONSIVE */
-/* ------------------------------ */
+/* RESPONSIVE  */
 
 @media (max-width: 980px) {
   .aboutMain {
-    grid-template-columns: 1fr; /* Text + Rail untereinander */
+    grid-template-columns: 1fr;
   }
 
   .aboutRailInMain {
@@ -841,17 +870,17 @@ header #fancy-heading {
   }
 
   .aboutMain::after {
-    display: none; /* orange Linie ausblenden auf Mobile */
+    display: none;
   }
 
-  .aboutRailInMain .rail-block:first-child{
+  .aboutRailInMain .rail-block:first-child {
     position: relative;
   }
-  
-  .aboutRailInMain .rail-block:first-child::before{
+
+  .aboutRailInMain .rail-block:first-child::before {
     content: "";
     position: absolute;
-    left: -14px;           /* Abstand neben dem Card */
+    left: -14px;
     top: 16px;
     bottom: 16px;
     width: 2px;
@@ -863,24 +892,23 @@ header #fancy-heading {
     top: 0;
     letter-spacing: 0.2em;
     font-size: 1rem;
-    opacity: 0.5;
+    opacity: 0.1;
   }
 }
-@media (max-width: 980px){
-
-  .aboutRailInMain .rail-block{
+@media (max-width: 980px) {
+  .aboutRailInMain .rail-block {
     position: relative;
     overflow: hidden;
   }
 
-  .aboutRailInMain .rail-block::after{
+  .aboutRailInMain .rail-block::after {
     content: "";
     position: absolute;
     top: 16px;
     bottom: 16px;
 
-    left: 68%;        /* letztes Drittel */
-    width: 1.5px;     /* dünner wirkt edler */
+    left: 68%;
+    width: 1.5px;
 
     background: linear-gradient(
       to bottom,
@@ -889,10 +917,8 @@ header #fancy-heading {
       transparent
     );
 
-    opacity: 0.6;     /* wichtig: sonst zu dominant */
+    opacity: 0.6;
     border-radius: 2px;
     pointer-events: none;
   }
-
 }
-

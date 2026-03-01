@@ -21,7 +21,6 @@ const MainSection: React.FC = () => {
     let startTimeoutId: number | null = null;
     let isRunning = false;
 
-    // helpers
     const clamp01 = (t: number) => Math.max(0, Math.min(1, t));
     const easeInQuad = (t: number) => t * t;
     const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
@@ -35,10 +34,9 @@ const MainSection: React.FC = () => {
       const isMobile = window.innerWidth <= BREAKPOINT_PX;
       const dotSize = ball.offsetWidth || 40;
 
-      // Mittelpunkt vom I relativ zum Container
       const xCenter = rectI.left - rectC.left + rectI.width / 2;
 
-      // Ball soll “oben auf der Zeile” sitzen
+      
       const yTopLine = rectI.top - rectC.top - (isMobile ? 10 : 20);
 
       wrapper.style.left = `${xCenter - dotSize / 2}px`;
@@ -48,7 +46,6 @@ const MainSection: React.FC = () => {
       wrapper.style.opacity = "1";
       wrapper.style.zIndex = "10";
 
-      // JS übernimmt rotate/scale
       ball.style.transform = "translateX(0px) rotate(0deg) scale(1,1)";
     };
 
@@ -57,22 +54,20 @@ const MainSection: React.FC = () => {
       const padBottom = parseFloat(cs.paddingBottom || "0") || 0;
       const dotSize = ball.offsetWidth || 40;
 
-      // Boden = innerer “Main”-Boden
+      
       const groundY = container.clientHeight - padBottom - dotSize;
 
       return Math.max(0, groundY - startTop);
     };
 
-    // initial
     placeOnI();
 
-    // bei Resize nur neu positionieren, wenn nicht animiert
+
     const onResize = () => {
       if (!isRunning) placeOnI();
     };
     window.addEventListener("resize", onResize);
 
-    // timings
     const phases = {
       pulse: 2600,
       rollTop: 4200,
@@ -84,7 +79,7 @@ const MainSection: React.FC = () => {
     startTimeoutId = window.setTimeout(() => {
       isRunning = true;
 
-      // StartTop aus wrapper.top
+     
       const startTop = parseFloat(wrapper.style.top || "0") || 0;
       const groundDY = getGroundDY(startTop);
 
@@ -104,7 +99,6 @@ const MainSection: React.FC = () => {
         let scaleX = 1;
         let scaleY = 1;
 
-        // 1) pulse
         if (tAll < phases.pulse) {
           const t = tAll / phases.pulse;
           const wobble = Math.sin(t * Math.PI * 2) * 0.04;
@@ -118,7 +112,7 @@ const MainSection: React.FC = () => {
           return;
         }
 
-        // 2) roll on top line
+        
         const t2 = tAll - phases.pulse;
         if (t2 < phases.rollTop) {
           const t = clamp01(t2 / phases.rollTop);
@@ -134,7 +128,7 @@ const MainSection: React.FC = () => {
           return;
         }
 
-        // 3) fall
+
         const t3 = t2 - phases.rollTop;
         if (t3 < phases.fall) {
           const t = clamp01(t3 / phases.fall);
@@ -157,7 +151,7 @@ const MainSection: React.FC = () => {
           return;
         }
 
-        // 4) bounce
+     
         const t4 = t3 - phases.fall;
         if (t4 < phases.bounce) {
           const t = clamp01(t4 / phases.bounce);
@@ -192,7 +186,7 @@ const MainSection: React.FC = () => {
           return;
         }
 
-        // 5) roll out
+  
         const t5 = t4 - phases.bounce;
         if (t5 < phases.rollOut) {
           const t = clamp01(t5 / phases.rollOut);

@@ -22,7 +22,7 @@ const RightHeader: React.FC = () => {
     );
   }, []);
 
-  // ✅ Bubbles NUR auf Home
+
   useEffect(() => {
     if (!isHome) return;
 
@@ -62,7 +62,6 @@ const RightHeader: React.FC = () => {
     };
   }, [chars, isHome]);
 
-  // Rendering der Buchstaben: Home animiert, sonst statisch (ohne Delay)
   const titleContent = useMemo(() => {
     return chars.map((item, i) => {
       if (item.char === " ") {
@@ -104,7 +103,7 @@ const RightHeader: React.FC = () => {
           {titleContent}
         </h1>
 
-        {/* ✅ eigene Klasse, damit du das 1:1 wie Home stylen kannst */}
+     
         <p className="web rh-role">Webentwicklerin</p>
       </div>
 

@@ -7,7 +7,6 @@ const Navigation: React.FC = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const highlightRef = useRef<HTMLSpanElement | null>(null);
 
-  // 0/1/2 je nach Route
   const activeIndex = useMemo(() => {
     if (pathname === "/") return 0;
     if (pathname.startsWith("/about")) return 1;
@@ -15,26 +14,25 @@ const Navigation: React.FC = () => {
     return 0;
   }, [pathname]);
 
-  // Setzt die Bubble-Position (ohne Layout zu ändern)
   const setHighlight = (index: number) => {
     const h = highlightRef.current;
     if (!h) return;
 
     let nudge = 0;
 
-    if (index === 0) nudge = 6;     // Home etwas nach rechts
-    if (index === 1) nudge = -2;    // Über mich leicht nach links
-    if (index === 2) nudge = -4;    // Projekte minimal mehr nach links
+    if (index === 0) nudge = 6;     
+    if (index === 1) nudge = -2;    
+    if (index === 2) nudge = -4;    
     
     h.style.transform = `translateX(calc(${index * 100}% + ${nudge}px)) scale(0.85)`;
   };
 
-  // Beim Seitenwechsel Bubble korrekt setzen
+
   useEffect(() => {
     setHighlight(activeIndex);
   }, [activeIndex]);
 
-  // Wenn Maus den Slider verlässt, wieder zur aktiven Seite zurück
+  
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -79,7 +77,7 @@ const Navigation: React.FC = () => {
           Projekte
         </NavLink>
 
-        {/* Bubble */}
+    
         <span ref={highlightRef} className="highlight" aria-hidden="true" />
       </div>
     </nav>

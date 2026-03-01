@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-/* Layer für Slider-Bubbles (wie vorher bubbleLayer) */
 .rph-bubbleLayer {
   position: absolute;
   inset: -10px -10px -20px -10px;
@@ -75,7 +74,6 @@
   }
 }
 
-/* Animation nur Home */
 .nameChar,
 .nameSpace {
   display: inline-block;
@@ -91,7 +89,6 @@
   }
 }
 
-/* About/Projects statisch */
 .rph-static .nameChar,
 .rph-static .nameSpace {
   animation: none !important;
@@ -110,7 +107,6 @@
   font-size: 1.7rem;
 }
 
-/* ✅ Bubble (aufsteigend) */
 .rph-bubble {
   position: absolute;
   border-radius: 50%;
@@ -121,15 +117,22 @@
 }
 
 @keyframes rise {
-  0% { transform: translateY(0) scale(0.6); opacity: 1; }
-  80% { opacity: 0.6; }
-  100% { transform: translateY(-150px) scale(1); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-150px) scale(1);
+    opacity: 0;
+  }
 }
 
-/* Statement */
 .rph-statement {
-    margin-top: 110px; /* statt top: 240px */
-  
+  margin-top: 110px;
+
   writing-mode: vertical-lr;
   text-orientation: mixed;
 
@@ -139,7 +142,7 @@
   text-transform: uppercase;
 
   color: #2e2b29;
-  opacity: 0.25;
+  opacity: 0.1;
 
   pointer-events: none;
   user-select: none;
@@ -147,15 +150,11 @@
   text-align: center;
 }
 
-
-/* ✅ Slider kleiner + runde Highlight-Bubble (override Navigation CSS) */
-/* Wir überschreiben bewusst deine globalen .slider-* Regeln nur in diesem Bereich */
-.rph-sliderWrap{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
+.rph-sliderWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 .rph .slider-nav {
   width: 100%;
@@ -169,17 +168,17 @@
   display: flex;
   border-radius: 100px;
   background: #fcfbfb;
-  padding: 14px;                 /* kleiner */
+  padding: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   max-width: 100%;
   width: min(290px, 100%);
   margin-inline: auto;
-  }
+}
 
 .rph .slider a {
   flex: 1;
-  font-weight: 600;  
-    color: #2e2b29;
+  font-weight: 600;
+  color: #2e2b29;
   z-index: 2;
   user-select: none;
   transition: color 0.3s ease;
@@ -197,7 +196,6 @@
   color: #2e2b29;
 }
 
-/* ✅ runde Bubble, nicht oval */
 .rph .slider .highlight {
   position: absolute;
   top: 3px;
@@ -213,42 +211,36 @@
     rgba(5, 5, 5, 0.28) 100%
   );
 
-  border-radius: 999px; /* rund */
-  aspect-ratio: 1 / 1;  /* bleibt rund */
+  border-radius: 999px;
+  aspect-ratio: 1 / 1;
   transform: scale(0.85);
 
   box-shadow: inset -4px -4px 12px rgba(255, 255, 255, 0.6),
     inset 4px 4px 12px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.3);
 
-    transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
 }
 
-/* ================================
-   RPH Slider: feste, saubere Breiten
-   (Ende der Datei, damit es gewinnt)
-================================ */
+.rph .rph-sliderWrap .slider {
+  width: 100%;
+  max-width: 275px;
+  margin-inline: auto;
+}
 
-.rph .rph-sliderWrap .slider{
-    width: 100%;
-    max-width: 275px;  /* Desktop/Tablet Standard */
-    margin-inline: auto;
+@media (max-width: 520px) {
+  .rph .rph-sliderWrap .slider {
+    max-width: 260px;
   }
-  
-  /* ✅ Mobile kleiner (muss greifen!) */
-  @media (max-width: 520px){
-    .rph .rph-sliderWrap .slider{
-      max-width: 260px;
-    }
+}
+
+.rph .rph-sliderWrap .slider a {
+  display: grid;
+  place-items: center;
+  line-height: 1.05;
+}
+@media (max-width: 520px) {
+  .rph .rph-sliderWrap .slider a {
+    font-size: 0.9rem;
   }
-  /* Links im RPH-Slider: wirklich mittig, auch bei 2 Zeilen */
-.rph .rph-sliderWrap .slider a{
-    display: grid;
-    place-items: center;
-    line-height: 1.05;
-  }
-  @media (max-width: 520px){
-    .rph .rph-sliderWrap .slider a{
-      font-size: 0.9rem;
-    }
-  }
+}
