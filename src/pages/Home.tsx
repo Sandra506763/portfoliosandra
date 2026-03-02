@@ -170,6 +170,9 @@ const Home: React.FC = () => {
 
     placeOnI();
 
+document.fonts?.ready?.then(() => placeOnI());
+window.setTimeout(placeOnI, 250);
+requestAnimationFrame(() => requestAnimationFrame(placeOnI));
     const onResize = () => {
       if (!isRunning) placeOnI();
     };
@@ -183,7 +186,10 @@ const Home: React.FC = () => {
     };
 
     startTimeoutId = window.setTimeout(() => {
+      placeOnI();          // <-- ganz wichtig: freshest layout
       isRunning = true;
+    
+    
 
       const startTop = parseFloat(wrapper.style.top || "0") || 0;
       const dotSize = ball.offsetWidth || 40;
