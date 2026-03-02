@@ -628,16 +628,18 @@ header #fancy-heading {
 @media (max-width: 520px) {
   .quoteLines {
     padding-right: 72px;
+    box-sizing: border-box;
   }
   .qLine {
-    gap: 16px;
+    gap: 10px;
   }
   .qChar {
-    letter-spacing: 0.06em;
-  }
-}
+    letter-spacing: 0.05em;
+    font-size: clamp(52px, 8.2vw, 110px);
+   }
+ }
 
-/* ABOUT MAIN:  */
+ /* ABOUT MAIN:  */
 
 .aboutMain {
   position: relative;
