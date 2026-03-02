@@ -625,7 +625,7 @@ header #fancy-heading {
 
 @media (max-width: 520px) {
   .quoteLines {
-    padding-right: 56px;
+    padding-right: 72px;
   }
   .qLine {
     gap: 16px;
