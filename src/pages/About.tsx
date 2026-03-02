@@ -116,7 +116,7 @@ const About: React.FC = () => {
 
               <div>
                 Ein weiterer Gedanke ließ mich nicht los: Ich war fast 47 Jahre
-                alt. Trotzdem fasste ich einen Entschluss –{" "}
+                alt. Trotzdem fasste ich den Entschluss –{" "}
                 <strong>nichts ist unmöglich</strong>. Ich wollte es mir selbst
                 beweisen und auch meinem fast erwachsenen Sohn, der heute
                 übrigens einen ganz ähnlichen beruflichen Weg anstrebt.
@@ -162,7 +162,7 @@ const About: React.FC = () => {
                 API-Schnittstellen-Implementierung gehören ebenso dazu wie
                 SQL-Datenbanken sowie Grundkenntnisse in MongoDB für flexible
                 Datenmodelle. DevOps-Grundlagen runden das technische Fundament
-                ab.UI & UX – klare Interfaces, saubere User Flows und ein Fokus
+                ab. UI & UX – klare Interfaces, saubere User Flows und ein Fokus
                 auf Performance, Wartbarkeit und Struktur gehören für mich
                 selbstverständlich zum Entwicklungsprozess.
               </div>
