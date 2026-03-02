@@ -532,8 +532,8 @@ header #fancy-heading {
 }
 .quoteCard.homeBallStage {
   position: relative;
-  overflow: visible;
-}
+  overflow: hidden;
+  }
 
 /* =========================================
    HOME: Slider exakt wie About "fühlen"
@@ -625,7 +625,7 @@ header #fancy-heading {
 
 @media (max-width: 520px) {
   .quoteLines {
-    padding-right: 32px;
+    padding-right: 56px;
   }
   .qLine {
     gap: 16px;
