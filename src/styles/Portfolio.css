@@ -532,7 +532,7 @@ header #fancy-heading {
 }
 .quoteCard.homeBallStage {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* =========================================
