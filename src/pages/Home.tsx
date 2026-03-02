@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useRef } from "react";
 import "../styles/Portfolio.css";
 import Navigation from "../components/Navigation";
@@ -12,8 +11,6 @@ const Home: React.FC = () => {
 
   const bubbleLayerRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
-
-
   const sliderNavRef = useRef<HTMLDivElement | null>(null);
 
   const nameText = "Sandra Nitsch";
@@ -22,9 +19,9 @@ const Home: React.FC = () => {
     [nameText]
   );
 
-
-
-
+  // =========================
+  // BUBBLES (robust on iPhone)
+  // =========================
   useEffect(() => {
     const layer = bubbleLayerRef.current;
     const titleEl = titleRef.current;
@@ -32,12 +29,12 @@ const Home: React.FC = () => {
 
     if (!layer || !titleEl || !sliderWrap) return;
 
-
     const getSliderEl = () =>
       sliderNavRef.current?.querySelector(".slider") as HTMLElement | null;
 
     let intervalId: number | null = null;
     let stopTimeoutId: number | null = null;
+    let fallbackTimerId: number | null = null;
     let started = false;
 
     const spawnBubble = () => {
@@ -54,7 +51,7 @@ const Home: React.FC = () => {
       const bubble = document.createElement("span");
       bubble.className = "bubble";
 
-      const size = Math.floor(Math.random() * 10) + 10; 
+      const size = Math.floor(Math.random() * 10) + 10;
       const radius = size / 2;
 
       const duration = Math.random() * 1.4 + 3.0;
@@ -99,9 +96,11 @@ const Home: React.FC = () => {
         window.clearTimeout(stopTimeoutId);
         stopTimeoutId = null;
       }
+      if (fallbackTimerId) {
+        window.clearTimeout(fallbackTimerId);
+        fallbackTimerId = null;
+      }
     };
-
-    const firstChar = titleEl.querySelector(".nameChar") as HTMLElement | null;
 
     const onStart = () => {
       if (started) return;
@@ -113,9 +112,16 @@ const Home: React.FC = () => {
       stopTimeoutId = window.setTimeout(stopBubbles, totalNameTime + 3000);
     };
 
-    if (firstChar)
-      firstChar.addEventListener("animationstart", onStart, { once: true });
+    const firstChar = titleEl.querySelector(".nameChar") as HTMLElement | null;
+
+    // Try to start based on animationstart (works on most browsers)
+    if (firstChar) firstChar.addEventListener("animationstart", onStart, { once: true });
     else onStart();
+
+    // ✅ iPhone fallback: animationstart sometimes doesn't fire (or Reduce Motion)
+    fallbackTimerId = window.setTimeout(() => {
+      onStart();
+    }, 400);
 
     return () => {
       if (firstChar) firstChar.removeEventListener("animationstart", onStart);
@@ -124,9 +130,9 @@ const Home: React.FC = () => {
     };
   }, [nameChars]);
 
-
-
-
+  // =========================
+  // BALL / DOT ANIMATION
+  // =========================
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
@@ -168,11 +174,14 @@ const Home: React.FC = () => {
       ball.style.transform = "translateX(0px) rotate(0deg) scale(1,1)";
     };
 
+    // Initial placement
     placeOnI();
 
-document.fonts?.ready?.then(() => placeOnI());
-window.setTimeout(placeOnI, 250);
-requestAnimationFrame(() => requestAnimationFrame(placeOnI));
+    // ✅ Re-place after fonts/layout settle (prevents iPhone shift)
+    (document as any).fonts?.ready?.then?.(() => placeOnI());
+    window.setTimeout(placeOnI, 250);
+    requestAnimationFrame(() => requestAnimationFrame(placeOnI));
+
     const onResize = () => {
       if (!isRunning) placeOnI();
     };
@@ -186,10 +195,10 @@ requestAnimationFrame(() => requestAnimationFrame(placeOnI));
     };
 
     startTimeoutId = window.setTimeout(() => {
-      placeOnI();          // <-- ganz wichtig: freshest layout
+      // ✅ One last "fresh" placement right before starting the motion
+      placeOnI();
+
       isRunning = true;
-    
-    
 
       const startTop = parseFloat(wrapper.style.top || "0") || 0;
       const dotSize = ball.offsetWidth || 40;
@@ -236,7 +245,6 @@ requestAnimationFrame(() => requestAnimationFrame(placeOnI));
           return;
         }
 
-   
         const t2 = tAll - phases.pulse;
         if (t2 < phases.rollAndDrop) {
           const t = clamp01(t2 / phases.rollAndDrop);
@@ -267,7 +275,6 @@ requestAnimationFrame(() => requestAnimationFrame(placeOnI));
           return;
         }
 
-    
         const t3 = t2 - phases.rollAndDrop;
         if (t3 < phases.bounce) {
           const t = clamp01(t3 / phases.bounce);
@@ -302,7 +309,6 @@ requestAnimationFrame(() => requestAnimationFrame(placeOnI));
           return;
         }
 
-     
         const t4 = t3 - phases.bounce;
         if (t4 < phases.rollOut) {
           const t = clamp01(t4 / phases.rollOut);
@@ -433,7 +439,6 @@ requestAnimationFrame(() => requestAnimationFrame(placeOnI));
                 </p>
               </header>
 
-           
               <div ref={sliderNavRef}>
                 <Navigation />
               </div>

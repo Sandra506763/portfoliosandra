@@ -170,6 +170,7 @@ body {
   overflow: hidden;
 }
 
+
 .quoteLines {
   width: min(1220px, 100%);
   max-width: 100%;
@@ -177,6 +178,7 @@ body {
   gap: clamp(14px, 2vw, 28px);
   font-family: "Montserrat", system-ui, sans-serif;
   padding-right: clamp(14px, 2.2vw, 26px);
+  box-sizing: border-box; 
 }
 
 .qLine {
