@@ -331,6 +331,7 @@ header #fancy-heading {
   padding: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   max-width: 100%;
+
 }
 
 .slider a {
@@ -542,26 +543,26 @@ header #fancy-heading {
    (nur Home, nicht About/Projects)
    ========================================= */
 
-   .homePage--home .slider {
-    padding: 8px;                 /* vorher 5px -> weniger Höhe */
+   /* .homePage--home .slider {
+    padding: 8px;               
   }
   
   .homePage--home .slider a {
-    padding: clamp(0.72rem, 1.4vw, 1.15rem); /* weniger Höhe */
-    line-height: 1.05;            /* sauberer, weniger "hoch" */
+    padding: clamp(0.72rem, 1.4vw, 1.15rem);
+    line-height: 1.05;           
       display: grid;
   place-items: center;
-  line-height: 1.05;              /* weniger Zeilenabstand -> wirkt mittiger */
-  padding-block: clamp(0.75rem, 1.2vw, 1.05rem); /* gleiche optische Höhe */
+  line-height: 1.05;             
+  padding-block: clamp(0.75rem, 1.2vw, 1.05rem); 
 }
 
-/* optional: falls "Über mich" immer noch minimal zu tief wirkt */
+
 .homePage--home .slider a:nth-child(2) {
   transform: translateY(-1px);
 }
 .homePage--home .slider .highlight{
   transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
+  } */
 
 /*
    RESPONSIVE
@@ -623,7 +624,47 @@ header #fancy-heading {
   .quoteLines {
     gap: clamp(22px, 4vw, 40px);
   }
+
+  /* .homePage--home .slider {
+    padding: 5px;               
+  }
+
+  .homePage--home .slider a {
+    display: block;              
+    padding: clamp(0.8rem, 1.6vw, 1.3rem);
+    line-height: normal;
+    padding-block: initial;
+  }     
+
+  .homePage--home .slider a:nth-child(2) {
+    transform: none;            
+  } */
 }
+
+/* HOME-only Feintuning: NUR Desktop */
+@media (min-width: 981px) {
+  .homePage--home .slider {
+    padding: 8px;
+  }
+
+  .homePage--home .slider a {
+    padding: clamp(0.72rem, 1.4vw, 1.15rem);
+    display: grid;
+    place-items: center;
+    line-height: 1.05;
+    padding-block: clamp(0.75rem, 1.2vw, 1.05rem);
+  }
+
+  .homePage--home .slider a:nth-child(2) {
+    transform: translateY(-1px);
+  }
+
+  .homePage--home .slider .highlight {
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+
 
 @media (max-width: 520px) {
   .quoteLines {

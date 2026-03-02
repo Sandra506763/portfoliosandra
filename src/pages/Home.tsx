@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import "../styles/Portfolio.css";
 import Navigation from "../components/Navigation";
+import "../styles/RightPanelHeader.css";
 
 const BREAKPOINT_PX = 768;
 
@@ -19,9 +20,9 @@ const Home: React.FC = () => {
     [nameText]
   );
 
-  // =========================
-  // BUBBLES (robust on iPhone)
-  // =========================
+ 
+  
+
   useEffect(() => {
     const layer = bubbleLayerRef.current;
     const titleEl = titleRef.current;
@@ -114,11 +115,11 @@ const Home: React.FC = () => {
 
     const firstChar = titleEl.querySelector(".nameChar") as HTMLElement | null;
 
-    // Try to start based on animationstart (works on most browsers)
+   
     if (firstChar) firstChar.addEventListener("animationstart", onStart, { once: true });
     else onStart();
 
-    // ✅ iPhone fallback: animationstart sometimes doesn't fire (or Reduce Motion)
+ 
     fallbackTimerId = window.setTimeout(() => {
       onStart();
     }, 400);
@@ -130,9 +131,8 @@ const Home: React.FC = () => {
     };
   }, [nameChars]);
 
-  // =========================
-  // BALL / DOT ANIMATION
-  // =========================
+
+
   useEffect(() => {
     const container = containerRef.current;
     const wrapper = wrapperRef.current;
@@ -174,10 +174,10 @@ const Home: React.FC = () => {
       ball.style.transform = "translateX(0px) rotate(0deg) scale(1,1)";
     };
 
-    // Initial placement
+
     placeOnI();
 
-    // ✅ Re-place after fonts/layout settle (prevents iPhone shift)
+
     (document as any).fonts?.ready?.then?.(() => placeOnI());
     window.setTimeout(placeOnI, 250);
     requestAnimationFrame(() => requestAnimationFrame(placeOnI));
@@ -195,7 +195,7 @@ const Home: React.FC = () => {
     };
 
     startTimeoutId = window.setTimeout(() => {
-      // ✅ One last "fresh" placement right before starting the motion
+  
       placeOnI();
 
       isRunning = true;
@@ -439,9 +439,9 @@ const Home: React.FC = () => {
                 </p>
               </header>
 
-              <div ref={sliderNavRef}>
-                <Navigation />
-              </div>
+              <div ref={sliderNavRef} className="rph-sliderWrap">
+  <Navigation />
+</div>
             </div>
           </aside>
         </section>
