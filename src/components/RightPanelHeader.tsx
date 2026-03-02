@@ -5,8 +5,8 @@ import type { CharItem } from "../types";
 import "../styles/RightPanelHeader.css";
 
 type Props = {
-  bubbles?: boolean;     // Home
-  statement?: boolean;   // About/Projects
+  bubbles?: boolean;
+  statement?: boolean;
   roleText?: string;
   imageSrc?: string;
 };
@@ -34,12 +34,11 @@ const RightPanelHeader: React.FC<Props> = ({
     setChars(
       [...text].map((ch, i) => ({
         char: ch,
-        delay: i * 0.22, // wie dein Home vorher
+        delay: i * 0.22,
       }))
     );
   }, []);
 
-  // Title-Rendering: Home mit Delay, sonst ohne Delay
   const titleContent = useMemo(() => {
     return chars.map((item, i) => {
       if (item.char === " ") {
@@ -65,7 +64,6 @@ const RightPanelHeader: React.FC<Props> = ({
     });
   }, [chars, isHome]);
 
-  // ✅ Slider-Bubbles (wie früher in Home.tsx): starten AUS dem Slider
   useEffect(() => {
     if (!bubbles || !isHome) return;
 
@@ -87,14 +85,13 @@ const RightPanelHeader: React.FC<Props> = ({
       const layerRect = l.getBoundingClientRect();
       const sliderRect = slider.getBoundingClientRect();
 
-      // Slider-Koordinaten relativ zum Bubble-Layer
       const sliderLeft = sliderRect.left - layerRect.left;
       const sliderRight = sliderRect.right - layerRect.left;
 
       const bubble = document.createElement("span");
       bubble.className = "rph-bubble";
 
-      const size = Math.floor(Math.random() * 10) + 10; // 10..19
+      const size = Math.floor(Math.random() * 10) + 10;
       const radius = size / 2;
 
       const duration = Math.random() * 1.4 + 3.0;
@@ -105,10 +102,8 @@ const RightPanelHeader: React.FC<Props> = ({
       bubble.style.opacity = `${opacity}`;
       bubble.style.animationDuration = `${duration}s`;
 
-      // Mittelpunkt vom Slider
       const centerX = sliderLeft + (sliderRight - sliderLeft) / 2;
 
-      // Mobile: kleinere Streuung, Desktop: wie gehabt
       const isMobile = window.innerWidth <= BREAKPOINT_PX;
       const spread = isMobile
         ? (sliderRight - sliderLeft) * 0.35
@@ -116,7 +111,6 @@ const RightPanelHeader: React.FC<Props> = ({
 
       let xCenter = centerX + (Math.random() * spread - spread / 2);
 
-      // Hard clamp, Bubble bleibt IM Slider
       const padding = 6;
       const minCenter = sliderLeft + padding + radius;
       const maxCenter = sliderRight - padding - radius;
@@ -126,7 +120,6 @@ const RightPanelHeader: React.FC<Props> = ({
 
       bubble.style.left = `${xCenter - radius}px`;
 
-      // Start hinter/unter dem Slider
       const bottomFromLayer = layerRect.bottom - sliderRect.bottom + 6;
       bubble.style.bottom = `${Math.max(6, bottomFromLayer)}px`;
 
@@ -153,12 +146,12 @@ const RightPanelHeader: React.FC<Props> = ({
 
       intervalId = window.setInterval(spawnBubble, 350);
 
-      // wie vorher in Home: Name-Animzeit + Buffer
       const totalNameTime = (chars.length - 1) * 220 + 900;
       stopTimeoutId = window.setTimeout(stopBubbles, totalNameTime + 3000);
     };
 
-    if (firstChar) firstChar.addEventListener("animationstart", onStart, { once: true });
+    if (firstChar)
+      firstChar.addEventListener("animationstart", onStart, { once: true });
     else onStart();
 
     return () => {
@@ -170,19 +163,31 @@ const RightPanelHeader: React.FC<Props> = ({
 
   return (
     <div ref={rootRef} className={`rph ${isHome ? "rph-home" : "rph-static"}`}>
-      {/* ✅ Layer sitzt hinter allem und ist für Slider-Bubbles */}
       {bubbles && isHome && (
-        <div ref={bubbleLayerRef} className="rph-bubbleLayer" aria-hidden="true" />
+        <div
+          ref={bubbleLayerRef}
+          className="rph-bubbleLayer"
+          aria-hidden="true"
+        />
       )}
 
       <div className="rph-sideStack">
         <div className="rph-profileBox">
-          {/* wenn du “profile-pic” wirklich im DOM behalten willst: className="profile-pic rph-profilePic" */}
-          <img src={imageSrc} alt="Profilbild" className="rph-profilePic" loading="lazy" />
+          <img
+            src={imageSrc}
+            alt="Profilbild"
+            className="rph-profilePic"
+            loading="lazy"
+          />
         </div>
 
         <header className="rph-homeHeader">
-          <h1 ref={titleRef} className="rph-homeTitle" aria-label="Sandra Nitsch">
+          <h1
+            ref={titleRef}
+            className="rph-homeTitle notranslate"
+            aria-label="Sandra Nitsch"
+            translate="no"
+          >
             {titleContent}
           </h1>
 
@@ -191,13 +196,15 @@ const RightPanelHeader: React.FC<Props> = ({
           </p>
         </header>
 
-        {/* ✅ Navigation bekommt ref, damit Bubbles den Slider messen können */}
         <div ref={sliderNavRef} className="rph-sliderWrap">
-  <Navigation />
-</div>
-          
-      
-        {statement && <div className="rph-statement">Design is how it feels</div>}
+          <Navigation />
+        </div>
+
+        {statement && (
+          <div className="rph-statement notranslate" translate="no">
+            Design is how it feels
+          </div>
+        )}
       </div>
     </div>
   );

@@ -48,34 +48,37 @@ const Navigation: React.FC = () => {
   return (
     <nav className="slider-nav">
       <div ref={sliderRef} className="slider">
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onMouseEnter={() => setHighlight(0)}
-          onFocus={() => setHighlight(0)}
-        >
-          Home
-        </NavLink>
+      
+      <NavLink
+  to="/"
+  end
+  translate="no"
+  className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+  onMouseEnter={() => setHighlight(0)}
+  onFocus={() => setHighlight(0)}
+>
+  Home
+</NavLink>
+<NavLink
+  to="/about"
+  translate="no"
+  className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+  onMouseEnter={() => setHighlight(1)}
+  onFocus={() => setHighlight(1)}
+>
+  Über<br />
+  mich
+</NavLink>
 
-        <NavLink
-          to="/about"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onMouseEnter={() => setHighlight(1)}
-          onFocus={() => setHighlight(1)}
-        >
-          Über<br />
-          mich
-        </NavLink>
-
-        <NavLink
-          to="/projects"
-          className={({ isActive }) => (isActive ? "active" : "")}
-          onMouseEnter={() => setHighlight(2)}
-          onFocus={() => setHighlight(2)}
-        >
-          Projekte
-        </NavLink>
+<NavLink
+  to="/projects"
+  translate="no"
+  className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+  onMouseEnter={() => setHighlight(2)}
+  onFocus={() => setHighlight(2)}
+>
+  Projekte
+</NavLink>
 
     
         <span ref={highlightRef} className="highlight" aria-hidden="true" />
