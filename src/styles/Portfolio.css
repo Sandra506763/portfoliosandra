@@ -1,5 +1,3 @@
-
-
 html,
 body {
   height: 100%;
@@ -170,7 +168,6 @@ body {
   overflow: hidden;
 }
 
-
 .quoteLines {
   width: min(1220px, 100%);
   max-width: 100%;
@@ -178,7 +175,7 @@ body {
   gap: clamp(14px, 2vw, 28px);
   font-family: "Montserrat", system-ui, sans-serif;
   padding-right: clamp(14px, 2.2vw, 26px);
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .qLine {
@@ -536,14 +533,14 @@ header #fancy-heading {
 .quoteCard.homeBallStage {
   position: relative;
   overflow: hidden;
-  }
+}
 
 /* =========================================
    HOME: Slider exakt wie About "fühlen"
    (nur Home, nicht About/Projects)
    ========================================= */
 
-   /* .homePage--home .slider {
+/* .homePage--home .slider {
     padding: 8px;               
   }
   
@@ -587,8 +584,11 @@ header #fancy-heading {
   .homeGrid {
     grid-template-columns: 1fr;
     align-items: start;
-    gap: 140px;
-    padding-top: 64px;
+    gap: 96px;
+    padding-top: 24px;
+  }
+  .rph-profileBox {
+    margin-top: 34px;
   }
 
   .homeLeft {
@@ -641,6 +641,11 @@ header #fancy-heading {
   } */
 }
 
+@media (max-width: 980px) {
+  .homePage--home .homeFrame {
+    margin-bottom: 6px;
+  }
+}
 /* HOME-only Feintuning: NUR Desktop */
 @media (min-width: 981px) {
   .homePage--home .slider {
@@ -664,8 +669,6 @@ header #fancy-heading {
   }
 }
 
-
-
 @media (max-width: 520px) {
   .quoteLines {
     padding-right: 72px;
@@ -677,10 +680,10 @@ header #fancy-heading {
   .qChar {
     letter-spacing: 0.05em;
     font-size: clamp(52px, 8.2vw, 110px);
-   }
- }
+  }
+}
 
- /* ABOUT MAIN:  */
+/* ABOUT MAIN:  */
 
 .aboutMain {
   position: relative;
@@ -695,12 +698,12 @@ header #fancy-heading {
   font-family: "DM Sans", system-ui, sans-serif;
   line-height: 1.1;
   margin: 35px 0 0 0;
-  font-weight: 500;                          
-  font-size: clamp(2.0rem, 2.6vw, 2.8rem);   
+  font-weight: 500;
+  font-size: clamp(2rem, 2.6vw, 2.8rem);
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.82);
-  text-shadow: none;             
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: none;
 }
 .about-text {
   display: grid;
@@ -885,7 +888,6 @@ header #fancy-heading {
   margin-top: 1.5rem;
   text-align: center;
 }
-
 
 .aboutPage .homeRight {
   min-height: clamp(520px, 72vh, 820px);
