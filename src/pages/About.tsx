@@ -186,9 +186,9 @@ const About: React.FC = () => {
                 Lebensweise, die sagt: Nothing's impossible!
               </div>
             </section>{" "}
-            {/* Ende .about-text */}
+
           </section>{" "}
-          {/* Ende .homeLeft */}
+      
           <aside className="homeRight">
             <RightPanelHeader statement />
           </aside>

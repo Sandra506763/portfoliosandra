@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import "../styles/Portfolio.css";
-import Navigation from "../components/Navigation";
+import RightPanelHeader from "../components/RightPanelHeader";
 import "../styles/RightPanelHeader.css";
 
 const BREAKPOINT_PX = 768;
@@ -349,105 +348,59 @@ const Home: React.FC = () => {
     <main className="homePage homePage--home">
       <section className="homeFrame">
         <section className="homeGrid">
+  
           <div className="homeLeft">
-            <div ref={containerRef} className="quoteCard homeBallStage">
-              <div
-                ref={wrapperRef}
-                className="orange-dot-wrapper"
-                style={{ display: "none" }}
-                aria-hidden="true"
-              >
-                <div className="orange-dot" />
-              </div>
-
-              <div className="quoteLines" aria-hidden="true">
-                <div className="qLine">
-                  <span className="qChar">N</span>
-                  <span className="qChar">O</span>
-                  <span className="qChar">-</span>
+              <div ref={containerRef} className="quoteCard homeBallStage">
+                <div
+                  ref={wrapperRef}
+                  className="orange-dot-wrapper"
+                  style={{ display: "none" }}
+                  aria-hidden="true"
+                >
+                  <div className="orange-dot" />
                 </div>
-
-                <div className="qLine">
-                  <span className="qChar">T</span>
-                  <span className="qChar">H</span>
-                  <span ref={iLetterRef} className="qChar qI">
-                    I
-                  </span>
-                  <span className="qChar">N</span>
-                  <span className="qChar">G</span>
-                  <span className="qChar">&apos;</span>
-                  <span className="qChar">S</span>
-                </div>
-
-                <div className="qLine">
-                  <span className="qChar">I</span>
-                  <span className="qChar">M</span>
-                  <span className="qChar">P</span>
-                  <span className="qChar">O</span>
-                  <span className="qChar">S</span>
-                  <span className="qChar">-</span>
-                </div>
-
-                <div className="qLine">
-                  <span className="qChar">S</span>
-                  <span className="qChar">I</span>
-                  <span className="qChar">B</span>
-                  <span className="qChar">L</span>
-                  <span className="qChar">E</span>
+  
+                <div className="quoteLines" aria-hidden="true">
+                  <div className="qLine">
+                    <span className="qChar">N</span>
+                    <span className="qChar">O</span>
+                    <span className="qChar">-</span>
+                  </div>
+  
+                  <div className="qLine">
+                    <span className="qChar">T</span>
+                    <span className="qChar">H</span>
+                    <span ref={iLetterRef} className="qChar qI">I</span>
+                    <span className="qChar">N</span>
+                    <span className="qChar">G</span>
+                    <span className="qChar">&apos;</span>
+                    <span className="qChar">S</span>
+                  </div>
+  
+                  <div className="qLine">
+                    <span className="qChar">I</span>
+                    <span className="qChar">M</span>
+                    <span className="qChar">P</span>
+                    <span className="qChar">O</span>
+                    <span className="qChar">S</span>
+                    <span className="qChar">-</span>
+                  </div>
+  
+                  <div className="qLine">
+                    <span className="qChar">S</span>
+                    <span className="qChar">I</span>
+                    <span className="qChar">B</span>
+                    <span className="qChar">L</span>
+                    <span className="qChar">E</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <aside className="homeRight" aria-label="Profil und Navigation">
-            <div ref={bubbleLayerRef} className="bubbleLayer" aria-hidden="true" />
-
-            <div className="sideStack">
-              <div className="profileBox">
-                <img
-                  className="profile-pic"
-                  src="/images/pictureMe.jpg"
-                  alt="Profilbild"
-                  loading="lazy"
-                />
-              </div>
-
-              <header className="homeHeader">
-                <h1 ref={titleRef} className="homeTitle" aria-label={nameText}>
-                  {nameChars.map((item, i) =>
-                    item.ch === " " ? (
-                      <span
-                        key={i}
-                        className="nameSpace"
-                        style={{ animationDelay: `${item.delay}s` }}
-                        dangerouslySetInnerHTML={{ __html: "&nbsp;" }}
-                      />
-                    ) : (
-                      <span
-                        key={i}
-                        className="nameChar"
-                        style={{ animationDelay: `${item.delay}s` }}
-                      >
-                        {item.ch}
-                      </span>
-                    )
-                  )}
-                </h1>
-
-                <p className="homeSub">
-                  <span className="web">Webentwicklerin</span>
-                </p>
-              </header>
-
-              <div ref={sliderNavRef} className="rph-sliderWrap">
-  <Navigation />
-</div>
-            </div>
-          </aside>
-        </section>
+            <aside className="homeRight">
+          <RightPanelHeader bubbles roleText="Webentwicklerin" />
+        </aside>
       </section>
-    </main>
-  );
-};
-
+    </section>
+  </main>
+)};
 export default Home;
