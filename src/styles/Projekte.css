@@ -351,8 +351,8 @@
   .projectsPage .homeGrid {
     grid-template-columns: 1fr;
     align-items: start;
-    gap: 140px;
-    padding-top: 64px;
+    gap: 96px;
+    padding-top: 24px;
   }
 
   .projectsPage .homeRight.projectsRight,
