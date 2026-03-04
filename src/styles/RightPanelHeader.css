@@ -230,6 +230,14 @@
   margin-inline: auto;
 }
 
+@media (max-width: 980px) {
+ 
+  .rph-profileBox {
+    margin-top: 34px;   
+  }
+}
+
+
 @media (max-width: 520px) {
   .rph .rph-sliderWrap .slider {
     max-width: 260px;

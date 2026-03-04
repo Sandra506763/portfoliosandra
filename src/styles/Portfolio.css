@@ -587,9 +587,7 @@ header #fancy-heading {
     gap: 96px;
     padding-top: 24px;
   }
-  .rph-profileBox {
-    margin-top: 34px;
-  }
+  
 
   .homeLeft {
     min-height: clamp(620px, 78vh, 920px);

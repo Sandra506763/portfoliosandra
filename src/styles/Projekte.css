@@ -375,6 +375,7 @@
   .projectsGrid {
     grid-template-columns: 1fr;
   }
+  
 }
 
 @media (min-width: 981px) and (max-width: 1250px) {
