@@ -34,8 +34,9 @@ const MainSection: React.FC = () => {
       const isMobile = window.innerWidth <= BREAKPOINT_PX;
       const dotSize = ball.offsetWidth || 40;
 
-      const xCenter = rectI.left - rectC.left + rectI.width / 2;
-
+      
+      const mobileXOffset = isMobile ? 8 : 0;
+      const xCenter = rectI.left - rectC.left + rectI.width / 2 + mobileXOffset;
       
       const yTopLine = rectI.top - rectC.top - (isMobile ? 10 : 20);
 
