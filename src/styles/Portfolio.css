@@ -220,70 +220,6 @@ body {
   z-index: 0;
 }
 
-/* .sideStack {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
-  padding: 0 clamp(8px, 1.2vw, 18px);
-}
-
-.profileBox {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.profile-pic {
-  width: clamp(120px, 16vw, 170px);
-  height: clamp(240px, 32vw, 350px);
-  border-radius: 8px;
-  border: 2px solid rgb(247, 69, 14);
-  box-shadow: 8px 8px 0 rgba(247, 69, 14, 0.1),
-    16px 16px 0 rgba(240, 123, 77, 0.1);
-  object-fit: cover;
-}
-
-.profile-pic:hover {
-  transform: scale(1.06);
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.2);
-  cursor: pointer;
-}
-header #fancy-heading {
-  position: relative;
-}
-.homeHeader {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.homeTitle {
-  font-family: "Dancing Script", cursive;
-  font-size: clamp(2.2rem, 3.6vw, 4.2rem);
-  color: #fff;
-  margin: 0;
-  white-space: nowrap;
-
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.28), 0 0 18px rgba(247, 111, 57, 0.35);
-
-  animation: nameGlow 4s ease-in-out infinite alternate;
-}
-
-@keyframes nameGlow {
-  0% {
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.28), 0 0 18px rgba(247, 111, 57, 0.25);
-  }
-  100% {
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.28), 0 0 26px rgba(247, 111, 57, 0.45);
-  }
-} */
 
 .nameChar,
 .nameSpace {
@@ -311,116 +247,6 @@ header #fancy-heading {
   font-size: 1.7rem;
 }
 
-/* .slider-nav {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 0;
-}
-
-.slider {
-  position: relative;
-  display: flex;
-  border-radius: 100px;
-  overflow: visible;
-  background: #fcfbfb;
-  padding: 5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-  max-width: 100%;
-
-}
-
-.slider a {
-  flex: 1;
-  padding: clamp(0.8rem, 1.6vw, 1.3rem);
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #2e2b29;
-  z-index: 2;
-  user-select: none;
-  transition: color 0.3s ease;
-  text-align: center;
-  text-decoration: none;
-}
-
-.slider a:hover {
-  color: rgb(247, 69, 14);
-}
-.slider a.active {
-  color: #2e2b29;
-}
-
-.slider .highlight {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  left: 3px;
-  width: calc(33.33% - 6px);
-  height: calc(100% - 6px);
-
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgb(244, 246, 247),
-    rgba(241, 242, 243, 0.37) 40%,
-    rgba(5, 5, 5, 0.41) 100%
-  );
-
-  border-radius: 50%;
-  box-shadow:
-  inset -2px -2px 10px rgba(255,255,255,0.55),
-  inset  2px  2px 10px rgba(0,0,0,0.14),
-  0 6px 14px rgba(0,0,0,0.22);
-
-  
-    transition: all 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  
-  z-index: 0;
-  transform: scale(1);
-  aspect-ratio: 1 / 1;
-}
-
-.slider a:nth-child(1).active ~ .highlight,
-.slider a:nth-of-type(1):hover ~ .highlight,
-.slider a:nth-of-type(1):focus-visible ~ .highlight {
-  transform: translateX(0%) scale(0.8);
-}
-
-.slider a:nth-child(2).active ~ .highlight,
-.slider a:nth-of-type(2):hover ~ .highlight,
-.slider a:nth-of-type(2):focus-visible ~ .highlight {
-  transform: translateX(100%) scale(0.8);
-}
-
-.slider a:nth-child(3).active ~ .highlight,
-.slider a:nth-of-type(3):hover ~ .highlight,
-.slider a:nth-of-type(3):focus-visible ~ .highlight {
-  transform: translateX(200%) scale(0.8);
-}
-
-.bubble {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(30, 30, 30, 0.18);
-  pointer-events: none;
-  animation: rise 3.2s ease-out forwards;
-  z-index: 1;
-}
-
-@keyframes rise {
-  0% {
-    transform: translateY(0) scale(0.6);
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-150px) scale(1);
-    opacity: 0;
-  }
-} */
 
 .siteFooter {
   margin-top: auto;
@@ -535,31 +361,6 @@ header #fancy-heading {
   overflow: hidden;
 }
 
-/* =========================================
-   HOME: Slider exakt wie About "fühlen"
-   (nur Home, nicht About/Projects)
-   ========================================= */
-
-/* .homePage--home .slider {
-    padding: 8px;               
-  }
-  
-  .homePage--home .slider a {
-    padding: clamp(0.72rem, 1.4vw, 1.15rem);
-    line-height: 1.05;           
-      display: grid;
-  place-items: center;
-  line-height: 1.05;             
-  padding-block: clamp(0.75rem, 1.2vw, 1.05rem); 
-}
-
-
-.homePage--home .slider a:nth-child(2) {
-  transform: translateY(-1px);
-}
-.homePage--home .slider .highlight{
-  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-  } */
 
 /*
    RESPONSIVE
@@ -623,21 +424,7 @@ header #fancy-heading {
     gap: clamp(22px, 4vw, 40px);
   }
 
-  /* .homePage--home .slider {
-    padding: 5px;               
   }
-
-  .homePage--home .slider a {
-    display: block;              
-    padding: clamp(0.8rem, 1.6vw, 1.3rem);
-    line-height: normal;
-    padding-block: initial;
-  }     
-
-  .homePage--home .slider a:nth-child(2) {
-    transform: none;            
-  } */
-}
 
 @media (max-width: 980px) {
   .homePage--home .homeFrame {
@@ -645,42 +432,20 @@ header #fancy-heading {
     padding-bottom: 8px; 
   }
 }
-/* HOME-only Feintuning: NUR Desktop */
-/* @media (min-width: 981px) {
-  .homePage--home .slider {
-    padding: 8px;
+@media (max-width: 400px) {
+  .qLine {
+    gap: 8px;
   }
 
-  .homePage--home .slider a {
-    padding: clamp(0.72rem, 1.4vw, 1.15rem);
-    display: grid;
-    place-items: center;
-    line-height: 1.05;
-    padding-block: clamp(0.75rem, 1.2vw, 1.05rem);
+  .qChar {
+    font-size: clamp(44px, 12vw, 60px);
+    letter-spacing: 0.05em;
   }
 
-  .homePage--home .slider a:nth-child(2) {
-    transform: translateY(-1px);
-  }
-
-  .homePage--home .slider .highlight {
-    transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  .quoteLines {
+    padding-right: 0;
   }
 }
-
-@media (max-width: 520px) {
-  .quoteLines {
-    padding-right: 72px;
-    box-sizing: border-box;
-  }
-  .qLine {
-    gap: 10px;
-  }
-  .qChar {
-    letter-spacing: 0.05em;
-    font-size: clamp(52px, 8.2vw, 110px);
-  }
-} */
 
 /* ABOUT MAIN:  */
 
