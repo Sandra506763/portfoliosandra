@@ -13,15 +13,16 @@ const About: React.FC = () => {
               <div className="rail-block">
                 <h3>Quick Facts</h3>
                 <ul>
-                  <li>Frontend Developer</li>
-                  <li>React · Next.js · TypeScript</li>
-                  <li>Designaffin</li>
+                  <li>React · Next.js · Node.js</li>
+                  <li>TypeScript · Git · Docker </li>
+                  <li>PostgreSQL · Prisma</li>
+                  <li>DevOps Basics</li>
                 </ul>
               </div>
 
               <div className="rail-block">
                 <h3>Status</h3>
-                <p>Open for opportunities</p>
+                <p>Open to Frontend & Full-Stack opportunities</p>
               </div>
 
               <div className="rail-block">
@@ -156,15 +157,16 @@ const About: React.FC = () => {
               </div>
 
               <div>
-                <strong>Tech-Stack? Klar!</strong> JavaScript & TypeScript,
-                React, Next.js, Node.js – alles am Start. Dazu moderne Tools wie
-                bun und npm. Backend-Programmierung und
-                API-Schnittstellen-Implementierung gehören ebenso dazu wie
-                SQL-Datenbanken sowie Grundkenntnisse in MongoDB für flexible
-                Datenmodelle. DevOps-Grundlagen runden das technische Fundament
-                ab. UI & UX – klare Interfaces, saubere User Flows und ein Fokus
-                auf Performance, Wartbarkeit und Struktur gehören für mich
-                selbstverständlich zum Entwicklungsprozess.
+                <strong>Tech-Stack? Klar!</strong> JavaScript und TypeScript
+                bilden meine Grundlage. Ich entwickle mit React, Next.js und
+                Node.js und arbeite dabei mit REST-APIs, Prisma ORM sowie
+                PostgreSQL. Git und GitHub gehören dabei ebenso
+                selbstverständlich zu meinem Arbeitsalltag wie moderne
+                Entwicklungswerkzeuge wie npm und bun. Grundlagen in Docker und
+                DevOps ergänzen mein technisches Fundament. UI & UX – klare
+                Interfaces, saubere User Flows sowie ein Fokus auf Performance,
+                Wartbarkeit und Struktur gehören für mich selbstverständlich zum
+                Entwicklungsprozess.
               </div>
 
               <div>
@@ -186,9 +188,7 @@ const About: React.FC = () => {
                 Lebensweise, die sagt: Nothing's impossible!
               </div>
             </section>{" "}
-
           </section>{" "}
-      
           <aside className="homeRight">
             <RightPanelHeader statement />
           </aside>

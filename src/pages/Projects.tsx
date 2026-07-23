@@ -8,7 +8,8 @@ interface Project {
   description: string;
   image?: string;
   videoUrl?: string;
-  linkUrl?: string; 
+  linkUrl?: string;
+  status?: string;
 }
 
 const projects: Project[] = [
@@ -16,7 +17,7 @@ const projects: Project[] = [
     id: "project1",
     title: "Streamflix",
     description:
-      "Streamflix ist eine Web-APP nur für Serien – mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und CSS erstellt.",
+      "Streamflix ist eine Web-APP nur für Serien – mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und SCSS erstellt.",
     image: "/images/BildschirmfotoStreamflix.png",
     videoUrl: "/videos/streamflix.mp4",
   },
@@ -36,6 +37,13 @@ const projects: Project[] = [
       "Web-APP, die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt – oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript und CSS. Responsives Design!",
     image: "/images/If-I-lived-there-thailand.png",
     videoUrl: "/videos/if-i-lived-there.mp4",
+  },
+  {
+    id: "project4",
+    title: "SESONA",
+    description:
+      "Mein bisher größtes Projekt entsteht derzeit mit viel Liebe zum Detail. SESONA ist ein kuratierter Marketplace für handgemachte Unikate – entwickelt mit Next.js, TypeScript, Prisma und PostgreSQL.",
+    status: "In Entstehung",
   },
 ];
 
@@ -58,7 +66,7 @@ const Projekte: React.FC = () => {
             <main className="homeLeft projectsLeft">
               <div className="projectsPanel">
                 <div className="projectsHeader">
-                  <h2>PROJEKTE</h2>
+                  <h2>Projekte</h2>
                   <div className="projectsRail" />
                 </div>
 
@@ -76,7 +84,13 @@ const Projekte: React.FC = () => {
                             loading="lazy"
                           />
                         ) : (
-                          <div className="imagePlaceholder">{project.title}</div>
+                          <div className="imagePlaceholder">
+                            <span className="placeholderTitle">{project.title}</span>
+                        
+                            {project.status && (
+                              <span className="placeholderStatus">{project.status}</span>
+                            )}
+                          </div>
                         )}
 
                         {project.videoUrl && (

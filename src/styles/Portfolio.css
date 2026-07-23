@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap");
+
 html,
 body {
   height: 100%;
@@ -20,30 +22,36 @@ body {
   flex-direction: column;
 
   background: radial-gradient(
-      1200px 700px at 50% -10%,
-      rgba(0, 0, 0, 0.07),
-      rgba(0, 0, 0, 0) 72%
+      900px 620px at 16% 8%,
+      rgba(255, 255, 255, 0.68) 0%,
+      rgba(255, 255, 255, 0.28) 34%,
+      rgba(255, 255, 255, 0) 72%
     ),
     radial-gradient(
-      1200px 640px at 50% 0%,
-      rgba(255, 255, 255, 0.62),
-      rgba(255, 255, 255, 0.18) 52%,
-      rgba(255, 255, 255, 0) 78%
+      760px 560px at 82% 30%,
+      rgba(255, 246, 238, 0.42) 0%,
+      rgba(255, 246, 238, 0.16) 42%,
+      rgba(255, 246, 238, 0) 76%
     ),
     radial-gradient(
-      1200px 820px at 50% 58%,
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.12) 55%,
+      1100px 760px at 46% 58%,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 52%,
       rgba(255, 255, 255, 0) 82%
     ),
     radial-gradient(
-      1400px 1100px at 50% 118%,
-      rgba(255, 255, 255, 0.56),
-      rgba(255, 255, 255, 0.24) 52%,
-      rgba(255, 255, 255, 0.1) 70%,
-      rgba(255, 255, 255, 0) 92%
+      1300px 900px at 50% 120%,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.12) 54%,
+      rgba(255, 255, 255, 0) 88%
     ),
-    linear-gradient(180deg, #e2e1e0 0%, #d8d6d4 48%, #cdcbca 100%);
+    radial-gradient(
+      1500px 1000px at 50% 42%,
+      rgba(0, 0, 0, 0) 54%,
+      rgba(45, 42, 40, 0.045) 82%,
+      rgba(45, 42, 40, 0.085) 100%
+    ),
+    linear-gradient(180deg, #e3e2e1 0%, #d8d6d4 48%, #cbc9c8 100%);
 }
 
 .top-section > header {
@@ -64,30 +72,36 @@ body {
   box-sizing: border-box;
 
   background: radial-gradient(
-      1200px 700px at 50% -10%,
-      rgba(0, 0, 0, 0.07),
-      rgba(0, 0, 0, 0) 72%
+      900px 620px at 16% 8%,
+      rgba(255, 255, 255, 0.68) 0%,
+      rgba(255, 255, 255, 0.28) 34%,
+      rgba(255, 255, 255, 0) 72%
     ),
     radial-gradient(
-      1200px 640px at 50% 0%,
-      rgba(255, 255, 255, 0.62),
-      rgba(255, 255, 255, 0.18) 52%,
-      rgba(255, 255, 255, 0) 78%
+      760px 560px at 82% 30%,
+      rgba(255, 246, 238, 0.42) 0%,
+      rgba(255, 246, 238, 0.16) 42%,
+      rgba(255, 246, 238, 0) 76%
     ),
     radial-gradient(
-      1200px 820px at 50% 58%,
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.12) 55%,
+      1100px 760px at 46% 58%,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 52%,
       rgba(255, 255, 255, 0) 82%
     ),
     radial-gradient(
-      1400px 1100px at 50% 118%,
-      rgba(255, 255, 255, 0.56),
-      rgba(255, 255, 255, 0.24) 52%,
-      rgba(255, 255, 255, 0.1) 70%,
-      rgba(255, 255, 255, 0) 92%
+      1300px 900px at 50% 120%,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.12) 54%,
+      rgba(255, 255, 255, 0) 88%
     ),
-    linear-gradient(180deg, #e2e1e0 0%, #d8d6d4 48%, #cdcbca 100%);
+    radial-gradient(
+      1500px 1000px at 50% 42%,
+      rgba(0, 0, 0, 0) 54%,
+      rgba(45, 42, 40, 0.045) 82%,
+      rgba(45, 42, 40, 0.085) 100%
+    ),
+    linear-gradient(180deg, #e3e2e1 0%, #d8d6d4 48%, #cbc9c8 100%);
 }
 
 .aboutPage .homeFrame {
@@ -127,8 +141,7 @@ body {
   position: absolute;
   inset: clamp(6px, 1.2vw, 12px);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.56);
   pointer-events: none;
   box-sizing: border-box;
 }
@@ -161,7 +174,7 @@ body {
   height: 100%;
   background: #fbf9f8;
   border-radius: 22px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14), 0 3px 10px rgba(0, 0, 0, 0.05);
   padding: clamp(18px, 2.5vw, 34px);
   display: grid;
   place-items: center;
@@ -220,7 +233,6 @@ body {
   z-index: 0;
 }
 
-
 .nameChar,
 .nameSpace {
   display: inline-block;
@@ -246,7 +258,6 @@ body {
 .web {
   font-size: 1.7rem;
 }
-
 
 .siteFooter {
   margin-top: auto;
@@ -361,7 +372,6 @@ body {
   overflow: hidden;
 }
 
-
 /*
    RESPONSIVE
   */
@@ -388,7 +398,6 @@ body {
     gap: 96px;
     padding-top: 24px;
   }
-  
 
   .homeLeft {
     min-height: clamp(620px, 78vh, 920px);
@@ -423,13 +432,12 @@ body {
   .quoteLines {
     gap: clamp(22px, 4vw, 40px);
   }
-
-  }
+}
 
 @media (max-width: 980px) {
   .homePage--home .homeFrame {
     margin-bottom: 0;
-    padding-bottom: 8px; 
+    padding-bottom: 8px;
   }
 }
 @media (max-width: 400px) {
@@ -459,16 +467,17 @@ body {
 
 .aboutMain h2 {
   grid-column: 1;
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
   line-height: 1.1;
-  margin: 35px 0 0 0;
-  font-weight: 500;
-  font-size: clamp(2rem, 2.6vw, 2.8rem);
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+  margin: 70px 0 0 0;
+  font-weight: 600;
+  font-size: clamp(2.7rem, 3.5vw, 3.8rem);
+  letter-spacing: 0.015em;
   color: rgba(255, 255, 255, 0.82);
   text-shadow: none;
+  text-transform: none;
 }
+
 .about-text {
   display: grid;
   gap: clamp(10px, 1.2vw, 16px);
@@ -656,6 +665,38 @@ body {
 .aboutPage .homeRight {
   min-height: clamp(520px, 72vh, 820px);
   align-items: flex-start;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.aboutPage .homeRight::after {
+  content: "";
+  position: absolute;
+
+  width: clamp(420px, 46vw, 720px);
+  height: clamp(760px, 88vh, 1200px);
+
+  right: -22%;
+  bottom: -28%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.045) 32%,
+    rgba(255, 255, 255, 0.015) 52%,
+    rgba(255, 255, 255, 0) 74%
+  );
+
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aboutPage .homeRight > * {
+  position: relative;
+  z-index: 1;
 }
 
 .aboutPage .sideStack {
@@ -664,6 +705,43 @@ body {
 }
 
 /* RESPONSIVE  */
+
+@media (max-width: 1320px) {
+  .aboutPage .homeGrid {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 64px;
+    padding-top: 24px;
+  }
+
+  .aboutPage .homeRight {
+    order: 1;
+    min-height: auto;
+    display: block;
+  }
+
+  .aboutPage .homeLeft {
+    order: 2;
+    min-height: auto;
+  }
+
+  .aboutMain {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutRailInMain {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+    top: auto;
+    margin-bottom: 18px;
+  }
+
+  .aboutMain::after {
+    display: none;
+  }
+}
+
 
 @media (max-width: 980px) {
   .aboutMain {
