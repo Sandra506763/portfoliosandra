@@ -56,7 +56,7 @@
   border-radius: 10px;
   background: linear-gradient(180deg, #3b3b3b 0%, #444444 55%, #4a4a4a 100%);
 
-  border: none;
+  border: 2px solid white;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 
