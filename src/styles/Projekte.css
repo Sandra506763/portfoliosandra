@@ -518,6 +518,11 @@
     display: none;
   }
 
+  .moreInline {
+    animation: none !important;
+    display: none !important;
+    opacity: 0.82;
+  }
 
   .projectCard,
   .cardImage {
