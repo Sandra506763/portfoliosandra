@@ -510,11 +510,3 @@
     margin-top: 20px;
   }
 }
-
-/* TEMPORÄRER PERFORMANCE-TEST MOBILE */
-@media (max-width: 768px) {
-  .projectCard,
-  .cardImage {
-    box-shadow: none;
-  }
-}
