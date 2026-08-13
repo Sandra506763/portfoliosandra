@@ -513,11 +513,6 @@
 
 /* TEMPORÄRER PERFORMANCE-TEST MOBILE */
 @media (max-width: 768px) {
-  .projectsPage .homeRight::after,
-  .projectsPanel::after {
-    display: none;
-  }
-
   .projectCard,
   .cardImage {
     box-shadow: none;
