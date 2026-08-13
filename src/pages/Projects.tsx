@@ -18,7 +18,7 @@ const projects: Project[] = [
     title: "Streamflix",
     description:
       "Streamflix ist eine Web-APP nur für Serien – mit vielen visuellen Effekten. Mein Fokus lag darauf, die Seite selbst wie ein Filmerlebnis wirken zu lassen. Cinematic-Style! Sie wurde mit JavaScript und SCSS erstellt.",
-    image: "/images/BildschirmfotoStreamflix.png",
+    image: "/images/BildschirmfotoStreamflix.webp",
     videoUrl: "/videos/streamflix.mp4",
   },
   {
@@ -26,7 +26,7 @@ const projects: Project[] = [
     title: "Moty",
     description:
       "Web-APP mit eigenem Logo und responsivem Design. Herunterladbar bei Netlify. Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt mit TypeScript, CSS, Tailwind und Inline-Style.",
-    image: "/images/DailyMotivatorDesktop.png",
+    image: "/images/DailyMotivatorDesktop.webp",
     videoUrl: "/videos/moty.mp4",
     linkUrl: "https://app.netlify.com/projects/peppy-marigold-2a2a40/",
   },
@@ -35,7 +35,7 @@ const projects: Project[] = [
     title: "If I lived there",
     description:
       "Web-APP, die anregen soll, darüber nachzudenken, wie der Alltag wäre in einer anderen Stadt – oder sogar in einem anderen Land. Entwickelt habe ich das Projekt mit Next.js, TypeScript und CSS. Responsives Design!",
-    image: "/images/If-I-lived-there-thailand.png",
+    image: "/images/If-I-lived-there-thailand.webp",
     videoUrl: "/videos/if-i-lived-there.mp4",
   },
   {
@@ -62,7 +62,6 @@ const Projekte: React.FC = () => {
       <div className="homePage projectsPage">
         <div className="homeFrame">
           <div className="homeGrid">
-            
             <main className="homeLeft projectsLeft">
               <div className="projectsPanel">
                 <div className="projectsHeader">
@@ -85,10 +84,14 @@ const Projekte: React.FC = () => {
                           />
                         ) : (
                           <div className="imagePlaceholder">
-                            <span className="placeholderTitle">{project.title}</span>
-                        
+                            <span className="placeholderTitle">
+                              {project.title}
+                            </span>
+
                             {project.status && (
-                              <span className="placeholderStatus">{project.status}</span>
+                              <span className="placeholderStatus">
+                                {project.status}
+                              </span>
                             )}
                           </div>
                         )}
@@ -132,11 +135,36 @@ const Projekte: React.FC = () => {
                                 strokeWidth="2"
                               />
                               <circle cx="7" cy="5" r="1" fill="currentColor" />
-                              <circle cx="12" cy="5" r="1" fill="currentColor" />
-                              <circle cx="17" cy="5" r="1" fill="currentColor" />
-                              <circle cx="7" cy="19" r="1" fill="currentColor" />
-                              <circle cx="12" cy="19" r="1" fill="currentColor" />
-                              <circle cx="17" cy="19" r="1" fill="currentColor" />
+                              <circle
+                                cx="12"
+                                cy="5"
+                                r="1"
+                                fill="currentColor"
+                              />
+                              <circle
+                                cx="17"
+                                cy="5"
+                                r="1"
+                                fill="currentColor"
+                              />
+                              <circle
+                                cx="7"
+                                cy="19"
+                                r="1"
+                                fill="currentColor"
+                              />
+                              <circle
+                                cx="12"
+                                cy="19"
+                                r="1"
+                                fill="currentColor"
+                              />
+                              <circle
+                                cx="17"
+                                cy="19"
+                                r="1"
+                                fill="currentColor"
+                              />
                             </svg>
                           </button>
                         )}
@@ -168,14 +196,12 @@ const Projekte: React.FC = () => {
               </div>
             </main>
 
-       
             <aside className="homeRight projectsRight">
               <RightPanelHeader statement roleText="Webentwicklerin" />
             </aside>
           </div>
         </div>
       </div>
-
 
       {activeVideo && (
         <div
