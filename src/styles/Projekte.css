@@ -510,3 +510,9 @@
     margin-top: 20px;
   }
 }
+
+@media (max-width: 768px) {
+  .projectsPage .homeGrid {
+    gap: 120px;
+  }
+}
