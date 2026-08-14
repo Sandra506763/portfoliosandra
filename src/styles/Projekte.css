@@ -436,6 +436,11 @@
   }
 }
 @media (max-width: 768px) {
+
+  .projectsPage .homeGrid {
+    gap: 64px;
+  }
+
   .projectsPage .homeRight {
     padding-bottom: 40px;
   }
