@@ -436,6 +436,10 @@
   }
 }
 @media (max-width: 768px) {
+
+  .projectsPage .homeRight {
+    padding-bottom: 40px;
+  }
   .projectsPage .homeRight::after {
     width: 100%;
     height: 420px;
@@ -511,8 +515,3 @@
   }
 }
 
-@media (max-width: 768px) {
-  .projectsPage .homeGrid {
-    gap: 120px;
-  }
-}
