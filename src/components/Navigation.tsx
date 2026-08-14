@@ -15,18 +15,27 @@ const Navigation: React.FC = () => {
   }, [pathname]);
 
   const setHighlight = (index: number) => {
+    const slider = sliderRef.current;
     const h = highlightRef.current;
-    if (!h) return;
 
-    let nudge = 0;
-    if (index === 0) nudge = 6;
-    if (index === 1) nudge = -2;
-    if (index === 2) nudge = -4;
+    if (!slider || !h) return;
 
-    h.style.transform = `translateX(calc(${index * 100}% + ${nudge}px)) scale(0.85)`;
+    const links = slider.querySelectorAll("a");
+    const link = links[index] as HTMLElement | undefined;
+
+    if (!link) return;
+
+    const sliderRect = slider.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+
+    const linkCenter = linkRect.left - sliderRect.left + linkRect.width / 2;
+
+    const highlightWidth = h.offsetWidth;
+
+    h.style.left = `${linkCenter - highlightWidth / 2}px`;
+    h.style.transform = "scale(0.85)";
   };
 
-  // ✅ statt useEffect
   useLayoutEffect(() => {
     setHighlight(activeIndex);
   }, [activeIndex]);
@@ -48,7 +57,9 @@ const Navigation: React.FC = () => {
           to="/"
           end
           translate="no"
-          className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+          className={({ isActive }) =>
+            isActive ? "active notranslate" : "notranslate"
+          }
           onMouseEnter={() => setHighlight(0)}
           onFocus={() => setHighlight(0)}
         >
@@ -58,17 +69,23 @@ const Navigation: React.FC = () => {
         <NavLink
           to="/about"
           translate="no"
-          className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+          className={({ isActive }) =>
+            isActive ? "active notranslate" : "notranslate"
+          }
           onMouseEnter={() => setHighlight(1)}
           onFocus={() => setHighlight(1)}
         >
-          Über<br />mich
+          Über
+          <br />
+          mich
         </NavLink>
 
         <NavLink
           to="/projects"
           translate="no"
-          className={({ isActive }) => (isActive ? "active notranslate" : "notranslate")}
+          className={({ isActive }) =>
+            isActive ? "active notranslate" : "notranslate"
+          }
           onMouseEnter={() => setHighlight(2)}
           onFocus={() => setHighlight(2)}
         >

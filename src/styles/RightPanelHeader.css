@@ -70,16 +70,21 @@
   color: #fff;
   margin: 0;
   white-space: nowrap;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.28), 0 0 18px rgba(247, 111, 57, 0.35);
+
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.22), 0 0 12px rgba(247, 111, 57, 0.16);
+
   animation: rph-nameGlow 4s ease-in-out infinite alternate;
 }
 
 @keyframes rph-nameGlow {
   0% {
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.28), 0 0 18px rgba(247, 111, 57, 0.25);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.22),
+      0 0 10px rgba(247, 111, 57, 0.12);
   }
+
   100% {
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.28), 0 0 26px rgba(247, 111, 57, 0.45);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.22),
+      0 0 16px rgba(247, 111, 57, 0.22);
   }
 }
 
@@ -108,7 +113,7 @@
 .rph-homeSub {
   margin: 0.2rem 0 0 0;
   color: #fff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
   font-size: 1.15rem;
 }
 
@@ -202,7 +207,7 @@
   border-radius: 100px;
   background: #fcfbfb;
   padding: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
   max-width: 100%;
   width: min(290px, 100%);
   margin-inline: auto;
@@ -219,6 +224,9 @@
   text-decoration: none;
   padding: 0.75rem 0.95rem;
   font-size: 0.95rem;
+  display: grid;
+  place-items: center;
+  line-height: 1.05;
 }
 
 .rph .slider a:hover {
@@ -233,8 +241,8 @@
   position: absolute;
   top: 3px;
   bottom: 3px;
-  left: 3px;
-  width: calc(33.33% - 6px);
+  left: 0;
+  width: auto;
   height: calc(100% - 6px);
 
   background: radial-gradient(
@@ -257,7 +265,7 @@
 
 .rph .rph-sliderWrap .slider {
   width: 100%;
-  max-width: 275px;
+  max-width: 310px;
   margin-inline: auto;
 }
 
@@ -265,16 +273,33 @@
   .rph-profileBox {
     margin-top: 34px;
   }
+
+  .rph-homeTitle {
+    font-size: 2.8rem;
+  }
+
+  .rph-web {
+    font-size: 1.5rem;
+  }
 }
 @media (max-width: 768px) {
   .rph-homeTitle {
     animation: none !important;
 
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.28), 0 0 18px rgba(247, 111, 57, 0.28);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.22),
+      0 0 12px rgba(247, 111, 57, 0.16);
   }
 }
 
 @media (max-width: 520px) {
+  .rph-homeTitle {
+    font-size: 2.65rem;
+  }
+
+  .rph-web {
+    font-size: 1.45rem;
+  }
+
   .rph .rph-sliderWrap .slider {
     max-width: 260px;
   }
