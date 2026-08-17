@@ -28,7 +28,7 @@ const projects: Project[] = [
       "Web-APP mit eigenem Logo und responsivem Design. Herunterladbar bei Netlify. Motivator mit täglich wechselnden Sprüchen und Bildern. Mittels eines Musikbuttons kann eine Reggae-Playlist aufgerufen werden. Erstellt mit TypeScript, CSS, Tailwind und Inline-Style.",
     image: "/images/DailyMotivatorDesktop.webp",
     videoUrl: "/videos/moty.mp4",
-    linkUrl: "https://app.netlify.com/projects/peppy-marigold-2a2a40/",
+    linkUrl: "https://peppy-marigold-2a2a40.netlify.app/?utm_source=chatgpt.com",
   },
   {
     id: "project3",
