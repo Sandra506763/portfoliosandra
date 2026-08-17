@@ -184,7 +184,7 @@
 
 .project-project2 .cardImage img {
   object-fit: cover;
-  object-position: center 17%;
+  object-position: center 9%;
 }
 
 .imagePlaceholder {
@@ -436,8 +436,7 @@
   }
 }
 @media (max-width: 768px) {
-
-    .projectsPage .homeRight {
+  .projectsPage .homeRight {
     padding-bottom: 40px;
   }
   .projectsPage .homeRight::after {
