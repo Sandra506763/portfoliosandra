@@ -206,9 +206,7 @@ body {
   gap: 0.8rem;
   isolation: isolate;
   position: relative;
-background: linear-gradient(to top, #18140f, #3a352e);
- 
- 
+  background: #30312e;
 }
 
 .siteFooter::before {
